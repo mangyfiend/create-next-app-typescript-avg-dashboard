@@ -1,0 +1,12 @@
+.users {
+	display: flex;
+
+	.usersWrapper {
+		color: skyblue;
+	}
+
+	.usersContainer {
+		background-color: antiquewhite;
+		flex: 8;
+	}
+}

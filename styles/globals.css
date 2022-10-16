@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: .8rem;
+}
+
+/* HIDE SCROLLBAR */
+html::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 2fr;
+}
+
+.container {
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: .5rem;
+}
+
+h1 {
+  margin-bottom: .5rem;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  font-size: .5rem;
+  width: 150px;
+  padding: 1em;
+  margin: 0.25em;
+  display: grid;
+  place-content: center;
+}
+
+input {
+  font-size: .5rem;
+  width: 100%;
+  padding: 0.25rem;
+  margin-bottom: .5rem;
+  /* outline: none; */
+}
+
