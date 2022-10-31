@@ -1,0 +1,28 @@
+{
+   "djEvents": [
+      {
+         "id": "2",
+         "name": "Boom Dance Festival Experience",
+         "eventId": "boom-dance-festival-experience",
+         "venue": "Blackjacks Hooker Emporium",
+         "address": "966 Lexington Ave. New York, New York (NY), 10021",
+         "performers": "Daft Punk, DJ Frizzy",
+         "date": "June 2, 2021",
+         "time": "8:00 PM EST",
+         "description": "The show will be fire. Their first live show this year",
+         "imageUrl": "/images/samples/image-1.jpg"
+      },
+      {
+         "id": "2",
+         "name": "Horny Males Music Mash",
+         "eventId": "horny-males-music-mash",
+         "venue": "The Wet Fist",
+         "address": "966 Lexington Ave. New York, New York (NY), 10021",
+         "performers": "Davido, Burna Boy",
+         "date": "June 2, 2020",
+         "time": "1:00 PM EST",
+         "description": "Prepare to get down",
+         "imageUrl": "/images/samples/image-2.jpg"
+      }
+   ]
+}

@@ -22,8 +22,8 @@ export default function Layout({title, keywords, description, children}) {
       <Header>
         <div className={styles.container}></div>
       </Header>
-      <Footer></Footer>
       {children}
+      <Footer></Footer>
     </div>
   )
 }

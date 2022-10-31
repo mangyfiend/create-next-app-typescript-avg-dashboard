@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-size-adjust: 100%;
 }
 
 html {
@@ -20,6 +21,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 1rem;
+  letter-spacing: -0.4px
 }
 
 .App {
@@ -46,20 +49,78 @@ section {
   align-items: center;
 }
 
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
 button {
-  font-size: .5rem;
-  width: 150px;
-  padding: 1em;
+  width: auto;
+  padding: .5em;
   margin: 0.25em;
   display: grid;
   place-content: center;
 }
 
 input {
-  font-size: .5rem;
   width: 100%;
   padding: 0.25rem;
   margin-bottom: .5rem;
   /* outline: none; */
 }
 
+input:invalid {
+	outline: 2px solid red;
+	background-color: rgb(255, 255, 139);
+}
+
+input,
+select {
+	padding: 0.5rem;
+	width: 100%;
+}
+
+select {
+  /* width: fit-content; */
+}
+
+input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	margin-right: 0.5rem;
+}
+
+ul {
+	list-style-type: none;
+	margin-bottom: 1rem;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  flex-flow: column nowrap;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  flex-flow: column nowrap;
+  /* align-items: center; */
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.flex-1 {
+  flex: 1
+}
+
+.fit-content {
+  width: fit-content;
+}

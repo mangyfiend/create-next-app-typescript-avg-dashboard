@@ -1,0 +1,19 @@
+.actions-container {
+   margin: 10px 0;
+   padding: 10px;
+   border: 1px solid black;
+}
+
+.content-wrapper {
+   display: flex;
+   flex-direction: column;
+}
+
+.list-wrapper {
+   height: 50vh;
+   overflow-y: scroll;
+}
+
+.content-controls-wrapper {
+
+}

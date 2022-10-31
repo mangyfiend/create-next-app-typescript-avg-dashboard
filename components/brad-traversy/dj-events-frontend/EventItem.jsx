@@ -1,20 +1,25 @@
 import React from "react";
-import styles from "@/styles/EventItem.module.css";
+import styles from "@styles/EventItem.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
 function EventItem({ eventItem }) {
+
 	return (
 		<div className={styles.event}>
 			<div className={styles.img}>
 				<Image
 					src={
-						eventItem.image && eventItem.image.data
-							? eventItem.image.data.attributes.formats.thumbnail.url
-							: "/images/event-default.png"
+						eventItem.image || "/images/event-default.png"
 					}
+					// src={
+					// 	eventItem.image && eventItem.image.data
+					// 		? eventItem.image.data.attributes.formats.thumbnail.url
+					// 		: "/images/event-default.png"
+					// }
 					width={170}
 					height={100}
+					// style={{backgroundColor: "pink", width: 200, height: 200}}
 				/>
 			</div>
 
@@ -26,7 +31,7 @@ function EventItem({ eventItem }) {
 			</div>
 
 			<div className={styles.link}>
-				<Link href={`/events/${eventItem.eventId}`}>
+				<Link href={`/tutorials/brad-traversy/dj-events-frontend/events/${eventItem.eventId}`}>
 					<a className="btn">Details</a>
 				</Link>
 			</div>

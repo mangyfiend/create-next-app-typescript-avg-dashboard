@@ -1,0 +1,11 @@
+.container {
+  margin: 60px auto;
+  max-width: 60vw;
+  padding: 0 30px;
+  display: block;
+}
+
+label .in-stock-chk {
+  display: flex;
+  align-items: center;
+}
