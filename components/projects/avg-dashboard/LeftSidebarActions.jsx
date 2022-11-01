@@ -1,26 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "@styles/projects/avg-dashboard/LeftSidebar.module.css";
+import useTriggerFetchData from "@hooks/projects/avg-dashboard/useTriggerFetchData";
 
-export default function LeftSidebarActions({ onSelectChangeHandler }) {
+export default function LeftSidebarActions({
+	loadingChk,
+	onSelectChangeHandler,
+}) {
 	// const [data, setData] = useState([]);
-	// const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
-	// const fetchDataIntervalId = useRef();
+	const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
+	const fetchDataIntervalId = useRef();
 
-	// const setFetchDataInterval = (interval) => {
-	// 	// Clear old interval
-	// 	if (fetchDataIntervalId.current) {
-	// 		clearInterval(fetchDataIntervalId.current);
-	// 		fetchDataIntervalId.current = undefined;
-	// 	}
+	// REMOVE
+	const setFetchDataInterval = (interval) => {
+		// Clear old interval
+		if (fetchDataIntervalId.current) {
+			clearInterval(fetchDataIntervalId.current);
+			fetchDataIntervalId.current = undefined;
+		}
 
-	// 	// Set new interval
-	// 	if (interval > 0) {
-	// 		fetchDataIntervalId.current = setInterval(() => {
-	// 			setFetchDataTrigger(Date.now());
-	// 		}, interval);
-	// 	}
-	// };
+		// Set new interval
+		if (interval > 0) {
+			fetchDataIntervalId.current = setInterval(() => {
+				setFetchDataTrigger(Date.now());
+			}, interval);
+		}
+	};
 
+	// REMOVE
 	// useEffect(() => {
 	// 	console.log("effect running");
 	// 	const fetchData = async () => {
@@ -41,35 +47,77 @@ export default function LeftSidebarActions({ onSelectChangeHandler }) {
 	// 	return () => clearInterval(fetchDataIntervalId.current);
 	// }, [fetchDataTrigger]);
 
+	// REMOVE
+	// TRIGGER API CALL @ NEW TIME
+	// useTriggerFetchData(fetchDataTrigger, fetchDataIntervalId.current);
+
 	// console.log({ data });
+	// console.log({loadingChk})
 
 	return (
 		<div className="flex-col">
 			<div className={styles["actions-container"]}>
-				<div>Left Sidebar Actions</div>
+				<div className="flex-row-between">
+					<div>Data Select Actions</div>
+					<div className="flex-self-end">
+						{!loadingChk ? (
+							<span className="success-text">ready</span>
+						) : (
+							<span className="plain-text">loading data</span>
+						)}
+					</div>
+				</div>
 				<div className="flex-row">
-					<button>Print</button>
-					<button>Download</button>
-					<button>Share</button>
 					<button>Refresh</button>
-					<select name="" id="" defaultValue={0} onChange={onSelectChangeHandler}>
-						<option value={0}>Auto Refresh: OFF</option>
-						<option value={5000}>5 seconds</option>
-						<option value={15000}>15 seconds</option>
-						<option value={30000}>30 seconds</option>
-					</select>
-					{/* <select
+					<select
 						name=""
 						id=""
 						defaultValue={0}
-						onChange={(evt) => setFetchDataInterval(evt.target.value)}>
-						<option value={0}>Auto Refresh: OFF</option>
+						onChange={onSelectChangeHandler}>
+						<option value={0}>Data Auto Refresh - Off</option>
 						<option value={5000}>5 seconds</option>
 						<option value={15000}>15 seconds</option>
 						<option value={30000}>30 seconds</option>
-					</select> */}
+						<option value={300000}>5 minutes</option>
+					</select>
 				</div>
 			</div>
 		</div>
+
+		// <div className="flex-col">
+		// 	<div className={styles["actions-container"]}>
+		// 		<div>Left Sidebar Actions</div>
+		// 		<div className="flex-row">
+		// 			<button>Print</button>
+		// 			<button>Download</button>
+		// 			<button>Share</button>
+		// 			<button>Refresh</button>
+		// 			<select name="" id="" defaultValue={0} onChange={onSelectChangeHandler}>
+		// 				<option value={0}>Data Auto Refresh - Off</option>
+		// 				<option value={5000}>5 seconds</option>
+		// 				<option value={15000}>15 seconds</option>
+		// 				<option value={30000}>30 seconds</option>
+		// 				<option value={300000}>5 minutes</option>
+		// 			</select>
+		// 			{/* <select
+		// 				name=""
+		// 				id=""
+		// 				defaultValue={0}
+		// 				onChange={(evt) => setFetchDataInterval(evt.target.value)}>
+		// 				<option value={0}>Auto Refresh: OFF</option>
+		// 				<option value={5000}>5 seconds</option>
+		// 				<option value={15000}>15 seconds</option>
+		// 				<option value={30000}>30 seconds</option>
+		// 			</select> */}
+		// 		</div>
+		// 		<div className="flex-self-end">
+		// 			{!loadingChk ? (
+		// 				<span className="success-text">ready</span>
+		// 			) : (
+		// 				<span>data loading</span>
+		// 			)}
+		// 		</div>
+		// 	</div>
+		// </div>
 	);
 }

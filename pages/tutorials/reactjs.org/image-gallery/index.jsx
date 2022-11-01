@@ -26,9 +26,7 @@ function PictureGallery() {
 	return (
 		<Fragment>
 			<div style={{ display: "flex" }}>
-				<button
-					disabled={pictureIdx === 0 ? true : false}
-					onClick={handleBackClick}>
+				<button disabled={pictureIdx === 0 ? true : false} onClick={handleBackClick}>
 					Back
 				</button>
 				<button
@@ -45,16 +43,9 @@ function PictureGallery() {
 			<h3>
 				({pictureIdx + 1} of {pictureList.length})
 			</h3>
-			<button onClick={handleShowMoreClick}>
-				{showMoreChk ? "Hide" : "Show"} details
-			</button>
+			<button onClick={handleShowMoreClick}>{showMoreChk ? "Hide" : "Show"} details</button>
 			{showMoreChk && <p>{currentPicture.description}</p>}
-			<Image
-				src={currentPicture.url}
-				alt={currentPicture.alt}
-				width={200}
-				height={200}
-			/>
+			<Image src={currentPicture.url} alt={currentPicture.alt} width={200} height={200} />
 		</Fragment>
 	);
 }

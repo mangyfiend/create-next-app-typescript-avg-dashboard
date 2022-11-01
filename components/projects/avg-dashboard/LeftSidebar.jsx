@@ -2,42 +2,52 @@ import React from "react";
 import { useState } from "react";
 import LeftSidebarHeader from "./LeftSidebarHeader";
 import SearchBar from "./SearchBar";
+import SearchBar_Copy from "./SearchBar_Copy";
 import SearchBar2 from "./SearchBar2";
 import LeftSidebarActions from "./LeftSidebarActions";
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext";
 import LeftSidebarList from "./LeftSidebarList";
 import LeftSidebarListControls from "./LeftSidebarListControls";
-import styles from "@styles/projects/avg-dashboard/LeftSidebar.module.css";
 
-export default function LeftSidebar({ cachedGeoclusters }) {
-	const [filterText, setFilterText] = useState("");
+import ExampleComponent from "./ExampleComponent";
+
+export default function LeftSidebar({ cachedGeoclusters, liveGeoClusters }) {
+	// const [filterText, setFilterText] = useState("");
 
 	//
 	const {
-		agcs,
+		agcs, // TODO > REPLACE CACHED DATA WITH "agcs" WHEN AVAILABLE
+		filterText,
 		onFilterTextChange,
-		onIntervalSelectChange,
+		filterText2,
+		onFilter2TextChange,
+		onRetreiveIntervalSelectChange,
 		onPageRowsSelectChange,
 		pageRowsLength,
-		filterText2,
 		filteredAgcs,
+		dataLoadingChk,
 	} = useLeftSidebarContext();
 
 	return (
 		<div>
-			<LeftSidebarHeader data={filteredAgcs}></LeftSidebarHeader>
+			<LeftSidebarHeader headerData={filteredAgcs}></LeftSidebarHeader>
 			<LeftSidebarActions
-				onSelectChangeHandler={onIntervalSelectChange}></LeftSidebarActions>
-			<SearchBar
-				searchText={filterText}
-				onTextChangeHandler={setFilterText}></SearchBar>
+				loadingChk={dataLoadingChk}
+				onSelectChangeHandler={
+					onRetreiveIntervalSelectChange
+				}></LeftSidebarActions>
+			{/* <ExampleComponent></ExampleComponent> */}
 			<SearchBar2
 				searchText={filterText2}
-				onTextChangeHandler={onFilterTextChange}></SearchBar2>
+				onTextChangeHandler={onFilter2TextChange}></SearchBar2>
+			{/* <SearchBar searchText={filterText} onTextChangeHandler={setFilterText}></SearchBar> */}
+			<SearchBar_Copy
+				searchText={filterText}
+				onTextChangeHandler={onFilterTextChange}></SearchBar_Copy>
 			<div style={{ display: "flex", flexDirection: "column" }}>
 				<LeftSidebarList
 					searchText={filterText}
-					results={cachedGeoclusters}
+					data={cachedGeoclusters}
 					pageRowsLimit={pageRowsLength}></LeftSidebarList>
 				<LeftSidebarListControls
 					onSelectChangeHandler={

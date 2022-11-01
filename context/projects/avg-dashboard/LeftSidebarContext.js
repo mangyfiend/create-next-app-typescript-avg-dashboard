@@ -3,21 +3,25 @@ import { createContext, useState, useEffect, useRef } from "react";
 const LeftSidebarContext = createContext({});
 
 export const LeftSidebarProvider = ({ children }) => {
-	console.log("LEFT SIDEBAR CONTEXT PROVIDER RE-RENDERED");
-
-	const [filterText2, setFilterText2] = useState("");
-	const [pageRowsLength, setPageRowsLength] = useState(0);
+	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
 
 	const [agcs, setAgcs] = useState(null);
+	const [dataLoadingChk, setDataLoadingChk] = useState(true);
+	const [filterText, setFilterText] = useState("");
+	const [filterText2, setFilterText2] = useState("");
+	const [pageRowsLength, setPageRowsLength] = useState(0);
 	const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
 	const fetchDataIntervalId = useRef();
 	const [filteredAgcs, setFilteredAgcs] = useState(null);
 
-	// search2 text input change
+	// search #1 text input change
 	const onFilterTextChange = (evt) => {
-		setFilterText2(parseInt(evt.target.value));
+		setFilterText(evt.target.value);
+	};
 
-		// console.log({ filterText2 });
+	// search #2 text input change
+	const onFilter2TextChange = (evt) => {
+		setFilterText2(evt.target.value);
 	};
 
 	//
@@ -28,14 +32,17 @@ export const LeftSidebarProvider = ({ children }) => {
 	//
 	// ????? DON'T UNDERSTAND HOW THIS WORKS
 	const setFetchDataInterval = (interval) => {
+		
 		// Clear old interval
 		if (fetchDataIntervalId.current) {
+			console.log("HERE 1")
 			clearInterval(fetchDataIntervalId.current);
 			fetchDataIntervalId.current = undefined;
 		}
 
 		// Set new interval
 		if (interval > 0) {
+			console.log("HERE 2")
 			fetchDataIntervalId.current = setInterval(() => {
 				setFetchDataTrigger(Date.now());
 			}, interval);
@@ -44,7 +51,11 @@ export const LeftSidebarProvider = ({ children }) => {
 
 	// trigger API call
 	useEffect(() => {
-		console.log("useEffect GEOCLUSTERS API FETCH RUNNING");
+		console.log("[LEFT SIDEBAR] useEffect GEOCLUSTERS API FETCH RUNNING");
+		// console.log({fetchDataTrigger})
+
+		setDataLoadingChk(true);
+
 		const fetchData = async () => {
 			try {
 				const apiResponse = await fetch(`https://geoclusters.herokuapp.com/api/v1/agcs/`);
@@ -52,9 +63,11 @@ export const LeftSidebarProvider = ({ children }) => {
 				const apiDocs = await apiResponse.json();
 
 				setAgcs(apiDocs.agcs);
+				setDataLoadingChk(false);
 			} catch (err) {
 				console.warn(err.message);
 				console.warn(`[ FAILED TO FETCH ]`)
+				setDataLoadingChk(false);
 			}
 		};
 
@@ -65,8 +78,8 @@ export const LeftSidebarProvider = ({ children }) => {
 	}, [fetchDataTrigger]);
 
 	// select diff. option for API refresh interval
-	const onIntervalSelectChange = (evt) => {
-		console.log("YOU ARE SELECTED");
+	const onRetreiveIntervalSelectChange = (evt) => {
+		console.log("DATA REFRESH INTERVAL CHANGED");
 		setFetchDataInterval(evt.target.value);
 	};
 
@@ -85,19 +98,22 @@ export const LeftSidebarProvider = ({ children }) => {
 		};
 	}, [agcs, filterText2]);
 
-	console.log({ agcs });
+	// console.log({ agcs });
 	console.log({ filteredAgcs });
 
 	return (
 		<LeftSidebarContext.Provider
 			value={{
 				agcs,
+				filterText,
 				onFilterTextChange,
-				onIntervalSelectChange,
+				filterText2,
+				onFilter2TextChange,
+				onRetreiveIntervalSelectChange,
 				onPageRowsSelectChange,
 				pageRowsLength,
-				filterText2,
 				filteredAgcs,
+				dataLoadingChk,
 			}}>
 			{children}
 		</LeftSidebarContext.Provider>

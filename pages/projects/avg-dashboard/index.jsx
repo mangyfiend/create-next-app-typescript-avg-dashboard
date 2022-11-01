@@ -1,21 +1,24 @@
 import React from "react";
 import LeftSidebar from "@components/projects/avg-dashboard/LeftSidebar";
+import Dashboard from "@components/projects/avg-dashboard/Dashboard";
 import { LeftSidebarProvider } from "@context/projects/avg-dashboard/LeftSidebarContext";
+import { DashboardProvider } from "@context/projects/avg-dashboard/DashboardContext";
 
 export default function AvgDashboard(props) {
 	return (
 		<div>
-			<div>AVG Dashboard</div>
-			<LeftSidebarProvider>
-				<LeftSidebar cachedGeoclusters={props.cachedGeoclusters}></LeftSidebar>
-			</LeftSidebarProvider>
+			<DashboardProvider>
+				<Dashboard cachedGeoclusters={props.cachedGeoclusters}></Dashboard>
+			</DashboardProvider>
 		</div>
 	);
 }
 
 export async function getServerSideProps() {
 	try {
-		const apiResponse = await fetch(`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`);
+		const apiResponse = await fetch(
+			`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`
+		);
 		const apiDocs = await apiResponse.json();
 		console.log({ apiDocs });
 		return {

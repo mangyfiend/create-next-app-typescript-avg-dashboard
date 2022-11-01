@@ -2,6 +2,9 @@
    margin: 10px 0;
    padding: 10px;
    border: 1px solid black;
+
+   display: flex;
+   flex-direction: column;
 }
 
 .content-wrapper {
@@ -9,11 +12,15 @@
    flex-direction: column;
 }
 
-.list-wrapper {
-   height: 50vh;
-   overflow-y: scroll;
+.list-pages-footer {
+
 }
 
-.content-controls-wrapper {
+.list-pages-controls{
 
+}
+
+.list-page-body {
+   height: 50vh;
+   overflow-y: scroll;
 }
