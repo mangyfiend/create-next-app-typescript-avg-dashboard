@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import DataRecordRow from "./DataRecordRow";
 import styles from "@styles/projects/avg-dashboard/LeftSidebar.module.css";
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext";
+import OBJECT_SELECTORS from "../../../utils/constants/object-properties";
 
 export default function LeftSidebarListPages({ pagesArray }) {
 	const { filterText } = useLeftSidebarContext();
@@ -29,11 +30,11 @@ export default function LeftSidebarListPages({ pagesArray }) {
 		};
 	}, [filterText]);
 
-	console.log({ pagesArray });
+	// console.log({ pagesArray });
 
 	let recordsArray = pagesArray[pageIdx];
 
-	console.log({ recordsArray });
+	// console.log({ recordsArray });
 
 	return (
 		<>
@@ -45,7 +46,11 @@ export default function LeftSidebarListPages({ pagesArray }) {
 					{recordsArray &&
 						recordsArray.map((record) => (
 							<DataRecordRow
-								key={record.properties.agc_id}
+								key={
+									record[OBJECT_SELECTORS.GEOCLUSTER_PROPERTIES][
+										OBJECT_SELECTORS.GEOCLUSTER_ID
+									]
+								}
 								dataRecord={record}></DataRecordRow>
 						))}
 				</div>

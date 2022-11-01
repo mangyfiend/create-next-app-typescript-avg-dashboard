@@ -1,9 +1,14 @@
+import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import { createContext, useState, useEffect, useRef } from "react";
 
 const LeftSidebarContext = createContext({});
 
 export const LeftSidebarProvider = ({ children }) => {
 	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
+
+	// SANDBOX
+	const { cachedGeoclusters } = useDashboardContext();
+	const [cachedRecords, setCachedRecords] = useState([]);
 
 	const [agcs, setAgcs] = useState(null);
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
@@ -32,17 +37,16 @@ export const LeftSidebarProvider = ({ children }) => {
 	//
 	// ????? DON'T UNDERSTAND HOW THIS WORKS
 	const setFetchDataInterval = (interval) => {
-		
 		// Clear old interval
 		if (fetchDataIntervalId.current) {
-			console.log("HERE 1")
+			console.log("HERE 1");
 			clearInterval(fetchDataIntervalId.current);
 			fetchDataIntervalId.current = undefined;
 		}
 
 		// Set new interval
 		if (interval > 0) {
-			console.log("HERE 2")
+			console.log("HERE 2");
 			fetchDataIntervalId.current = setInterval(() => {
 				setFetchDataTrigger(Date.now());
 			}, interval);
@@ -58,7 +62,9 @@ export const LeftSidebarProvider = ({ children }) => {
 
 		const fetchData = async () => {
 			try {
-				const apiResponse = await fetch(`https://geoclusters.herokuapp.com/api/v1/agcs/`);
+				const apiResponse = await fetch(
+					`https://geoclusters.herokuapp.com/api/v1/agcs/`
+				);
 
 				const apiDocs = await apiResponse.json();
 
@@ -66,7 +72,7 @@ export const LeftSidebarProvider = ({ children }) => {
 				setDataLoadingChk(false);
 			} catch (err) {
 				console.warn(err.message);
-				console.warn(`[ FAILED TO FETCH ]`)
+				console.warn(`[ FAILED TO FETCH ]`);
 				setDataLoadingChk(false);
 			}
 		};
@@ -83,7 +89,7 @@ export const LeftSidebarProvider = ({ children }) => {
 		setFetchDataInterval(evt.target.value);
 	};
 
-	// update "agcs" after new API fetch trigger
+	// update "filteredAgcs" when filterText2 changes or new agc data is received
 	useEffect(() => {
 		if (agcs) {
 			const filteredResults = agcs.filter((result) => {
