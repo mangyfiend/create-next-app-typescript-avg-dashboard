@@ -1,5 +1,6 @@
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
+import { divideArray } from "@utils/helpers";
 import { createContext, useState, useEffect } from "react";
 
 const LeftSidebarContext = createContext({});
@@ -7,14 +8,15 @@ const LeftSidebarContext = createContext({});
 export const LeftSidebarProvider = ({ children }) => {
 	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
 
-	const { liveClustersArray } = useDashboardContext();
+	// SANDBOX
+	const { cachedClustersArray, liveClustersArray } = useDashboardContext(); // TODO > WHICH TO USE???
+	const [clusterPagesArray, setClusterPagesArray] = useState([]);
+
 	const [workingClustersArray, setWorkingClustersArray] = useState([]);
 	const [filterText, setFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState(0);
 
 	// SANDBOX
-	console.log({ workingClustersArray });
-
 	const [filtersData, setFiltersData] = useState({
 		clusterSizeCategory: 0,
 	});
@@ -38,6 +40,20 @@ export const LeftSidebarProvider = ({ children }) => {
 		return clustersArray.filter((cluster) => cluster.features.length >= sizeCategory);
 	};
 	// 2.
+	const filterClustersByTitle = (clustersArray, titleString) => {
+		let filteredArray = clustersArray.filter((record) => {
+			const recordTitle = record.properties[OS.CLUSTER_TITLE].toLowerCase();
+			return recordTitle.indexOf(titleString.toLowerCase()) !== -1;
+		});
+		return filteredArray;
+	};
+
+	// 3.
+	const getClusterArrayPages = (clustersArray, numPages) => {
+		// before user interaction,
+		// the default value of the rows limit select elment is == 0
+		return numPages === 0 ? [clustersArray] : divideArray(clustersArray, numPages);
+	};
 
 	// search #1 text input change
 	const onFilterTextChange = (evt) => {
@@ -53,31 +69,32 @@ export const LeftSidebarProvider = ({ children }) => {
 	useEffect(() => {
 		let filteredClustersArray = [];
 
-		// SANDBOX
+		// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS
 		if (liveClustersArray.length > 0) {
-
 			filteredClustersArray = filterClustersBySize(
 				liveClustersArray,
 				filtersData.clusterSizeCategory
 			);
-			console.log({ filteredClustersArray });
 
-			if (filteredClustersArray.length > 0) {
-				filteredClustersArray = filteredClustersArray.filter((record) => {
-					const recordTitle = record.properties[OS.CLUSTER_TITLE].toLowerCase();
-					return recordTitle.indexOf(filterText.toLowerCase()) !== -1;
-				});
+			//
+			filteredClustersArray = filterClustersByTitle(filteredClustersArray, filterText);
 
-				if (filteredClustersArray.length > 0) {
-					setWorkingClustersArray(filteredClustersArray);
-				} else {
-					setWorkingClustersArray(liveClustersArray);
-				}
-			}
+			// if (filteredClustersArray.length > 0) {
+			filteredClustersArray = filteredClustersArray.filter((record) => {
+				const recordTitle = record.properties[OS.CLUSTER_TITLE].toLowerCase();
+				return recordTitle.indexOf(filterText.toLowerCase()) !== -1;
+			});
+
+			//
+			setWorkingClustersArray(filteredClustersArray);
+
+			//
+			setClusterPagesArray(getClusterArrayPages(filteredClustersArray, pageRowsLength));
+
 			console.log({ filteredClustersArray });
 		}
 		return () => {};
-	}, [liveClustersArray, filterText, filtersData]);
+	}, [liveClustersArray, filterText, pageRowsLength, filtersData]);
 
 	return (
 		<LeftSidebarContext.Provider
@@ -86,9 +103,11 @@ export const LeftSidebarProvider = ({ children }) => {
 				onFilterTextChange,
 				handleClusterFiltersChange,
 				setFiltersData,
+				filtersData,
 				onPageRowsSelectChange,
 				pageRowsLength,
 				workingClustersArray,
+				clusterPagesArray,
 			}}>
 			{children}
 		</LeftSidebarContext.Provider>

@@ -5,7 +5,7 @@ import { dividerClasses } from "@mui/material";
 
 export default function DataSelectActions() {
 	const {
-		liveClustersData,
+		liveClustersArray,
 		onRetreiveIntervalSelectChange,
 		dataLoadingChk,
 		fetchErrChk,
@@ -13,20 +13,29 @@ export default function DataSelectActions() {
 	} = useDashboardContext();
 
 	let messageSpan;
+	let refreshBtnDisabled;
 
-	if (!dataLoadingChk && !fetchErrChk && !liveClustersData)
+	if (!dataLoadingChk && !fetchErrChk && liveClustersArray.length === 0) {
+		refreshBtnDisabled = false;
 		messageSpan = <span className="info-text">no data</span>;
+	}
 
-	if (!dataLoadingChk && !fetchErrChk && liveClustersData)
+	if (!dataLoadingChk && !fetchErrChk && liveClustersArray.length > 0) {
 		messageSpan = <span className="success-text">ready</span>;
+		refreshBtnDisabled = false;
+	}
 
-	if (dataLoadingChk && !fetchErrChk)
+	if (dataLoadingChk && !fetchErrChk) {
 		messageSpan = <span className="plain-text">loading data</span>;
+		refreshBtnDisabled = true;
+	}
 
-	if (!dataLoadingChk && fetchErrChk)
+	if (!dataLoadingChk && fetchErrChk) {
 		messageSpan = <span className="error-text">data fetch error</span>;
+		refreshBtnDisabled = false;
+	}
 
-	return(
+	return (
 		<div className="flex-col">
 			<div className={styles["actions-container"]}>
 				<div className="flex-row-between">
@@ -47,7 +56,7 @@ export default function DataSelectActions() {
 						<option value={300000}>5 minutes</option>
 					</select>
 					<button
-						disabled={fetchErrChk || dataLoadingChk ? true : false}
+						disabled={refreshBtnDisabled}
 						onClick={onDataRefreshButtonClick}>
 						Refresh Data
 					</button>

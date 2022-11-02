@@ -8,14 +8,18 @@ export const DashboardProvider = ({ children }) => {
 
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
 	const [fetchErrChk, setFetchErrChk] = useState(false);
-	const [liveClustersData, setLiveClustersData] = useState(null);
+	const [clustersAPIResponse, setClustersAPIResponse] = useState(null);
+	const [liveClustersArray, setLiveClustersArray] = useState([]);
 	const [liveDataTimestamp, setLiveDataTimestamp] = useState(Date.now());
 	const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
 	const [manualDataRefreshTrigger, setManualDataRefreshTrigger] = useState(0);
 	const fetchDataIntervalId = useRef();
 
+	// SANDBOX
+	const [cachedClustersArray, setCachedClustersArray] = useState([]);
+
 	// manual refresh button clicked
-	const onDataRefreshButtonClick = (evt) => setManualDataRefreshTrigger(evt.timeStamp)
+	const onDataRefreshButtonClick = (evt) => setManualDataRefreshTrigger(evt.timeStamp);
 
 	//
 	// ????? DON'T UNDERSTAND HOW THIS WORKS
@@ -46,20 +50,21 @@ export const DashboardProvider = ({ children }) => {
 
 		const fetchData = async () => {
 			try {
-				const apiResponse = await fetch(
+				let apiResponse = await fetch(
 					`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`
 				);
 
 				// TODO > combine parcelized-agcs + legacy-agcs in single endpoint
-				// const apiResponse2 = await fetch(
+				// let apiResponse2 = await fetch(
 				// 	`https://geoclusters.herokuapp.com/api/v3/geoclusters/`
 				// );
 
-				const apiDocs = await apiResponse.json();
+				apiResponse = await apiResponse.json();
 
-				console.log({ apiDocs });
+				console.log({ apiResponse });
 
-				setLiveClustersData(apiDocs[OS.API_DATA][OS.API_DOCS]);
+				setClustersAPIResponse(apiResponse);
+				setLiveClustersArray(apiResponse[OS.API_DATA][OS.API_DOCS]);
 				setDataLoadingChk(false);
 				setLiveDataTimestamp(Date.now());
 			} catch (err) {
@@ -85,7 +90,10 @@ export const DashboardProvider = ({ children }) => {
 	return (
 		<DashboardContext.Provider
 			value={{
-				liveClustersData,
+				cachedClustersArray,
+				setCachedClustersArray,
+				clustersAPIResponse,
+				liveClustersArray,
 				liveDataTimestamp,
 				setFetchDataTrigger,
 				onDataRefreshButtonClick,

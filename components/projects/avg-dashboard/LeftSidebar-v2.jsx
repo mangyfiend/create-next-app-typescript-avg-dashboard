@@ -1,30 +1,27 @@
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v2";
-import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import LeftSidebarHeader from "./LeftSidebarHeader-v2";
 import SearchBar from "./SearchBar-v2";
 import LeftSidebarList from "./LeftSidebarList-v2";
 import LeftSidebarListControls from "./LeftSidebarListControls-v2";
+import LeftSidebarFilters from "./LeftSidebar/LeftSidebarFilters";
 
-export default function LeftSidebar({ cachedGeoclusters }) {
-	const { liveClustersData } = useDashboardContext();
-	const { filterText, workingClustersData, pageRowsLength } = useLeftSidebarContext();
+export default function LeftSidebar({ clustersArray }) {
+	const { filterText, pageRowsLength } = useLeftSidebarContext();
 
-	// TODO > COMPARE LIVE AND CACHED GEO CLUSTERS AND PASS MOST RECENT TO LIST
-	// console.log({ liveClustersData });
-	// console.log({ workingClustersData });
-
-	let filteredData = null;
+	let filteredData = [];
 	let pagenatedData = [];
 
-	// TODO > ABSTRACT TO A FUNCTION
-	if (cachedGeoclusters) {
-		filteredData = cachedGeoclusters.filter((record) => {
+	// function compare
+
+	// TODO > ABSTRACT TO CONTEXT
+	if (clustersArray.length > 0) {
+		filteredData = clustersArray.filter((record) => {
 			const recordTitle = record.properties[OS.CLUSTER_TITLE].toLowerCase();
 			return recordTitle.indexOf(filterText.toLowerCase()) !== -1;
 		});
 
-		if (filteredData) {
+		if (filteredData.length > 0) {
 			// before user interaction,
 			// the default value of the rows limit select elment is == 0
 			if (pageRowsLength === 0) {
@@ -37,11 +34,14 @@ export default function LeftSidebar({ cachedGeoclusters }) {
 
 	return (
 		<div>
-			<LeftSidebarHeader dataArray={filteredData}></LeftSidebarHeader>
-			<SearchBar></SearchBar>
-			<div className="flex-col">
-				<LeftSidebarList pagenatedData={pagenatedData}></LeftSidebarList>
-				<LeftSidebarListControls></LeftSidebarListControls>
+			<LeftSidebarFilters></LeftSidebarFilters>
+			<div>
+				<LeftSidebarHeader dataArray={filteredData}></LeftSidebarHeader>
+				<SearchBar></SearchBar>
+				<div className="flex-col">
+					<LeftSidebarList pagenatedData={pagenatedData}></LeftSidebarList>
+					<LeftSidebarListControls></LeftSidebarListControls>
+				</div>
 			</div>
 		</div>
 	);

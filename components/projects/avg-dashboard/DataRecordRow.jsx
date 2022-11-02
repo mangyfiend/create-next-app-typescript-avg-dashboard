@@ -8,6 +8,7 @@ export default function DataRecordRow({ dataRecord }) {
 				<a href="#">{dataRecord.properties[OS.CLUSTER_TITLE]}</a>
 				<small>{dataRecord.properties[OS.CLUSTER_LOCATION]}</small>
 				<small>{dataRecord.properties[OS.CLUSTER_ID]}</small>
+				<small>{dataRecord.features.length} Farmers</small>
 			</div>
 		);
 	} else {

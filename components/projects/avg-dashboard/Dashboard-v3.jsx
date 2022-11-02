@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import DataSelectActions from "@components/projects/avg-dashboard/DataSelectActions.jsx";
-import LeftSidebar from "@components/projects/avg-dashboard/LeftSidebar-v2";
+import LeftSidebar from "@components/projects/avg-dashboard/LeftSidebar-v3";
 import styles from "@styles/projects/avg-dashboard/Dashboard.module.css";
 
-import { LeftSidebarProvider } from "@context/projects/avg-dashboard/LeftSidebarContext-v2";
+import { LeftSidebarProvider } from "@context/projects/avg-dashboard/LeftSidebarContext-v3";
 
 export default function Dashboard({ cachedClustersAPIResponse, cachedClustersArray }) {
-	const { clustersAPIResponse } = useDashboardContext();
+	const { clustersAPIResponse, setCachedClustersArray } = useDashboardContext();
 
 	// TODO > COMPARE LIVE AND CACHED GEO CLUSTERS AND PASS MOST RECENT TO LIST
 	console.log({ cachedClustersAPIResponse });
@@ -24,13 +24,20 @@ export default function Dashboard({ cachedClustersAPIResponse, cachedClustersArr
 	const recentData = getMostRecentData(cachedClustersAPIResponse, clustersAPIResponse);
 	console.log({ recentData });
 
+	// SANDBOX
+	// FIXME > CALLING THE PROVIDER IN SAME CONTEXT AS DASHBOARD COMPONENT SEEMS DUBIOUS
+	useEffect(() => {
+		setCachedClustersArray(cachedClustersArray);
+		return () => {};
+	}, [cachedClustersArray]);
+
 	return (
 		<div className={styles["dashboard-container"]}>
 			<div>AVG Dashboard</div>
 			<DataSelectActions></DataSelectActions>
 			<div className={styles["left-sidebar-container"]}>
 				<LeftSidebarProvider>
-					<LeftSidebar clustersArray={cachedClustersArray}></LeftSidebar>
+					<LeftSidebar></LeftSidebar>
 				</LeftSidebarProvider>
 			</div>
 		</div>

@@ -1,8 +1,10 @@
 import React from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
+import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v3";
 
-export default function LeftSidebarHeader({ dataArray }) {
+export default function LeftSidebarHeader() {
 	const { dataLoadingChk, liveDataTimestamp } = useDashboardContext();
+	const { workingClustersArray } = useLeftSidebarContext();
 
 	let listCountSpan;
 
@@ -10,14 +12,12 @@ export default function LeftSidebarHeader({ dataArray }) {
 
 	if (dataLoadingChk) timestampSpan = <div className="plain-text">loading data</div>;
 
-	// if (!dataLoadingChk && !dataArray) listCountSpan = <span> ... </span>;
-	if (dataArray) listCountSpan = <span> ... </span>;
+	if (workingClustersArray) listCountSpan = <span> ... </span>;
 
-	// if (!dataLoadingChk && dataArray)
-	if (dataArray.length > 1) {
+	if (workingClustersArray.length > 1) {
 		listCountSpan = (
 			<span>{`${
-				dataArray.length > 1 ? `${dataArray.length} AGCs` : `${dataArray.length} AGC`
+				workingClustersArray.length > 1 ? `${workingClustersArray.length} AGCs` : `${workingClustersArray.length} AGC`
 			}`}</span>
 		);
 	} else {

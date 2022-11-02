@@ -1,13 +1,15 @@
 import React from "react";
-// import Dashboard from "@components/projects/avg-dashboard/Dashboard";
-import Dashboard from "@components/projects/avg-dashboard/Dashboard-v2";
+// import Dashboard from "@components/projects/avg-dashboard/Dashboard-v2";
+import Dashboard from "@components/projects/avg-dashboard/Dashboard-v3";
 import { DashboardProvider } from "@context/projects/avg-dashboard/DashboardContext";
 
 export default function AvgDashboard(props) {
 	return (
 		<div>
 			<DashboardProvider>
-				<Dashboard cachedGeoclusters={props.cachedGeoclusters}></Dashboard>
+				<Dashboard
+					cachedClustersAPIResponse={props.cachedClustersAPIResponse}
+					cachedClustersArray={props.cachedGeoclustersArray}></Dashboard>
 			</DashboardProvider>
 		</div>
 	);
@@ -15,14 +17,12 @@ export default function AvgDashboard(props) {
 
 export async function getServerSideProps() {
 	try {
-		const apiResponse = await fetch(
-			`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`
-		);
-		const apiDocs = await apiResponse.json();
-		console.log({ apiDocs });
+		let apiResponse = await fetch(`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`);
+		apiResponse = await apiResponse.json();
 		return {
 			props: {
-				cachedGeoclusters: apiDocs.data.collection_docs,
+				cachedClustersAPIResponse: apiResponse,
+				cachedGeoclustersArray: apiResponse.data.collection_docs,
 				admin1Bounds: null,
 				admin2Bounds: null,
 			},
