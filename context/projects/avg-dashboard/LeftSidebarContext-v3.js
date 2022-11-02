@@ -1,20 +1,34 @@
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import { divideArray } from "@utils/helpers";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 
 const LeftSidebarContext = createContext({});
 
 export const LeftSidebarProvider = ({ children }) => {
 	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
 
-	// SANDBOX
 	const { cachedClustersArray, liveClustersArray } = useDashboardContext(); // TODO > WHICH TO USE???
-	const [clusterPagesArray, setClusterPagesArray] = useState([]);
+	// console.log({ cachedClustersArray });
+	// console.log({ liveClustersArray });
+	// // const [clustersArray, setClustersArray] = useState([]);
+	// const clustersArray = useRef();
+	// FIXME
+	// useEffect(() => {
+	// 	if (cachedClustersArray && cachedClustersArray.length > 0)
+	// 		clustersArray.current = cachedClustersArray;
+	// 	// setClustersArray(cachedClustersArray);
+	// 	if (liveClustersArray && liveClustersArray.length > 0) clustersArray.current = liveClustersArray;
+	// 	// setClustersArray(liveClustersArray);
+	// }, [cachedClustersArray, liveClustersArray]);
+	// console.log(clustersArray.current)
 
-	const [workingClustersArray, setWorkingClustersArray] = useState([]);
+	const clustersArray2 = cachedClustersArray ? cachedClustersArray : liveClustersArray;
+
 	const [filterText, setFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState(0);
+	const [workingClustersArray, setWorkingClustersArray] = useState([]);
+	const [clusterPagesArray, setClusterPagesArray] = useState([]);
 
 	// SANDBOX
 	const [filtersData, setFiltersData] = useState({
@@ -70,9 +84,9 @@ export const LeftSidebarProvider = ({ children }) => {
 		let filteredClustersArray = [];
 
 		// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS
-		if (liveClustersArray.length > 0) {
+		if (clustersArray2.length > 0) {
 			filteredClustersArray = filterClustersBySize(
-				liveClustersArray,
+				clustersArray2,
 				filtersData.clusterSizeCategory
 			);
 
@@ -94,7 +108,7 @@ export const LeftSidebarProvider = ({ children }) => {
 			console.log({ filteredClustersArray });
 		}
 		return () => {};
-	}, [liveClustersArray, filterText, pageRowsLength, filtersData]);
+	}, [clustersArray2, filterText, pageRowsLength, filtersData]);
 
 	return (
 		<LeftSidebarContext.Provider

@@ -12,12 +12,14 @@ export default function LeftSidebarHeader() {
 
 	if (dataLoadingChk) timestampSpan = <div className="plain-text">loading data</div>;
 
-	if (workingClustersArray) listCountSpan = <span> ... </span>;
+	if (workingClustersArray.length === 0) listCountSpan = <span> ... </span>;
 
-	if (workingClustersArray.length > 1) {
+	if (workingClustersArray.length > 0) {
 		listCountSpan = (
 			<span>{`${
-				workingClustersArray.length > 1 ? `${workingClustersArray.length} AGCs` : `${workingClustersArray.length} AGC`
+				workingClustersArray.length > 1
+					? `${workingClustersArray.length} AGCs`
+					: `${workingClustersArray.length} AGC`
 			}`}</span>
 		);
 	} else {

@@ -3,16 +3,15 @@ import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarC
 
 export default function LeftSidebarList() {
 	const { clusterPagesArray } = useLeftSidebarContext();
-	console.log({clusterPagesArray})
 	return (
-		<div>
-			<div>
+		<>
+			<>
 				{clusterPagesArray.length > 0 ? (
 					<LeftSidebarListPages></LeftSidebarListPages>
 				) : (
 					<div>nothing here</div>
 				)}
-			</div>
-		</div>
+			</>
+		</>
 	);
 }
