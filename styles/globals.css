@@ -57,6 +57,8 @@ select {
 
 button {
 	width: auto;
+	white-space: nowarp;
+	overflow: hidden;
 	padding: 0.5em;
 	margin: 0.25em;
 	display: grid;

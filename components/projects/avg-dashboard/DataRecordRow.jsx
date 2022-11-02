@@ -1,13 +1,13 @@
-import React from "react";
+import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 
 export default function DataRecordRow({ dataRecord }) {
 	let rowMarkup;
 	if (dataRecord) {
 		rowMarkup = (
 			<div className="flex-col">
-				<a href="#">{dataRecord.properties.agc_extended_name}</a>
-				<small>{dataRecord.properties.agc_location}</small>
-				<small>{dataRecord.properties.agc_id}</small>
+				<a href="#">{dataRecord.properties[OS.CLUSTER_TITLE]}</a>
+				<small>{dataRecord.properties[OS.CLUSTER_LOCATION]}</small>
+				<small>{dataRecord.properties[OS.CLUSTER_ID]}</small>
 			</div>
 		);
 	} else {

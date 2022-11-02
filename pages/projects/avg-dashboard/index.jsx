@@ -1,7 +1,6 @@
 import React from "react";
-import LeftSidebar from "@components/projects/avg-dashboard/LeftSidebar";
-import Dashboard from "@components/projects/avg-dashboard/Dashboard";
-import { LeftSidebarProvider } from "@context/projects/avg-dashboard/LeftSidebarContext";
+// import Dashboard from "@components/projects/avg-dashboard/Dashboard";
+import Dashboard from "@components/projects/avg-dashboard/Dashboard-v2";
 import { DashboardProvider } from "@context/projects/avg-dashboard/DashboardContext";
 
 export default function AvgDashboard(props) {

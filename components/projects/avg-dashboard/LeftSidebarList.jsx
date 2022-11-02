@@ -1,6 +1,10 @@
 import LeftSidebarListPages from "./LeftSidebarListPages";
 
-export default function LeftSidebarList({ searchText, data, pageRowsLimit }) {
+export default function LeftSidebarList({
+	searchText,
+	data,
+	pageRowsLimit,
+}) {
 	let filteredData = null;
 	let dataArray = [];
 	let pagenatedData = [];
@@ -36,7 +40,7 @@ export default function LeftSidebarList({ searchText, data, pageRowsLimit }) {
 	);
 }
 
-// split the data into arrays
+// split an array into pages
 function divideArray(arr, pageWidth) {
 	let finalArr = [];
 	let tempArr = [];

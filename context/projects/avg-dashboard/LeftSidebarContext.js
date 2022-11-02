@@ -7,8 +7,9 @@ export const LeftSidebarProvider = ({ children }) => {
 	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
 
 	// SANDBOX
-	const { cachedGeoclusters } = useDashboardContext();
-	const [cachedRecords, setCachedRecords] = useState([]);
+	const { liveClustersData } = useDashboardContext();
+	console.log({ liveClustersData });
+	const [workingClustersData, setWorkingClustersData] = useState([]);
 
 	const [agcs, setAgcs] = useState(null);
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
@@ -34,7 +35,7 @@ export const LeftSidebarProvider = ({ children }) => {
 		setPageRowsLength(evt.target.value);
 	};
 
-	//
+	// REMOVE > DEPRECATED
 	// ????? DON'T UNDERSTAND HOW THIS WORKS
 	const setFetchDataInterval = (interval) => {
 		// Clear old interval
@@ -53,6 +54,7 @@ export const LeftSidebarProvider = ({ children }) => {
 		}
 	};
 
+	// REMOVE > DEPRECATED
 	// trigger API call
 	useEffect(() => {
 		console.log("[LEFT SIDEBAR] useEffect GEOCLUSTERS API FETCH RUNNING");
@@ -89,7 +91,8 @@ export const LeftSidebarProvider = ({ children }) => {
 		setFetchDataInterval(evt.target.value);
 	};
 
-	// update "filteredAgcs" when filterText2 changes or new agc data is received
+	// REMOVE > DEPRECATED
+	// update "filteredAgcs" when filterText2 changes or new agcs is received
 	useEffect(() => {
 		if (agcs) {
 			const filteredResults = agcs.filter((result) => {
@@ -104,13 +107,42 @@ export const LeftSidebarProvider = ({ children }) => {
 		};
 	}, [agcs, filterText2]);
 
+	// SANDBOX
+	// filter the live data when text in "SearchBox2 [live]" changes
+	useEffect(() => {
+		let filteredData = null;
+		// let dataArray = [];
+		// let pagenatedData = [];
+
+		if (liveClustersData) {
+			filteredData = liveClustersData.filter((record) => {
+				const recordTitle =
+					record.properties.agc_extended_name.toLowerCase();
+				return recordTitle.indexOf(filterText2.toLowerCase()) !== -1;
+			});
+
+			// SANDBOX
+			if (filteredData) {
+				setWorkingClustersData(filteredData);
+				// // before user interaction,
+				// // the default value of the rows limit select elment is == 0
+				// if (pageRowsLimit === 0) {
+				// 	dataArray = [filteredData];
+				// } else {
+				// 	dataArray = divideArray(filteredData, pageRowsLimit);
+				// }
+			}
+		}
+		// console.log({ dataArray });
+		return () => {};
+	}, [liveClustersData, filterText2]);
+
 	// console.log({ agcs });
 	console.log({ filteredAgcs });
 
 	return (
 		<LeftSidebarContext.Provider
 			value={{
-				agcs,
 				filterText,
 				onFilterTextChange,
 				filterText2,
@@ -118,8 +150,10 @@ export const LeftSidebarProvider = ({ children }) => {
 				onRetreiveIntervalSelectChange,
 				onPageRowsSelectChange,
 				pageRowsLength,
+				agcs,
 				filteredAgcs,
 				dataLoadingChk,
+				workingClustersData,
 			}}>
 			{children}
 		</LeftSidebarContext.Provider>

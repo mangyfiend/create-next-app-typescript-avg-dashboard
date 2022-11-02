@@ -2,10 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "@styles/projects/avg-dashboard/LeftSidebar.module.css";
 import useTriggerFetchData from "@hooks/projects/avg-dashboard/useTriggerFetchData";
 
-export default function LeftSidebarActions({
-	loadingChk,
-	onSelectChangeHandler,
-}) {
+export default function LeftSidebarActions({ loadingChk, onSelectChangeHandler }) {
 	// const [data, setData] = useState([]);
 	const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
 	const fetchDataIntervalId = useRef();
@@ -69,11 +66,7 @@ export default function LeftSidebarActions({
 				</div>
 				<div className="flex-row">
 					<button>Refresh</button>
-					<select
-						name=""
-						id=""
-						defaultValue={0}
-						onChange={onSelectChangeHandler}>
+					<select name="" id="" defaultValue={0} onChange={onSelectChangeHandler}>
 						<option value={0}>Data Auto Refresh - Off</option>
 						<option value={5000}>5 seconds</option>
 						<option value={15000}>15 seconds</option>

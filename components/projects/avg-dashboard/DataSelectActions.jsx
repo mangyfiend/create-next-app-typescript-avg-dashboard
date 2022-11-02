@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@styles/projects/avg-dashboard/DataSelectActions.module.css";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
+import { dividerClasses } from "@mui/material";
 
 export default function DataSelectActions() {
 	const {
@@ -8,58 +9,33 @@ export default function DataSelectActions() {
 		onRetreiveIntervalSelectChange,
 		dataLoadingChk,
 		fetchErrChk,
+		onDataRefreshButtonClick,
 	} = useDashboardContext();
 
 	let messageSpan;
-	console.log({dataLoadingChk})
-	console.log({fetchErrChk})
-	switch (true) {
-		case !dataLoadingChk && !fetchErrChk && !liveClustersData:
-			messageSpan = <span className="info-text">no data</span>;
-			console.log(dataLoadingChk, fetchErrChk, liveClustersData)
-			break;
-		case !dataLoadingChk && !fetchErrChk && liveClustersData:
-			messageSpan = <span className="success-text">ready</span>;
-			console.log(dataLoadingChk, fetchErrChk, liveClustersData)
-			break;
-		case !fetchErrChk && liveClustersData:
-			messageSpan = <span className="success-text">ready</span>;
-			console.log(dataLoadingChk, fetchErrChk, liveClustersData)
-			break;
-		case dataLoadingChk && !fetchErrChk:
-			messageSpan = <span className="plain-text">loading data</span>;
-			console.log(dataLoadingChk, fetchErrChk, liveClustersData)
-			break;
-		case fetchErrChk && !dataLoadingChk:
-			messageSpan = <span className="error-text">data fetch error</span>;
-			console.log(dataLoadingChk, fetchErrChk, liveClustersData)
-			break;
 
-			default:
-			console.log(dataLoadingChk, fetchErrChk, liveClustersData)
-			messageSpan = <span className="">something went wong</span>;
-			break;
-	}
-	// if (!dataLoadingChk && !fetchErrChk && !liveClustersData) {
-	// 	messageSpan = <span className="info-text">no data</span>;
-	// } else {
-	// 	messageSpan = <span className="success-text">ready</span>;
-	// }
-	// if (dataLoadingChk && !fetchErrChk)
-	// 	messageSpan = <span className="plain-text">data loading</span>;
-	// if (fetchErrChk && !dataLoadingChk)
-	// 	messageSpan = <span className="error-text">data fetch error</span>;
+	if (!dataLoadingChk && !fetchErrChk && !liveClustersData)
+		messageSpan = <span className="info-text">no data</span>;
 
-	return (
+	if (!dataLoadingChk && !fetchErrChk && liveClustersData)
+		messageSpan = <span className="success-text">ready</span>;
+
+	if (dataLoadingChk && !fetchErrChk)
+		messageSpan = <span className="plain-text">loading data</span>;
+
+	if (!dataLoadingChk && fetchErrChk)
+		messageSpan = <span className="error-text">data fetch error</span>;
+
+	return(
 		<div className="flex-col">
 			<div className={styles["actions-container"]}>
 				<div className="flex-row-between">
 					<div>Data Select Actions</div>
 					<div>{messageSpan}</div>
 				</div>
-				<div className="flex-row">
-					<button>Refresh</button>
+				<div className="flex-row-between">
 					<select
+						className="flex-1"
 						name=""
 						id=""
 						defaultValue={0}
@@ -70,6 +46,11 @@ export default function DataSelectActions() {
 						<option value={30000}>30 seconds</option>
 						<option value={300000}>5 minutes</option>
 					</select>
+					<button
+						disabled={fetchErrChk || dataLoadingChk ? true : false}
+						onClick={onDataRefreshButtonClick}>
+						Refresh Data
+					</button>
 				</div>
 			</div>
 		</div>

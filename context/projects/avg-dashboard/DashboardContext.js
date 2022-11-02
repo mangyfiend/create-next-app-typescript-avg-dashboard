@@ -1,3 +1,4 @@
+import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import { createContext, useState, useEffect, useRef } from "react";
 
 const DashboardContext = createContext({});
@@ -7,22 +8,14 @@ export const DashboardProvider = ({ children }) => {
 
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
 	const [fetchErrChk, setFetchErrChk] = useState(false);
-	// const [filterText2, setFilterText2] = useState("");
-	// const [pageRowsLength, setPageRowsLength] = useState(0);
 	const [liveClustersData, setLiveClustersData] = useState(null);
+	const [liveDataTimestamp, setLiveDataTimestamp] = useState(Date.now());
 	const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
+	const [manualDataRefreshTrigger, setManualDataRefreshTrigger] = useState(0);
 	const fetchDataIntervalId = useRef();
-	// const [filteredAgcs, setFilteredAgcs] = useState(null);
 
-	// // search2 text input change
-	// const onFilter2TextChange = (evt) => {
-	// 	setFilterText2(evt.target.value);
-	// };
-
-	//
-	// const onPageRowsSelectChange = (evt) => {
-	// 	setPageRowsLength(evt.target.value);
-	// };
+	// manual refresh button clicked
+	const onDataRefreshButtonClick = (evt) => setManualDataRefreshTrigger(evt.timeStamp)
 
 	//
 	// ????? DON'T UNDERSTAND HOW THIS WORKS
@@ -45,29 +38,30 @@ export const DashboardProvider = ({ children }) => {
 
 	// trigger API call
 	useEffect(() => {
-		console.log(
-			"%c[DASHBOARD] useEffect GEOCLUSTERS API FETCH RUNNING",
-			"color: green"
-		);
+		console.log("%c[DASHBOARD] useEffect GEOCLUSTERS API FETCH RUNNING", "color: green");
 		// console.log({fetchDataTrigger})
 
 		setDataLoadingChk(true);
+		setFetchErrChk(false);
 
 		const fetchData = async () => {
 			try {
 				const apiResponse = await fetch(
-					`https://geoclusters.herokuapp.com/api/v1/agcs/`
+					`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`
 				);
 
-            // TODO > combine parcelized-agcs + legacy-agcs in single endpoint
+				// TODO > combine parcelized-agcs + legacy-agcs in single endpoint
 				// const apiResponse2 = await fetch(
 				// 	`https://geoclusters.herokuapp.com/api/v3/geoclusters/`
 				// );
 
 				const apiDocs = await apiResponse.json();
 
-				setLiveClustersData(apiDocs.agcs);
+				console.log({ apiDocs });
+
+				setLiveClustersData(apiDocs[OS.API_DATA][OS.API_DOCS]);
 				setDataLoadingChk(false);
+				setLiveDataTimestamp(Date.now());
 			} catch (err) {
 				setDataLoadingChk(false);
 				setFetchErrChk(true);
@@ -80,45 +74,22 @@ export const DashboardProvider = ({ children }) => {
 
 		// Clean up for unmount to prevent memory leak
 		return () => clearInterval(fetchDataIntervalId.current);
-	}, [fetchDataTrigger]);
+	}, [fetchDataTrigger, manualDataRefreshTrigger]);
 
 	// select diff. option for API refresh interval
 	const onRetreiveIntervalSelectChange = (evt) => {
-		console.log(
-			"%c[DASHBOARD] DATA REFRESH INTERVAL CHANGED",
-			"color: green"
-		);
+		console.log("%c[DASHBOARD] DATA REFRESH INTERVAL CHANGED", "color: green");
 		setFetchDataInterval(evt.target.value);
 	};
-
-	// // update "liveClustersData" after new API fetch trigger
-	// useEffect(() => {
-	// 	if (liveClustersData) {
-	// 		const filteredResults = liveClustersData.filter((result) => {
-	// 			const resultTitle = result.properties.extended_name.toLowerCase();
-	// 			return resultTitle.indexOf(filterText2.toLowerCase()) !== -1;
-	// 		});
-
-	// 		setFilteredAgcs(filteredResults);
-	// 	}
-	// 	return () => {
-	// 		//  TODO
-	// 	};
-	// }, [liveClustersData, filterText2]);
-
-	console.log({ liveClustersData });
-	// console.log({ filteredAgcs });
 
 	return (
 		<DashboardContext.Provider
 			value={{
 				liveClustersData,
-				// onFilter2TextChange,
+				liveDataTimestamp,
+				setFetchDataTrigger,
+				onDataRefreshButtonClick,
 				onRetreiveIntervalSelectChange,
-				// onPageRowsSelectChange,
-				// pageRowsLength,
-				// filterText2,
-				// filteredAgcs,
 				dataLoadingChk,
 				fetchErrChk,
 			}}>
