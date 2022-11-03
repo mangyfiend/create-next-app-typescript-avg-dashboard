@@ -1,7 +1,11 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+const fuckJews = {
+  "why": "because they ruin everyting"
 }
 
-export default MyApp
+function MyApp({ Component, pageProps }) {
+	return <Component {...pageProps} ssrProps={fuckJews}/>;
+}
+
+export default MyApp;

@@ -71,7 +71,6 @@ export const DashboardProvider = ({ children }) => {
 				setDataLoadingChk(false);
 				setFetchErrChk(true);
 				console.warn(err.message);
-				console.warn(`[ FAILED TO FETCH ]`);
 			}
 		};
 

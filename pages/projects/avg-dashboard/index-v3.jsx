@@ -1,11 +1,13 @@
-import Dashboard from "@components/projects/avg-dashboard/Dashboard-v4";
+import Dashboard from "@components/projects/avg-dashboard/Dashboard-v3";
 import { DashboardProvider } from "@context/projects/avg-dashboard/DashboardContext";
 
 export default function AvgDashboard(props) {
 	return (
 		<div>
 			<DashboardProvider>
-				<Dashboard cachedClustersArray={props.cachedGeoclustersArray}></Dashboard>
+				<Dashboard
+					cachedClustersAPIResponse={props.cachedClustersAPIResponse}
+					cachedClustersArray={props.cachedGeoclustersArray}></Dashboard>
 			</DashboardProvider>
 		</div>
 	);
@@ -17,6 +19,7 @@ export async function getServerSideProps() {
 		apiResponse = await apiResponse.json();
 		return {
 			props: {
+				cachedClustersAPIResponse: apiResponse,
 				cachedGeoclustersArray: apiResponse.data.collection_docs,
 				admin1Bounds: null,
 				admin2Bounds: null,
