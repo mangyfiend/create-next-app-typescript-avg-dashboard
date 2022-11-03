@@ -50,6 +50,7 @@ export default function DataSelectActions() {
 						defaultValue={0}
 						onChange={onRetreiveIntervalSelectChange}>
 						<option value={0}>Data Auto Refresh - Off</option>
+						<option value={5}>real time (5ms) </option>
 						<option value={5000}>5 seconds</option>
 						<option value={15000}>15 seconds</option>
 						<option value={30000}>30 seconds</option>

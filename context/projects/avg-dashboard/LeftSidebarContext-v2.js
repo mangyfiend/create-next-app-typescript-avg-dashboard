@@ -15,7 +15,7 @@ export const LeftSidebarProvider = ({ children }) => {
 	// SANDBOX
 	console.log({ workingClustersArray });
 
-	const [filtersData, setFiltersData] = useState({
+	const [clusterFiltersData, setFiltersData] = useState({
 		clusterSizeCategory: 0,
 	});
 
@@ -30,7 +30,7 @@ export const LeftSidebarProvider = ({ children }) => {
 		}));
 	};
 
-	console.log({ filtersData });
+	console.log({ clusterFiltersData });
 
 	// CLUSTER FILTER FUNCTIONS
 	// 1.
@@ -58,7 +58,7 @@ export const LeftSidebarProvider = ({ children }) => {
 
 			filteredClustersArray = filterClustersBySize(
 				liveClustersArray,
-				filtersData.clusterSizeCategory
+				clusterFiltersData.clusterSizeCategory
 			);
 			console.log({ filteredClustersArray });
 
@@ -77,7 +77,7 @@ export const LeftSidebarProvider = ({ children }) => {
 			console.log({ filteredClustersArray });
 		}
 		return () => {};
-	}, [liveClustersArray, filterText, filtersData]);
+	}, [liveClustersArray, filterText, clusterFiltersData]);
 
 	return (
 		<LeftSidebarContext.Provider

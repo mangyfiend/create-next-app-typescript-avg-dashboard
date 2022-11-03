@@ -9,7 +9,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
 
 	// IMPORTANT > THIS BRINGS SERVER SIDE PROPS INTO THE PROVIDER IMMEDIATELY VIA getServerSideProps in index.js
-	console.log(props );
+	console.log(props);
 
 	// SANDBOX
 	const { liveClustersArray } = useDashboardContext();
@@ -24,22 +24,26 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	const [clusterPagesArray, setClusterPagesArray] = useState([]);
 
 	// WIP
-	const [filtersData, setFiltersData] = useState({
+	const [clusterFiltersData, setClusterFiltersData] = useState({
 		clusterSizeCategory: 0,
+		neverVisitedChk: false,
+		rangeTimeframeSelect: "hours",
+		visitedInLastRange: 0,
 	});
+	// TOOO > neverVisitedChk == true ? visitedInLastRange = 0 & disabled
 
 	const handleClusterFiltersChange = (e) => {
 		const type = e.target.type;
 		const name = e.target.name;
 		const value = type === "checkbox" ? e.target.checked : e.target.value;
 
-		setFiltersData((prevData) => ({
+		setClusterFiltersData((prevData) => ({
 			...prevData,
 			[name]: value,
 		}));
 	};
 
-	console.log({ filtersData });
+	console.log({ clusterFiltersData });
 
 	// CLUSTER FILTER FUNCTIONS
 	// 1.
@@ -80,7 +84,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 		if (CLUSTERS_ARRAY && CLUSTERS_ARRAY.length > 0) {
 			filteredClustersArray = filterClustersBySize(
 				CLUSTERS_ARRAY,
-				filtersData.clusterSizeCategory
+				clusterFiltersData.clusterSizeCategory
 			);
 
 			//
@@ -101,7 +105,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 			console.log({ filteredClustersArray });
 		}
 		return () => {};
-	}, [CLUSTERS_ARRAY, filterText, pageRowsLength, filtersData]);
+	}, [CLUSTERS_ARRAY, filterText, pageRowsLength, clusterFiltersData]);
 
 	return (
 		<LeftSidebarContext.Provider
@@ -109,8 +113,8 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 				filterText,
 				onFilterTextChange,
 				handleClusterFiltersChange,
-				setFiltersData,
-				filtersData,
+				setClusterFiltersData,
+				clusterFiltersData,
 				onPageRowsSelectChange,
 				pageRowsLength,
 				workingClustersArray,

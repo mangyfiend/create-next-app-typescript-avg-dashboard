@@ -5,18 +5,19 @@ import LeftSidebarListControls from "./LeftSidebarListControls-v4";
 import LeftSidebarFilters from "./LeftSidebar/LeftSidebarFilters-v4";
 
 export default function LeftSidebar() {
-
 	return (
-		<>
-			<LeftSidebarFilters></LeftSidebarFilters>
-			<>
+		<div style={{ display: "grid", gridTemplateColumns: "1fr 0.9fr" }}>
+			<div className="flex-col" style={{ padding: "5px", border: "3px solid limegreen" }}>
 				<LeftSidebarHeader></LeftSidebarHeader>
-				<SearchBar></SearchBar>
-				<div className="flex-col">
+				<div>
+					<SearchBar></SearchBar>
 					<LeftSidebarList></LeftSidebarList>
 					<LeftSidebarListControls></LeftSidebarListControls>
 				</div>
-			</>
-		</>
+			</div>
+			<div>
+				<LeftSidebarFilters></LeftSidebarFilters>
+			</div>
+		</div>
 	);
 }
