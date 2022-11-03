@@ -6,6 +6,7 @@ const DashboardContext = createContext({});
 export const DashboardProvider = ({ children }) => {
 	console.log("%c[DASHBOARD] CONTEXT PROVIDER RE-RENDERED", "color: green");
 
+	const fetchDataIntervalId = useRef();
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
 	const [fetchErrChk, setFetchErrChk] = useState(false);
 	const [clustersAPIResponse, setClustersAPIResponse] = useState(null);
@@ -13,8 +14,6 @@ export const DashboardProvider = ({ children }) => {
 	const [liveDataTimestamp, setLiveDataTimestamp] = useState(Date.now());
 	const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
 	const [manualDataRefreshTrigger, setManualDataRefreshTrigger] = useState(0);
-	const fetchDataIntervalId = useRef();
-
 	// SANDBOX
 	const [cachedClustersArray, setCachedClustersArray] = useState([]);
 

@@ -1,22 +1,29 @@
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import { divideArray } from "@utils/helpers";
 import { createContext, useState, useEffect } from "react";
+import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 
 const LeftSidebarContext = createContext({});
 
 export const LeftSidebarProvider = ({ children, ...props }) => {
 	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
 
-	console.log({props})
-	// IMPORTANT > THIS BRINGS SERVER SIDE PROPS INTO THE PROVIDER IMMEDIATELY
-	const CLUSTERS_ARRAY = props.serverSideClusters;
+	// IMPORTANT > THIS BRINGS SERVER SIDE PROPS INTO THE PROVIDER IMMEDIATELY VIA getServerSideProps in index.js
+	console.log(props );
+
+	// SANDBOX
+	const { liveClustersArray } = useDashboardContext();
+	console.log({ liveClustersArray });
+
+	const CLUSTERS_ARRAY = props.serverSideClusters ? props.serverSideClusters : liveClustersArray;
+	console.log({ CLUSTERS_ARRAY });
 
 	const [filterText, setFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState(0);
 	const [workingClustersArray, setWorkingClustersArray] = useState([]);
 	const [clusterPagesArray, setClusterPagesArray] = useState([]);
 
-	// SANDBOX
+	// WIP
 	const [filtersData, setFiltersData] = useState({
 		clusterSizeCategory: 0,
 	});
@@ -70,7 +77,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 		let filteredClustersArray = [];
 
 		// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS
-		if (CLUSTERS_ARRAY.length > 0) {
+		if (CLUSTERS_ARRAY && CLUSTERS_ARRAY.length > 0) {
 			filteredClustersArray = filterClustersBySize(
 				CLUSTERS_ARRAY,
 				filtersData.clusterSizeCategory
