@@ -24,7 +24,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	const [clusterPagesArray, setClusterPagesArray] = useState([]);
 
 	// WIP
-	const [clusterFiltersData, setClusterFiltersData] = useState({
+	const [clusterFilters, setClusterFilters] = useState({
 		clusterSizeCategory: 0,
 		neverVisitedChk: false,
 		rangeTimeframeSelect: "hours",
@@ -37,13 +37,13 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 		const name = e.target.name;
 		const value = type === "checkbox" ? e.target.checked : e.target.value;
 
-		setClusterFiltersData((prevData) => ({
+		setClusterFilters((prevData) => ({
 			...prevData,
 			[name]: value,
 		}));
 	};
 
-	console.log({ clusterFiltersData });
+	console.log({ clusterFilters });
 
 	// CLUSTER FILTER FUNCTIONS
 	// 1.
@@ -84,7 +84,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 		if (CLUSTERS_ARRAY && CLUSTERS_ARRAY.length > 0) {
 			filteredClustersArray = filterClustersBySize(
 				CLUSTERS_ARRAY,
-				clusterFiltersData.clusterSizeCategory
+				clusterFilters.clusterSizeCategory
 			);
 
 			//
@@ -105,7 +105,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 			console.log({ filteredClustersArray });
 		}
 		return () => {};
-	}, [CLUSTERS_ARRAY, filterText, pageRowsLength, clusterFiltersData]);
+	}, [CLUSTERS_ARRAY, filterText, pageRowsLength, clusterFilters]);
 
 	return (
 		<LeftSidebarContext.Provider
@@ -113,8 +113,8 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 				filterText,
 				onFilterTextChange,
 				handleClusterFiltersChange,
-				setClusterFiltersData,
-				clusterFiltersData,
+				setClusterFilters,
+				clusterFilters,
 				onPageRowsSelectChange,
 				pageRowsLength,
 				workingClustersArray,

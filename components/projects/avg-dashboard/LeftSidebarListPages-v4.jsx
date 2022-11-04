@@ -5,7 +5,7 @@ import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarC
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 
 export default function LeftSidebarListPages() {
-	const { filterText, clusterPagesArray, clusterFiltersData, pageRowsLength } = useLeftSidebarContext();
+	const { filterText, clusterPagesArray, clusterFilters, pageRowsLength } = useLeftSidebarContext();
 	const [pageIdx, setPageIdx] = useState(0);
 	const [showMoreChk, setShowMoreChk] = useState(false);
 
@@ -32,7 +32,7 @@ export default function LeftSidebarListPages() {
 		return () => {
 			//  second
 		};
-	}, [filterText, clusterFiltersData, pageRowsLength]);
+	}, [filterText, clusterFilters, pageRowsLength]);
 
 	// console.log({ clusterPagesArray });
 

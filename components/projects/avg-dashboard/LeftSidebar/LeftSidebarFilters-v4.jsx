@@ -5,7 +5,7 @@ import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarC
 
 
 export default function LeftSidebarFilters() {
-	const { clusterFiltersData } = useLeftSidebarContext();
+	const { clusterFilters } = useLeftSidebarContext();
 	return (
 		<>
 			<div className={styles["filters-form-wrapper"]}>
@@ -13,7 +13,7 @@ export default function LeftSidebarFilters() {
 			</div>
 			<div className={styles["filter-breadcrumbs-wrapper"]}>
 				<span>Flter Breadcrumbs</span>
-				<BreadCrumbs keyValueArr={Object.entries(clusterFiltersData)}></BreadCrumbs>
+				<BreadCrumbs keyValueArr={Object.entries(clusterFilters)}></BreadCrumbs>
 			</div>
 		</>
 	);

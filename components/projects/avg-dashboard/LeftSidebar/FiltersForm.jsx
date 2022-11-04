@@ -7,7 +7,7 @@ import { GEO_POL_REGIONS } from "@utils/constants/geo-pol-regions";
 import { COUNTRY_ADMIN_LEVELS } from "@utils/constants/country-admin-levels";
 
 export default function LeftSidebarFilters() {
-	const { setClustersFilterData, handleClusterFiltersChange, clusterFiltersData } =
+	const { setClustersFilterData, handleClusterFiltersChange, clusterFilters } =
 		useLeftSidebarContext();
 
 	const featureTitle = capitalize(TITLES.CLUSTER_FEATURE_TITLE);
@@ -110,18 +110,18 @@ export default function LeftSidebarFilters() {
 						</div>
 						<div className="flex-col">
 							<label htmlFor="visitedInLastRange">
-								Visited in last {clusterFiltersData.visitedInLastRange}{" "}
-								{clusterFiltersData.rangeTimeframeSelect}
+								Visited in last {clusterFilters.visitedInLastRange}{" "}
+								{clusterFilters.rangeTimeframeSelect}
 							</label>
 							<input
 								className="range-slider"
-								disabled={clusterFiltersData.neverVisitedChk ? true : false}
+								disabled={clusterFilters.neverVisitedChk ? true : false}
 								type="range"
 								name="visitedInLastRange"
 								id="visited_in_last_range"
 								onChange={handleClusterFiltersChange}
 								min={1}
-								max={clusterFiltersData.rangeTimeframeSelect === "hours" ? 24 : 30}
+								max={clusterFilters.rangeTimeframeSelect === "hours" ? 24 : 30}
 							/>
 							<select
 								name="rangeTimeframeSelect"
