@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 
 export default function useTriggerFetchData(trigger, currentIntervalId) {
 	console.log({trigger})
