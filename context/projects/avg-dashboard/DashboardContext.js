@@ -6,57 +6,39 @@ const DashboardContext = createContext({});
 export const DashboardProvider = ({ children }) => {
 	console.log("%c[DASHBOARD] CONTEXT PROVIDER RE-RENDERED", "color: green");
 
-	const autoFetchIntervalId = useRef(undefined);
+	// REMOVE
+	// const autoFetchIntervalId = useRef(undefined);
+	// const [autoFetchDataTrigger, setAutoFetchDataTrigger] = useState(0);
+
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
 	const [fetchErrChk, setFetchErrChk] = useState(false);
-	const [clustersAPIResponse, setClustersAPIResponse] = useState(null);
+	const [clustersAPIResponse, setClustersAPIResponse] = useState(0);
 	const [liveClustersArray, setLiveClustersArray] = useState([]);
 	const [liveDataTimestamp, setLiveDataTimestamp] = useState(Date.now());
-	const [autoFetchDataTrigger, setAutoFetchDataTrigger] = useState(0);
 	const [manualDataRefreshTrigger, setManualDataRefreshTrigger] = useState(0);
 	// SANDBOX
-	const [cachedClustersArray, setCachedClustersArray] = useState([]);
+	const [autoFetchInterval, setAutoFetchInterval] = useState(0);
 
 	// manual refresh button clicked
-	const onDataRefreshButtonClick = (evt) => setManualDataRefreshTrigger(evt.timeStamp);
-
-	// REMOVE > NOT WORKING
-	// persist the setInterval ID between re-renders with useRef()
-	// ????? DON'T UNDERSTAND HOW THIS WORKS
-	const setFetchDataInterval = (interval) => {
-		// Clear old interval
-		if (autoFetchIntervalId.current) {
-			console.log("HERE 1");
-			clearInterval(autoFetchIntervalId.current);
-			autoFetchIntervalId.current = undefined;
-		}
-
-		// Set new interval
-		if (interval > 0) {
-			console.log("HERE 2");
-			autoFetchIntervalId.current = setInterval(() => {
-				setAutoFetchDataTrigger(Date.now());
-			}, interval);
-		}
+	const onDataRefreshButtonClick = (evt) => {
+		setManualDataRefreshTrigger(evt.timeStamp);
+		setAutoFetchInterval(0);
 	};
 
-	// FIXME
 	// select diff. option for API refresh interval
 	const onRetreiveIntervalSelectChange = (evt) => {
 		console.log("%c[DASHBOARD] DATA REFRESH INTERVAL CHANGED", "color: green");
-		setFetchDataInterval(evt.target.value);
+		setAutoFetchInterval(evt.target.value);
 	};
 
-	// trigger API call
+	// trigger API call & auto trigger thereafter
 	useEffect(() => {
-		console.log("%c[DASHBOARD] useEffect GEOCLUSTERS API FETCH RUNNING", "color: green");
-		console.log({ autoFetchDataTrigger });
-		console.log({ manualDataRefreshTrigger });
 
-		setDataLoadingChk(true);
-		setFetchErrChk(false);
-
+		// (1) define fetch fn. within effect callback scope
 		const fetchData = async () => {
+			console.log("%c[DASHBOARD] useEffect GEOCLUSTERS API FETCH RUNNING", "color: green");
+			setDataLoadingChk(true);
+			setFetchErrChk(false);
 			try {
 				let apiResponse = await fetch(
 					`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`
@@ -69,8 +51,6 @@ export const DashboardProvider = ({ children }) => {
 
 				apiResponse = await apiResponse.json();
 
-				console.log({ apiResponse });
-
 				setClustersAPIResponse(apiResponse);
 				setLiveClustersArray(apiResponse[OS.API_DATA][OS.API_DOCS]);
 				setDataLoadingChk(false);
@@ -82,25 +62,36 @@ export const DashboardProvider = ({ children }) => {
 			}
 		};
 
-		// fetchData();
+		let intervalId;
 
-		// Clean up for unmount to prevent memory leak
-		return () => clearInterval(autoFetchIntervalId.current);
-	}, [autoFetchDataTrigger, manualDataRefreshTrigger]);
+		console.log({autoFetchInterval})
+
+		if (autoFetchInterval > 0) {
+			intervalId = setInterval(() => {
+				console.log({autoFetchInterval})
+				fetchData(); // <-- (3) invoke in interval callback
+			}, autoFetchInterval);
+		} else {
+			console.log("%c[DASHBOARD] data auto refresh - off", "color: orange");
+		};
+		
+		fetchData(); // <-- (2) invoke on mount
+
+		return () => clearInterval(intervalId);
+	}, [autoFetchInterval, manualDataRefreshTrigger]);
 
 	return (
 		<DashboardContext.Provider
 			value={{
-				cachedClustersArray,
-				setCachedClustersArray,
 				clustersAPIResponse,
 				liveClustersArray,
 				liveDataTimestamp,
-				setAutoFetchDataTrigger,
+				// setAutoFetchDataTrigger, // REMOVE
 				onDataRefreshButtonClick,
 				onRetreiveIntervalSelectChange,
 				dataLoadingChk,
 				fetchErrChk,
+				autoFetchInterval,
 			}}>
 			{children}
 		</DashboardContext.Provider>

@@ -9,14 +9,14 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
 
 	// IMPORTANT > THIS BRINGS SERVER SIDE PROPS INTO THE PROVIDER IMMEDIATELY VIA getServerSideProps in index.js
-	console.log({props});
+	// console.log({props});
 
 	// SANDBOX
 	const { liveClustersArray } = useDashboardContext();
-	console.log({ liveClustersArray });
+	// console.log({ liveClustersArray });
 
+	// USE LIVE DATA IF DATA FROM SERVER SIDE (...props) IS NOT AVAILABLE
 	const CLUSTERS_ARRAY = props.serverSideClusters ? props.serverSideClusters : liveClustersArray;
-	console.log({ CLUSTERS_ARRAY });
 
 	const [filterText, setFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState(0);
