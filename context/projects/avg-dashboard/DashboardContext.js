@@ -20,6 +20,7 @@ export const DashboardProvider = ({ children }) => {
 	// manual refresh button clicked
 	const onDataRefreshButtonClick = (evt) => setManualDataRefreshTrigger(evt.timeStamp);
 
+	// REMOVE > NOT WORKING
 	// persist the setInterval ID between re-renders with useRef()
 	// ????? DON'T UNDERSTAND HOW THIS WORKS
 	const setFetchDataInterval = (interval) => {
@@ -39,6 +40,7 @@ export const DashboardProvider = ({ children }) => {
 		}
 	};
 
+	// FIXME
 	// select diff. option for API refresh interval
 	const onRetreiveIntervalSelectChange = (evt) => {
 		console.log("%c[DASHBOARD] DATA REFRESH INTERVAL CHANGED", "color: green");
@@ -80,7 +82,7 @@ export const DashboardProvider = ({ children }) => {
 			}
 		};
 
-		fetchData();
+		// fetchData();
 
 		// Clean up for unmount to prevent memory leak
 		return () => clearInterval(autoFetchIntervalId.current);

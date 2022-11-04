@@ -4,7 +4,6 @@ import LeftSidebar from "@components/projects/avg-dashboard/LeftSidebar-v4";
 import styles from "@styles/projects/avg-dashboard/Dashboard.module.css";
 
 export default function Dashboard({ cachedClustersArray }) {
-	
 	return (
 		<div className={styles["dashboard-container"]}>
 			<div>AVG Dashboard</div>

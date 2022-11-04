@@ -1,27 +1,6 @@
+import { useEffect, useState } from "react";
 import styles from "@styles/projects/avg-dashboard/DataSelectActions.module.css";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
-
-import {useState} from "react";
-const Stopwatch = () => {
-	const [status, setStatus] = useState("idle");
-	const [timeElapsed, setTimeElapsed] = useState(0);
-	setInterval(
-		() => {
-			setTimeElapsed((timeElapsed) => timeElapsed + 1);
-		},
-		status === "running" ? 10 : null
-	);
-	const toggle = () => {
-		setTimeElapsed(0);
-		setStatus((status) => (status === "running" ? "idle" : "running"));
-	};
-	return (
-		<>
-			Time Elapsed: {timeElapsed / 1000} s
-			<button onClick={toggle}>{status === "running" ? "Stop" : "Start"}</button>
-		</>
-	);
-};
 
 export default function DataSelectActions() {
 	const {
@@ -55,6 +34,37 @@ export default function DataSelectActions() {
 		refreshBtnDisabled = false;
 	}
 
+	const [autoFetchInterval, setAutoFetchInterval] = useState(0);
+
+	useEffect(() => {
+		// (1) define within effect callback scope
+		const fetchData = async () => {
+			try {
+				const res = await fetch(`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`);
+				const json = await res.json();
+				// setDatas(jsonData(json));
+				console.log({ json });
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		let intervalId;
+
+		if (autoFetchInterval > 0) {
+
+			intervalId = setInterval(() => {
+				fetchData(); // <-- (3) invoke in interval callback
+			}, autoFetchInterval);
+
+			// REMOVE
+			// fetchData(); // <-- (2) invoke on mount
+		}
+
+		return () => clearInterval(intervalId);
+
+	}, [autoFetchInterval]);
+
 	return (
 		<div className="flex-col">
 			{/* <Stopwatch></Stopwatch> */}
@@ -69,7 +79,8 @@ export default function DataSelectActions() {
 						name=""
 						id=""
 						defaultValue={0}
-						onChange={onRetreiveIntervalSelectChange}>
+						/* onChange={onRetreiveIntervalSelectChange}> */
+						onChange={(evt) => setAutoFetchInterval(evt.target.value)}>
 						<option value={0}>Data Auto Refresh - Off</option>
 						<option value={5}>real time (5ms) </option>
 						<option value={5000}>5 seconds</option>
