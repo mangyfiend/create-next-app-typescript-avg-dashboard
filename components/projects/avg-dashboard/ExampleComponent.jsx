@@ -2,20 +2,20 @@ import { useEffect, useRef, useState } from "react";
 
 const ExampleComponent = () => {
 	const [apiData, setApiData] = useState([]);
-	const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
-	const fetchDataIntervalId = useRef();
+	const [autoFetchDataTrigger, setAutoFetchDataTrigger] = useState(0);
+	const autoFetchIntervalId = useRef();
 
 	const setFetchDataInterval = (interval) => {
 		// Clear old interval
-		if (fetchDataIntervalId.current) {
-			clearInterval(fetchDataIntervalId.current);
-			fetchDataIntervalId.current = undefined;
+		if (autoFetchIntervalId.current) {
+			clearInterval(autoFetchIntervalId.current);
+			autoFetchIntervalId.current = undefined;
 		}
 
 		// Set new interval
 		if (interval > 0) {
-			fetchDataIntervalId.current = setInterval(() => {
-				setFetchDataTrigger(Date.now());
+			autoFetchIntervalId.current = setInterval(() => {
+				setAutoFetchDataTrigger(Date.now());
 			}, interval);
 		}
 	};
@@ -39,8 +39,8 @@ const ExampleComponent = () => {
       console.log({apiData})
 
 		// Clean up for unmount to prevent memory leak
-		return () => clearInterval(fetchDataIntervalId.current);
-	}, [fetchDataTrigger]);
+		return () => clearInterval(autoFetchIntervalId.current);
+	}, [autoFetchDataTrigger]);
 
 	return (
 		<div>

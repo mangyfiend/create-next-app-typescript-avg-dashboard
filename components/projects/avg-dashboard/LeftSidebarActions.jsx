@@ -4,21 +4,21 @@ import useTriggerFetchData from "@hooks/projects/avg-dashboard/useTriggerFetchDa
 
 export default function LeftSidebarActions({ loadingChk, onSelectChangeHandler }) {
 	// const [data, setData] = useState([]);
-	const [fetchDataTrigger, setFetchDataTrigger] = useState(0);
-	const fetchDataIntervalId = useRef();
+	const [autoFetchDataTrigger, setAutoFetchDataTrigger] = useState(0);
+	const autoFetchIntervalId = useRef();
 
 	// REMOVE
 	const setFetchDataInterval = (interval) => {
 		// Clear old interval
-		if (fetchDataIntervalId.current) {
-			clearInterval(fetchDataIntervalId.current);
-			fetchDataIntervalId.current = undefined;
+		if (autoFetchIntervalId.current) {
+			clearInterval(autoFetchIntervalId.current);
+			autoFetchIntervalId.current = undefined;
 		}
 
 		// Set new interval
 		if (interval > 0) {
-			fetchDataIntervalId.current = setInterval(() => {
-				setFetchDataTrigger(Date.now());
+			autoFetchIntervalId.current = setInterval(() => {
+				setAutoFetchDataTrigger(Date.now());
 			}, interval);
 		}
 	};
@@ -41,12 +41,12 @@ export default function LeftSidebarActions({ loadingChk, onSelectChangeHandler }
 	// 	fetchData();
 
 	// 	// Clean up for unmount to prevent memory leak
-	// 	return () => clearInterval(fetchDataIntervalId.current);
-	// }, [fetchDataTrigger]);
+	// 	return () => clearInterval(autoFetchIntervalId.current);
+	// }, [autoFetchDataTrigger]);
 
 	// REMOVE
 	// TRIGGER API CALL @ NEW TIME
-	// useTriggerFetchData(fetchDataTrigger, fetchDataIntervalId.current);
+	// useTriggerFetchData(autoFetchDataTrigger, autoFetchIntervalId.current);
 
 	// console.log({ data });
 	// console.log({loadingChk})

@@ -6,6 +6,7 @@ export default function AvgDashboard(props) {
 		// FOR DASHBOARD-V4
 		<div>
 			<DashboardProvider>
+				Stopwatch
 				<Dashboard cachedClustersArray={props.cachedGeoclustersArray}></Dashboard>
 			</DashboardProvider>
 		</div>
