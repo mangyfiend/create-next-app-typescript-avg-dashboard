@@ -3,14 +3,11 @@ import DataSelectActions from "@components/projects/avg-dashboard/DataSelectActi
 import LeftSidebar from "@components/projects/avg-dashboard/LeftSidebar-v4";
 import styles from "@styles/projects/avg-dashboard/Dashboard.module.css";
 
-import ExampleComponent from "./ExampleComponent"
-
 export default function Dashboard({ cachedClustersArray }) {
 	
 	return (
 		<div className={styles["dashboard-container"]}>
 			<div>AVG Dashboard</div>
-			<ExampleComponent></ExampleComponent>
 			<DataSelectActions></DataSelectActions>
 			<div className={styles["left-sidebar-container"]}>
 				<LeftSidebarProvider serverSideClusters={cachedClustersArray}>

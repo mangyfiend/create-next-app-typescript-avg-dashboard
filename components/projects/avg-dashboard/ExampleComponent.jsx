@@ -20,6 +20,8 @@ const ExampleComponent = () => {
 		}
 	};
 
+	console.log({autoFetchDataTrigger})
+
 	useEffect(() => {
 		console.log("%ceffect fired - fetching data", "color: orange")
 
