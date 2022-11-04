@@ -6,6 +6,11 @@ import { capitalize } from "@utils/helpers";
 import { GEO_POL_REGIONS } from "@utils/constants/geo-pol-regions";
 import { COUNTRY_ADMIN_LEVELS } from "@utils/constants/country-admin-levels";
 
+function AdminBoundsSelector({country, adminLevel}: {country: string, adminLevel: number}) {
+
+	return <div></div>;
+}
+
 export default function LeftSidebarFilters() {
 	const { setClustersFilterData, handleClusterFiltersChange, clusterFiltersData } =
 		useLeftSidebarContext();
@@ -42,6 +47,7 @@ export default function LeftSidebarFilters() {
 				</select>
 
 				<label htmlFor="geoPolRegionSelector">Geo-Political Regions</label>
+				<AdminBoundsSelector country={"NGA"} adminLevel={1}></AdminBoundsSelector>
 				<select
 					name="geoPolRegionSelector"
 					id="geo_pol_region_selector"
