@@ -21,23 +21,24 @@ const ExampleComponent = () => {
 	};
 
 	useEffect(() => {
+		console.log("%ceffect fired - fetching data", "color: orange")
 
 		const fetchData = async () => {
 			try {
-				const apiResponse = await fetch(`https://geoclusters.herokuapp.com/api/v1/agcs/`);
-
+				const apiResponse = await fetch(`http://127.0.0.1:3000/api/brad-traversy/dj-events`);
+				
 				const apiDocs = await apiResponse.json();
 
 				setApiData(apiDocs.agcs);
+				
+				console.log({apiDocs})
 			} catch (err) {
 				console.log(err.message);
 			}
 		};
-
+		
 		fetchData();
-
-      console.log({apiData})
-
+		
 		// Clean up for unmount to prevent memory leak
 		return () => clearInterval(autoFetchIntervalId.current);
 	}, [autoFetchDataTrigger]);
@@ -50,6 +51,7 @@ const ExampleComponent = () => {
 				defaultValue={0}
 				onChange={(evt) => setFetchDataInterval(evt.target.value)}>
 				<option value={0}>Auto Refresh: OFF</option>
+				<option value={50}>real time - 50 ms</option>
 				<option value={5000}>5 seconds</option>
 				<option value={15000}>15 seconds</option>
 				<option value={30000}>30 seconds</option>

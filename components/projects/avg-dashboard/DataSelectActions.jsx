@@ -1,7 +1,27 @@
-import React from "react";
 import styles from "@styles/projects/avg-dashboard/DataSelectActions.module.css";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
-import { dividerClasses } from "@mui/material";
+
+import {useState} from "react";
+const Stopwatch = () => {
+	const [status, setStatus] = useState("idle");
+	const [timeElapsed, setTimeElapsed] = useState(0);
+	setInterval(
+		() => {
+			setTimeElapsed((timeElapsed) => timeElapsed + 1);
+		},
+		status === "running" ? 10 : null
+	);
+	const toggle = () => {
+		setTimeElapsed(0);
+		setStatus((status) => (status === "running" ? "idle" : "running"));
+	};
+	return (
+		<>
+			Time Elapsed: {timeElapsed / 1000} s
+			<button onClick={toggle}>{status === "running" ? "Stop" : "Start"}</button>
+		</>
+	);
+};
 
 export default function DataSelectActions() {
 	const {
@@ -31,12 +51,13 @@ export default function DataSelectActions() {
 	}
 
 	if (!dataLoadingChk && fetchErrChk) {
-		messageSpan = <span className="error-text">data fetch error</span>;
+		messageSpan = <span className="error-text">error getting data</span>;
 		refreshBtnDisabled = false;
 	}
 
 	return (
 		<div className="flex-col">
+			{/* <Stopwatch></Stopwatch> */}
 			<div className={styles["actions-container"]}>
 				<div className="flex-row-between">
 					<div>Data Select Actions</div>
@@ -56,9 +77,7 @@ export default function DataSelectActions() {
 						<option value={30000}>30 seconds</option>
 						<option value={300000}>5 minutes</option>
 					</select>
-					<button
-						disabled={refreshBtnDisabled}
-						onClick={onDataRefreshButtonClick}>
+					<button disabled={refreshBtnDisabled} onClick={onDataRefreshButtonClick}>
 						Refresh Data
 					</button>
 				</div>

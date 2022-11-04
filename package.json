@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "status": "git branch && git status",
+    "stable": "git add -A && git commit -m `stable-commit`",
     "lint": "next lint"
   },
   "dependencies": {
