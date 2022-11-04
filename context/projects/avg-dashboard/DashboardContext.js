@@ -6,10 +6,6 @@ const DashboardContext = createContext({});
 export const DashboardProvider = ({ children }) => {
 	console.log("%c[DASHBOARD] CONTEXT PROVIDER RE-RENDERED", "color: green");
 
-	// REMOVE
-	// const autoFetchIntervalId = useRef(undefined);
-	// const [autoFetchDataTrigger, setAutoFetchDataTrigger] = useState(0);
-
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
 	const [fetchErrChk, setFetchErrChk] = useState(false);
 	const [clustersAPIResponse, setClustersAPIResponse] = useState(0);
@@ -86,7 +82,6 @@ export const DashboardProvider = ({ children }) => {
 				clustersAPIResponse,
 				liveClustersArray,
 				liveDataTimestamp,
-				// setAutoFetchDataTrigger, // REMOVE
 				onDataRefreshButtonClick,
 				onRetreiveIntervalSelectChange,
 				dataLoadingChk,
