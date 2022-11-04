@@ -9,7 +9,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
 
 	// IMPORTANT > THIS BRINGS SERVER SIDE PROPS INTO THE PROVIDER IMMEDIATELY VIA getServerSideProps in index.js
-	console.log(props);
+	console.log({props});
 
 	// SANDBOX
 	const { liveClustersArray } = useDashboardContext();

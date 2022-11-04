@@ -3,7 +3,6 @@ import { DashboardProvider } from "@context/projects/avg-dashboard/DashboardCont
 
 export default function AvgDashboard(props) {
 	return (
-		// FOR DASHBOARD-V4
 		<div>
 			<DashboardProvider>
 				<Dashboard cachedClustersArray={props.cachedGeoclustersArray}></Dashboard>

@@ -1,10 +1,21 @@
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
 import SearchBar from "@components/projects/avg-dashboard/SearchBar-v4";
 import styles from "@styles/projects/avg-dashboard/LeftSidebarFilters.module.css";
+import { TITLES } from "@utils/constants/titles";
+import { capitalize } from "@utils/helpers";
+import { GEO_POL_REGIONS } from "@utils/constants/geo-pol-regions";
+import { COUNTRY_ADMIN_LEVELS } from "@utils/constants/country-admin-levels";
+
+function AdminBoundsSelector({country, adminLevel}) {
+
+	return <div></div>;
+}
 
 export default function LeftSidebarFilters() {
 	const { setClustersFilterData, handleClusterFiltersChange, clusterFiltersData } =
 		useLeftSidebarContext();
+
+	const featureTitle = capitalize(TITLES.CLUSTER_FEATURE_TITLE);
 
 	return (
 		<>
@@ -17,18 +28,36 @@ export default function LeftSidebarFilters() {
 					id="cluster_size_selector"
 					onChange={handleClusterFiltersChange}>
 					<option value={0}>all cluster sizes</option>
-					<option value={5}>5 Farmers</option>
-					<option value={10}>10 Farmers</option>
-					<option value={20}>20 Farmers</option>
-					<option value={50}>50 Farmers</option>
+					<option value={5}>5 {featureTitle}</option>
+					<option value={10}>10 {featureTitle}</option>
+					<option value={20}>20 {featureTitle}</option>
+					<option value={50}>50 {featureTitle}</option>
 				</select>
+				<label htmlFor="adminLevelSelector">Administrative Level</label>
+				<select
+					name="adminLevelSelector"
+					id="admin_level_selector"
+					onChange={handleClusterFiltersChange}>
+					<option value={""}>none</option>
+					{Object.entries(COUNTRY_ADMIN_LEVELS).map((level, idx) => (
+						<option key={idx} value={level[0]}>
+							{level[1]}
+						</option>
+					))}
+				</select>
+
 				<label htmlFor="geoPolRegionSelector">Geo-Political Regions</label>
+				<AdminBoundsSelector country={"NGA"} adminLevel={1}></AdminBoundsSelector>
 				<select
 					name="geoPolRegionSelector"
 					id="geo_pol_region_selector"
 					onChange={handleClusterFiltersChange}>
-					<option value={0}>all regions</option>
-					<option value={"NW"}>North West</option>
+					<option value={""}>all regions</option>
+					{GEO_POL_REGIONS.map((region, idx) => (
+						<option key={idx} value={region[0]}>
+							{region[1]}
+						</option>
+					))}
 				</select>
 				<div>
 					<span>Close Points of Interest</span>
@@ -90,7 +119,8 @@ export default function LeftSidebarFilters() {
 								Visited in last {clusterFiltersData.visitedInLastRange}{" "}
 								{clusterFiltersData.rangeTimeframeSelect}
 							</label>
-							<input className="range-slider"
+							<input
+								className="range-slider"
 								disabled={clusterFiltersData.neverVisitedChk ? true : false}
 								type="range"
 								name="visitedInLastRange"
