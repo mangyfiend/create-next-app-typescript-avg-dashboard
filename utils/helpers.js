@@ -19,3 +19,13 @@ export function divideArray(arr, pageWidth) {
 export function capitalize(s) {
 	return s && s[0].toUpperCase() + s.slice(1);
 }
+
+// Add multiple classNames to nextjs elements
+export const addStyles = (stylesModule, classes) => {
+	const classList = classes.split(" ");
+	classes = "";
+	for (const className of classList) {
+		classes += `${stylesModule[className]} `;
+	}
+	return classes;
+};

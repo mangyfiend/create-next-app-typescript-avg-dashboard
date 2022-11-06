@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./TransactionsTable.module.scss";
-import { addStyles } from "../../../../../../src/utils/helpers";
+import { addStyles } from "@utils/helpers";
 
 const TransactionsTable = () => {
 	const dummyData = [

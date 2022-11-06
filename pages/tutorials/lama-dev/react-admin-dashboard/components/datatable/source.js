@@ -1,5 +1,5 @@
 import styles from "./Datatable.module.scss";
-import { addStyles } from "../../../../../../src/utils/helpers.js";
+import { addStyles } from "@utils/helpers";
 
 // DATA TABLE COLUMNS
 export const userColumns = [

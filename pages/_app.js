@@ -5,7 +5,7 @@ const fuckJews = {
 }
 
 function MyApp({ Component, pageProps }) {
-	return <Component {...pageProps} ssrProps={fuckJews}/>;
+	return <Component {...pageProps}/>;
 }
 
 export default MyApp;

@@ -4,7 +4,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import { addStyles } from "../../../../../../src/utils/helpers.js"
+import { addStyles } from "@utils/helpers";
 
 const Widget = ({ widgetType }) => {
 	

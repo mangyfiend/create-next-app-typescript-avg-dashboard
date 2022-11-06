@@ -4,7 +4,7 @@ import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutl
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import styles from "./SummaryChart.module.scss";
-import { addStyles } from "../../../../../../../src/utils/helpers.js";
+import { addStyles } from "@utils/helpers";
 
 const SummaryChart = () => {
 	return (
