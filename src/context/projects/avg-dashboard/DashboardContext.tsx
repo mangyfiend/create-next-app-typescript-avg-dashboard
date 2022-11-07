@@ -1,9 +1,9 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
 import { SyntheticEvent, ChangeEvent } from "react";
-import IGeoclusterAPIResponse from "@srcinterfaces/GeoclustersAPIResponse";
-import IFeatureCollection from "@srcinterfaces/GeoJSON";
-import { getErrorMessage } from "@srcutils/helpers";
+import IGeoclusterAPIResponse from "@interfaces/GeoclustersAPIResponse";
+import IFeatureCollection from "@interfaces/GeoJSON";
+import { getErrorMessage } from "@utils/helpers";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import API_URLS from "@utils/constants/api-urls";
 
