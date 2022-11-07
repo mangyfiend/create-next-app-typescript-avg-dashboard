@@ -3,8 +3,11 @@ import Layout from "../components/Layout";
 
 function IndexPage() {
 	return (
-		<Layout title="AVG Dashbord" description="Go Fuck Yourself TS" keywords="AGC, NIRSAL, pussy">
-			<h1>Hello Next.js 👋</h1>
+		<Layout
+			title="AVG Dashbord"
+			description="The Next.js + Typescript version of the AVG Dashboard"
+			keywords="AGC, NIRSAL, Dashboard, React, Next.js">
+			<p>Hello Next.js 👋</p>
 			<p>
 				<Link href="/about">About</Link>
 			</p>
