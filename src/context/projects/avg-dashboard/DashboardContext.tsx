@@ -5,26 +5,26 @@ import IGeoclusterAPIResponse from "@srcinterfaces/GeoclustersAPIResponse";
 import IFeatureCollection from "@srcinterfaces/GeoJSON";
 import { getErrorMessage } from "@srcutils/helpers";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
-
+import API_URLS from "@utils/constants/api-urls";
 
 interface IDashboardContextProps {
 	clustersAPIResponse: Object;
 	liveClustersArray: IFeatureCollection[];
 	liveDataTimestamp: number;
-	onDataRefreshButtonClick: (arg0: SyntheticEvent) => void;
-	onRetreiveIntervalSelectChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+	onDataRefreshButtonClick: (argument: SyntheticEvent) => void;
+	onRetreiveIntervalSelectChange: (argument: ChangeEvent<HTMLInputElement>) => void;
 	dataLoadingChk: Boolean;
 	fetchErrChk: Boolean;
 	autoFetchInterval: string | undefined;
-}
+};
 
-const DashboardContext = createContext<IDashboardContextProps | null>(null);
-
-interface IProps {
+interface IProviderProps {
 	children?: React.ReactNode;
-}
+};
 
-export const DashboardProvider: React.FC<IProps> = ({ children }) => {
+const DashboardContext = createContext<IDashboardContextProps | {}>({});
+
+export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 	console.log("%c[DASHBOARD] CONTEXT PROVIDER RE-RENDERED", "color: green");
 
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
@@ -48,20 +48,16 @@ export const DashboardProvider: React.FC<IProps> = ({ children }) => {
 
 	// trigger API call & auto trigger thereafter
 	useEffect(() => {
+
 		// (1) define fetch fn. within effect callback scope
 		const fetchData = async () => {
+
 			console.log("%c[DASHBOARD] useEffect GEOCLUSTERS API FETCH RUNNING", "color: green");
 			setDataLoadingChk(true);
 			setFetchErrChk(false);
-			try {
-				let apiResponse = await fetch(
-					`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`
-				);
 
-				// TODO > combine parcelized-agcs + legacy-agcs in single endpoint
-				// let apiResponse2 = await fetch(
-				// 	`https://geoclusters.herokuapp.com/api/v3/geoclusters/`
-				// );
+			try {
+				let apiResponse = await fetch(API_URLS.PARCELIZED_GEOCLUSTERS);
 
 				const apiData: IGeoclusterAPIResponse = await apiResponse.json();
 
