@@ -21,7 +21,12 @@
 
     "baseUrl": ".",
     "paths": {
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@components/*": ["components/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@context/*": ["context/*"],
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"]
     }
 
   },
