@@ -7,6 +7,7 @@ import { getErrorMessage } from "@srcutils/helpers";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import API_URLS from "@utils/constants/api-urls";
 
+// def. the context props
 interface IDashboardContextProps {
 	clustersAPIResponse: Object;
 	liveClustersArray: IFeatureCollection[];
@@ -16,14 +17,21 @@ interface IDashboardContextProps {
 	dataLoadingChk: Boolean;
 	fetchErrChk: Boolean;
 	autoFetchInterval: string | undefined;
-};
+}
 
+// def. the context provider props
 interface IProviderProps {
 	children?: React.ReactNode;
-};
+}
 
+// init. the context
 const DashboardContext = createContext<IDashboardContextProps | {}>({});
 
+// REMOVE
+// TS. PROVIDER FN. DEF. MTD #1
+export function DashboardPrvdr({ children }: { children: React.FC; }) { }
+
+// TS. PROVIDER FN. DEF. MTD #2
 export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 	console.log("%c[DASHBOARD] CONTEXT PROVIDER RE-RENDERED", "color: green");
 
@@ -48,10 +56,8 @@ export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 
 	// trigger API call & auto trigger thereafter
 	useEffect(() => {
-
 		// (1) define fetch fn. within effect callback scope
 		const fetchData = async () => {
-
 			console.log("%c[DASHBOARD] useEffect GEOCLUSTERS API FETCH RUNNING", "color: green");
 			setDataLoadingChk(true);
 			setFetchErrChk(false);
