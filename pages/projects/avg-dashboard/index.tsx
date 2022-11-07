@@ -3,11 +3,13 @@ import { DashboardProvider } from "@context/projects/avg-dashboard/DashboardCont
 import API_URLS from "@utils/constants/api-urls";
 import IFeatureCollection from "@src/interfaces/GeoJSON";
 
+// TODO > CHANGE TO IMPORT
 interface IGeoclustersAPIData {
 	collection_docs: IFeatureCollection[];
 	collection_docs_num: number;
 }
 
+// TODO > CHANGE TO IMPORT
 interface IGeoclusterAPIResponse {
 	date_requested: Date;
 	data: IGeoclustersAPIData;
