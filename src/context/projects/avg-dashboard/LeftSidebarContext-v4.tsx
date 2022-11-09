@@ -74,9 +74,9 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 
 	// 2.
 	const filterClustersByName = (clustersArray: IGeoclustersGeoJSON[], titleString: string) => {
-		let filteredArray = clustersArray.filter((record) => {
-			const recordTitle = record.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
-			return recordTitle.indexOf(titleString.toLowerCase()) !== -1;
+		let filteredArray = clustersArray.filter((cluster) => {
+			const clusterTitle = cluster.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
+			return clusterTitle.indexOf(titleString.toLowerCase()) !== -1;
 		});
 		return filteredArray;
 	};
@@ -100,8 +100,10 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 		setPageRowsLength(evt.target.value);
 	};
 
+	// TODO > MOVE TO CUSTOM HOOK
 	// filter the live data when text in the search input changes
 	useEffect(() => {
+
 		let filteredClustersArray = [];
 
 		// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS
@@ -111,14 +113,8 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 				clusterFilters.clusterSizeSelect
 			);
 
-			//
+			// filter clusters by cluster name
 			filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFiltertext);
-
-			// if (filteredClustersArray.length > 0) {
-			filteredClustersArray = filteredClustersArray.filter((record) => {
-				const recordTitle = record.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
-				return recordTitle.indexOf(clusterNameFiltertext.toLowerCase()) !== -1;
-			});
 
 			//
 			setWorkingClustersArray(filteredClustersArray);

@@ -52,9 +52,9 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	};
 	// 2.
 	const filterClustersByName = (clustersArray, titleString) => {
-		let filteredArray = clustersArray.filter((record) => {
-			const recordTitle = record.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
-			return recordTitle.indexOf(titleString.toLowerCase()) !== -1;
+		let filteredArray = clustersArray.filter((cluster) => {
+			const clusterTitle = cluster.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
+			return clusterTitle.indexOf(titleString.toLowerCase()) !== -1;
 		});
 		return filteredArray;
 	};
@@ -91,9 +91,9 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 			filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFiltertext);
 
 			// if (filteredClustersArray.length > 0) {
-			filteredClustersArray = filteredClustersArray.filter((record) => {
-				const recordTitle = record.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
-				return recordTitle.indexOf(clusterNameFiltertext.toLowerCase()) !== -1;
+			filteredClustersArray = filteredClustersArray.filter((cluster) => {
+				const clusterTitle = cluster.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
+				return clusterTitle.indexOf(clusterNameFiltertext.toLowerCase()) !== -1;
 			});
 
 			//
