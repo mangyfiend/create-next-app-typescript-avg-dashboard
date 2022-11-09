@@ -53,7 +53,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	// 2.
 	const filterClustersByTitle = (clustersArray, titleString) => {
 		let filteredArray = clustersArray.filter((record) => {
-			const recordTitle = record.properties[OS.CLUSTER_TITLE].toLowerCase();
+			const recordTitle = record.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
 			return recordTitle.indexOf(titleString.toLowerCase()) !== -1;
 		});
 		return filteredArray;
@@ -92,7 +92,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 
 			// if (filteredClustersArray.length > 0) {
 			filteredClustersArray = filteredClustersArray.filter((record) => {
-				const recordTitle = record.properties[OS.CLUSTER_TITLE].toLowerCase();
+				const recordTitle = record.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
 				return recordTitle.indexOf(filterText.toLowerCase()) !== -1;
 			});
 

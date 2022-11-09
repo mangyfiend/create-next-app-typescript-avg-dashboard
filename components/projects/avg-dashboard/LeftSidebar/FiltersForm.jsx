@@ -7,7 +7,7 @@ import { GEO_POL_REGIONS } from "@utils/constants/geo-pol-regions";
 import { COUNTRY_ADMIN_LEVELS } from "@utils/constants/country-admin-levels";
 
 export default function LeftSidebarFilters() {
-	const { setClustersFilterData, handleClusterFiltersChange, clusterFilters } =
+	const { setClusterFilters, handleClusterFiltersChange, clusterFilters } =
 		useLeftSidebarContext();
 
 	const featureTitle = capitalize(TITLES.CLUSTER_FEATURE_TITLE);
@@ -16,7 +16,7 @@ export default function LeftSidebarFilters() {
 		<>
 			<div>Left Sidebar Filters</div>
 			<SearchBar></SearchBar>
-			<form onSubmit={setClustersFilterData}>
+			<form onSubmit={setClusterFilters}>
 				<label htmlFor="clusterSizeCategory">Cluster Sizes</label>
 				<select
 					name="clusterSizeCategory"

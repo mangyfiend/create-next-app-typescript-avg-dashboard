@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Layout from "@components/Layout";
+import Layout from "@components/projects/avg-dashboard/Layouts/Layout";
 import API_URLS from "@utils/constants/api-urls";
 import Dashboard from "@components/projects/avg-dashboard/Dashboard-v4";
 import { DashboardProvider } from "@context/projects/avg-dashboard/DashboardContext";
-import IFeatureCollection from "@interfaces/GeoJSON";
+import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
 
 // TODO > CHANGE TO IMPORT
 interface IGeoclustersAPIData {

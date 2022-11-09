@@ -1,0 +1,26 @@
+.actions-container {
+   margin: 10px 0;
+   padding: 10px;
+   border: 1px solid black;
+
+   display: flex;
+   flex-direction: column;
+}
+
+.content-wrapper {
+   display: flex;
+   flex-direction: column;
+}
+
+.list-pages-footer {
+
+}
+
+.list-pages-controls{
+
+}
+
+.list-page-body {
+   height: 53vh;
+   overflow-y: scroll;
+}

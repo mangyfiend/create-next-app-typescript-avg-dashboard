@@ -1,23 +1,11 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
-import { SyntheticEvent, ChangeEvent } from "react";
-import IGeoclusterAPIResponse from "@interfaces/GeoclustersAPIResponse";
-import IFeatureCollection from "@interfaces/GeoJSON";
+import IGeoclusterAPIResponse from "@interfaces/projects/avg-dashboard/GeoclustersAPIResponse";
+import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
 import { getErrorMessage } from "@utils/helpers";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import API_URLS from "@utils/constants/api-urls";
-
-// def. the context props
-interface IDashboardContextProps {
-	clustersAPIResponse: Object;
-	liveClustersArray: IFeatureCollection[];
-	liveDataTimestamp: number;
-	onDataRefreshButtonClick: (argument: SyntheticEvent) => void;
-	onRetreiveIntervalSelectChange: (argument: ChangeEvent<HTMLInputElement>) => void;
-	dataLoadingChk: Boolean;
-	fetchErrChk: Boolean;
-	autoFetchInterval: string | undefined;
-}
+import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 
 // def. the context provider props
 interface IProviderProps {
@@ -28,8 +16,9 @@ interface IProviderProps {
 const DashboardContext = createContext<IDashboardContextProps | {}>({});
 
 // REMOVE
-// TS. PROVIDER FN. DEF. MTD #1
-export function DashboardPrvdr({ children }: { children: React.FC; }) { }
+// TS. PROVIDER FN. DEF. MTD #1 > typing using destructuring
+export function DashboardProvider2({ children }: { children: React.ReactNode; }) { }
+// export function DashboardPrvdr({ children }: { children: React.FC; }) { } // ????? will this work?
 
 // TS. PROVIDER FN. DEF. MTD #2
 export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {

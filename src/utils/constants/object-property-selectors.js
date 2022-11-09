@@ -5,7 +5,6 @@ export const OBJECT_SELECTORS = Object.freeze({
 	PARCELIZED_AGCS_DOCS: "collection_docs",
 	API_DATA: "data",
 	API_DOCS: "collection_docs",
-	CLUSTER_TITLE: "agc_extended_name",
-	CLUSTER_LOCATION: "agc_location",
-	CLUSTER_ID: "agc_id",
+	GEOCLUSTER_TITLE: "agc_extended_name",
+	GEOCLUSTER_LOCAITON: "agc_location",
 });

@@ -1,0 +1,27 @@
+.filters-wrapper {
+
+}
+.filters-form-wrapper {
+	padding: 5px;
+	border: 3px solid palevioletred;
+}
+
+.filter-breadcrumbs-wrapper {
+   padding: 5px;
+   border: 3px dashed palevioletred;
+   border-top: none;
+
+}
+
+.filters-section-wrapper {
+   margin: 5px 0;
+   padding: 5px;
+   border: 1px dashed purple;
+}
+
+.section-inputs-wrapper--column {
+
+}
+.section-inputs-wrapper--row {
+
+}

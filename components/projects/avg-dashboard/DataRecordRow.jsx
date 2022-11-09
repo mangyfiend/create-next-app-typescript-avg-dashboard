@@ -5,7 +5,7 @@ export default function DataRecordRow({ dataRecord }) {
 	if (dataRecord) {
 		rowMarkup = (
 			<div className="flex-col">
-				<a href="#">{dataRecord.properties[OS.CLUSTER_TITLE]}</a>
+				<a href="#">{dataRecord.properties[OS.GEOCLUSTER_TITLE]}</a>
 				<small>{dataRecord.properties[OS.CLUSTER_LOCATION]}</small>
 				<small>{dataRecord.properties[OS.CLUSTER_ID]}</small>
 				<small>{dataRecord.features.length} Farmers</small>

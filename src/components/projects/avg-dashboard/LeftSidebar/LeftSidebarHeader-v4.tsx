@@ -1,9 +1,11 @@
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
+import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
+import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
 
 export default function LeftSidebarHeader() {
-	const { dataLoadingChk, liveDataTimestamp } = useDashboardContext();
-	const { workingClustersArray } = useLeftSidebarContext();
+	const { dataLoadingChk, liveDataTimestamp }: IDashboardContextProps = useDashboardContext();
+	const { workingClustersArray }: ILeftSidebarContextProps = useLeftSidebarContext();
 
 	let listCountSpan;
 
