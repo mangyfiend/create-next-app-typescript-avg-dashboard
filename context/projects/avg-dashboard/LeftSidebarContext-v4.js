@@ -18,7 +18,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	// USE LIVE DATA IF DATA FROM SERVER SIDE (...props) IS NOT AVAILABLE
 	const CLUSTERS_ARRAY = props.serverSideClusters ? props.serverSideClusters : liveClustersArray;
 
-	const [filterText, setFilterText] = useState("");
+	const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState(0);
 	const [workingClustersArray, setWorkingClustersArray] = useState([]);
 	const [clusterPagesArray, setClusterPagesArray] = useState([]);
@@ -67,8 +67,8 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	};
 
 	// search #1 text input change
-	const onFilterTextChange = (evt) => {
-		setFilterText(evt.target.value);
+	const onClusterNameFilterTextChange = (evt) => {
+		setClusterNameFilterText(evt.target.value);
 	};
 
 	//
@@ -88,12 +88,12 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 			);
 
 			//
-			filteredClustersArray = filterClustersByName(filteredClustersArray, filterText);
+			filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFiltertext);
 
 			// if (filteredClustersArray.length > 0) {
 			filteredClustersArray = filteredClustersArray.filter((record) => {
 				const recordTitle = record.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
-				return recordTitle.indexOf(filterText.toLowerCase()) !== -1;
+				return recordTitle.indexOf(clusterNameFiltertext.toLowerCase()) !== -1;
 			});
 
 			//
@@ -105,13 +105,13 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 			console.log({ filteredClustersArray });
 		}
 		return () => {};
-	}, [CLUSTERS_ARRAY, filterText, pageRowsLength, clusterFilters]);
+	}, [CLUSTERS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);
 
 	return (
 		<LeftSidebarContext.Provider
 			value={{
-				filterText,
-				onFilterTextChange,
+				clusterNameFiltertext,
+				onClusterNameFilterTextChange,
 				handleClusterFiltersChange,
 				setClusterFilters,
 				clusterFilters,

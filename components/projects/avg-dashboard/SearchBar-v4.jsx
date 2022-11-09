@@ -1,14 +1,14 @@
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
 
 export default function SearchBar() {
-	const {filterText, onFilterTextChange} = useLeftSidebarContext();
+	const {clusterNameFiltertext, onClusterNameFilterTextChange} = useLeftSidebarContext();
 	return (    
 		<form>
 			<input
 				type="text"
-				value={filterText}
+				value={clusterNameFiltertext}
 				placeholder="search [cached]"
-				onChange={onFilterTextChange}>
+				onChange={onClusterNameFilterTextChange}>
 			</input>
 		</form>
 	);

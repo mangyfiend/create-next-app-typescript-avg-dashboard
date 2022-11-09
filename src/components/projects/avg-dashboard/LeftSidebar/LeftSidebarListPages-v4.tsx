@@ -8,7 +8,7 @@ import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersG
 
 export default function LeftSidebarListPages() {
 	const {
-		filterText,
+		clusterNameFiltertext,
 		clusterPagesArray,
 		clusterFilters,
 		pageRowsLength,
@@ -40,7 +40,7 @@ export default function LeftSidebarListPages() {
 		return () => {
 			//  second
 		};
-	}, [filterText, clusterFilters, pageRowsLength]);
+	}, [clusterNameFiltertext, clusterFilters, pageRowsLength]);
 
 	// console.log({ clusterPagesArray });
 

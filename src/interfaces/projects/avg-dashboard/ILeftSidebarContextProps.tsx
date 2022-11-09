@@ -4,8 +4,8 @@ import IGeoclusterFilters from "./GeoclusterFilters";
 
 // def. the context props
 export default interface ILeftSidebarContextProps {
-	filterText?: string;
-	onFilterTextChange?: (argument: ChangeEvent<HTMLInputElement>) => void;
+	clusterNameFiltertext?: string;
+	onClusterNameFilterTextChange?: (argument: ChangeEvent<HTMLInputElement>) => void;
 	handleClusterFiltersChange?: () => void;
 	setClusterFilters?: () => void;
 	clusterFilters?: IGeoclusterFilters;
