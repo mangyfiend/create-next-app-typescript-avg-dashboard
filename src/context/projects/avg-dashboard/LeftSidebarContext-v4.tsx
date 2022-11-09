@@ -35,17 +35,23 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 
 	// TODO > WIP > ADD MORE FILTERS
 	const [clusterFilters, setClusterFilters] = useState<IGeoclusterFilters>({
+		clusterSizeSelect: -Infinity,
+		adminLevelSelect: 1,
+		geoPolRegionSelect: "",
+		proximityToMarketChk: false,
+		proximityToWaterChk: false,
+		proximityToRoadChk: false,
+		proximityToFieldOfficeChk: false,
 		visitedInLastRange: 0,
 		rangeTimeframeSelect: "hours",
 		neverVisitedChk: false,
-		clusterSizeCategory: 0,
 	});
 	// TODO > neverVisitedChk == true ? visitedInLastRange = 0 & disabled
 
 	const handleClusterFiltersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		// AUTO-GENERATED TYPES >
 		// const handleClusterFiltersChange = (e: {
-		// 	target: { type: React.HTMLInputTypeAttribute; name: string; checked: Boolean; value: any };
+		// 	target: { type: React.HTMLInputTypeAttribute; name: string; checked: boolean; value: any };
 		// }) => {
 		const type = e.target.type;
 		const name = e.target.name;
@@ -102,7 +108,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 		if (CLUSTERS_ARRAY && CLUSTERS_ARRAY.length > 0) {
 			filteredClustersArray = filterClustersBySize(
 				CLUSTERS_ARRAY,
-				clusterFilters.clusterSizeCategory
+				clusterFilters.clusterSizeSelect
 			);
 
 			//

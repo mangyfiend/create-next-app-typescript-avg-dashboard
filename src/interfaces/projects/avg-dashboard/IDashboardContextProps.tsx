@@ -8,7 +8,7 @@ export default interface IDashboardContextProps {
 	liveDataTimestamp?: number;
 	onDataRefreshButtonClick?: (argument: SyntheticEvent) => void;
 	onRetreiveIntervalSelectChange?: (argument: ChangeEvent<HTMLInputElement>) => void;
-	dataLoadingChk?: Boolean;
-	fetchErrChk?: Boolean;
+	dataLoadingChk?: boolean;
+	fetchErrChk?: boolean;
 	autoFetchInterval?: string | undefined;
 }

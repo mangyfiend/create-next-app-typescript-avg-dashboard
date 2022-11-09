@@ -17,10 +17,10 @@ export default function LeftSidebarFilters() {
 			<div>Left Sidebar Filters</div>
 			<SearchBar></SearchBar>
 			<form onSubmit={setClusterFilters}>
-				<label htmlFor="clusterSizeCategory">Cluster Sizes</label>
+				<label htmlFor="clusterSizeSelect">Cluster Sizes</label>
 				<select
-					name="clusterSizeCategory"
-					id="cluster_size_selector"
+					name="clusterSizeSelect"
+					id="cluster_size_select"
 					onChange={handleClusterFiltersChange}>
 					<option value={0}>all cluster sizes</option>
 					<option value={5}>5 {featureTitle}</option>
@@ -28,10 +28,10 @@ export default function LeftSidebarFilters() {
 					<option value={20}>20 {featureTitle}</option>
 					<option value={50}>50 {featureTitle}</option>
 				</select>
-				<label htmlFor="adminLevelSelector">Administrative Level</label>
+				<label htmlFor="adminLevelSelect">Administrative Level</label>
 				<select
-					name="adminLevelSelector"
-					id="admin_level_selector"
+					name="adminLevelSelect"
+					id="admin_level_select"
 					onChange={handleClusterFiltersChange}>
 					<option value={""}>none</option>
 					{Object.entries(COUNTRY_ADMIN_LEVELS).map((level, idx) => (
@@ -44,7 +44,7 @@ export default function LeftSidebarFilters() {
 				<label htmlFor="geoPolRegionSelector">Geo-Political Regions</label>
 				<select
 					name="geoPolRegionSelector"
-					id="geo_pol_region_selector"
+					id="geo_pol_region_select"
 					onChange={handleClusterFiltersChange}>
 					<option value={""}>all regions</option>
 					{GEO_POL_REGIONS.map((region, idx) => (
@@ -125,7 +125,7 @@ export default function LeftSidebarFilters() {
 							/>
 							<select
 								name="rangeTimeframeSelect"
-								id="range_time_frame_select"
+								id="range_timeframe_select"
 								onChange={handleClusterFiltersChange}>
 								<option value={"hours"}>Hours</option>
 								<option value={"days"}>Days</option>

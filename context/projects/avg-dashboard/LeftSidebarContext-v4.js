@@ -25,7 +25,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 
 	// WIP
 	const [clusterFilters, setClusterFilters] = useState({
-		clusterSizeCategory: 0,
+		clusterSizeSelect: 0,
 		neverVisitedChk: false,
 		rangeTimeframeSelect: "hours",
 		visitedInLastRange: 0,
@@ -84,7 +84,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 		if (CLUSTERS_ARRAY && CLUSTERS_ARRAY.length > 0) {
 			filteredClustersArray = filterClustersBySize(
 				CLUSTERS_ARRAY,
-				clusterFilters.clusterSizeCategory
+				clusterFilters.clusterSizeSelect
 			);
 
 			//
