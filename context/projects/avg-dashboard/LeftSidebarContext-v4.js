@@ -51,7 +51,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 		return clustersArray.filter((cluster) => cluster.features.length >= sizeCategory);
 	};
 	// 2.
-	const filterClustersByTitle = (clustersArray, titleString) => {
+	const filterClustersByName = (clustersArray, titleString) => {
 		let filteredArray = clustersArray.filter((record) => {
 			const recordTitle = record.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
 			return recordTitle.indexOf(titleString.toLowerCase()) !== -1;
@@ -88,7 +88,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 			);
 
 			//
-			filteredClustersArray = filterClustersByTitle(filteredClustersArray, filterText);
+			filteredClustersArray = filterClustersByName(filteredClustersArray, filterText);
 
 			// if (filteredClustersArray.length > 0) {
 			filteredClustersArray = filteredClustersArray.filter((record) => {

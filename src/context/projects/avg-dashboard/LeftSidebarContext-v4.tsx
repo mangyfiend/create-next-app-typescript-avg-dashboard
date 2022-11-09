@@ -73,7 +73,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 	};
 
 	// 2.
-	const filterClustersByTitle = (clustersArray: IGeoclustersGeoJSON[], titleString: string) => {
+	const filterClustersByName = (clustersArray: IGeoclustersGeoJSON[], titleString: string) => {
 		let filteredArray = clustersArray.filter((record) => {
 			const recordTitle = record.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
 			return recordTitle.indexOf(titleString.toLowerCase()) !== -1;
@@ -112,7 +112,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 			);
 
 			//
-			filteredClustersArray = filterClustersByTitle(filteredClustersArray, filterText);
+			filteredClustersArray = filterClustersByName(filteredClustersArray, filterText);
 
 			// if (filteredClustersArray.length > 0) {
 			filteredClustersArray = filteredClustersArray.filter((record) => {

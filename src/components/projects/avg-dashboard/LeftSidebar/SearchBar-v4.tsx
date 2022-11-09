@@ -7,6 +7,7 @@ export default function SearchBar() {
 		<form>
 			<input
 				type="text"
+				name="clusterNameFilter"
 				value={filterText}
 				placeholder="search [cached]"
 				onChange={onFilterTextChange}></input>
