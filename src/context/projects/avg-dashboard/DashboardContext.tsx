@@ -1,11 +1,12 @@
 import React from "react";
+import { useRef } from "react";
 import { createContext, useState, useEffect } from "react";
 import IGeoclusterAPIResponse from "@interfaces/projects/avg-dashboard/GeoclustersAPIResponse";
-import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
 import { getErrorMessage } from "@utils/helpers";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import API_URLS from "@utils/constants/api-urls";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
+import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
 
 // def. the context provider props
 interface IProviderProps {
@@ -17,7 +18,7 @@ const DashboardContext = createContext<IDashboardContextProps | {}>({});
 
 // REMOVE
 // TS. PROVIDER FN. DEF. MTD #1 > typing using destructuring
-export function DashboardProvider2({ children }: { children: React.ReactNode; }) { }
+export function DashboardProvider2({ children }: { children: React.ReactNode }) {}
 // export function DashboardPrvdr({ children }: { children: React.FC; }) { } // ????? will this work?
 
 // TS. PROVIDER FN. DEF. MTD #2
@@ -27,10 +28,28 @@ export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
 	const [fetchErrChk, setFetchErrChk] = useState(false);
 	const [clustersAPIResponse, setClustersAPIResponse] = useState({});
-	const [liveClustersArray, setLiveClustersArray] = useState<IFeatureCollection[]>([]);
+	const [liveClustersArray, setLiveClustersArray] = useState<IGeoclustersGeoJSON[]>([]);
 	const [liveDataTimestamp, setLiveDataTimestamp] = useState(Date.now());
 	const [manualDataRefreshTrigger, setManualDataRefreshTrigger] = useState(0);
 	const [autoFetchInterval, setAutoFetchInterval] = useState<string | undefined>("0");
+	// SANDBOX
+	const [clickedClusterData, setClickedClusterData] = useState<IGeoclustersGeoJSON | null>(null);
+	const [clickedClusterFeatureData, setClickedClusterFeatureData] =
+		useState<IGeoclustersGeoJSON | null>(null);
+	const renderRef = useRef(false);
+
+	// SANDBOX
+	// when the clusterRow & clusterFeatureRow first render
+	// clickedClusterData & clickedClusterFeatureData both return "undefined" on first click
+	// after both components first render
+	useEffect(() => {
+		if (renderRef.current) {
+			console.log(clickedClusterData.features);
+		}
+		return () => {
+			renderRef.current = true;
+		};
+	}, [clickedClusterData]);
 
 	// manual refresh button clicked
 	const onDataRefreshButtonClick = (evt: React.SyntheticEvent) => {
@@ -113,6 +132,12 @@ export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 				dataLoadingChk,
 				fetchErrChk,
 				autoFetchInterval,
+
+				// SANDBOX
+				clickedClusterData,
+				setClickedClusterData,
+				clickedClusterFeatureData,
+				setClickedClusterFeatureData,
 			}}>
 			{children}
 		</DashboardContext.Provider>

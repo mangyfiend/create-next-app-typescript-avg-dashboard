@@ -34,11 +34,7 @@ export default function LeftSidebarListPages() {
 		};
 	}, [clusterNameFiltertext, clusterFilters, pageRowsLength]);
 
-	// console.log({ clusterPagesArray });
-
 	let recordsArray = clusterPagesArray[pageIdx];
-
-	// console.log({ recordsArray });
 
 	return (
 		<>

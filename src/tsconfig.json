@@ -34,7 +34,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/projects/avg-dashboard/LeftSidebar/DataSelectActions.jsx"  ],
   "exclude": [
     "node_modules"
   ]

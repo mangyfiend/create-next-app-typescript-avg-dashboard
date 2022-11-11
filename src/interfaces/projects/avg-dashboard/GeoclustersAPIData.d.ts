@@ -1,4 +1,4 @@
-import IFeatureCollection from "./GeoJSON";
+import IFeatureCollection from "./IFeatureCollection";
 
 export default interface IGeoclustersAPIData {
 	collection_docs: IFeatureCollection[];

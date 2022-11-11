@@ -1,23 +1,27 @@
-import { LeftSidebarProvider } from "@context/projects/avg-dashboard/LeftSidebarContext-v4";
-import RefreshDataControls from "@components/projects/avg-dashboard/RefreshDataControls";
+import DataRefreshControls from "@components/projects/avg-dashboard/DataRefreshControls";
 import LeftSidebar from "@components/projects/avg-dashboard/LeftSidebar/LeftSidebar-v4";
+import RightSidebar from "@components/projects/avg-dashboard/RightSidebar/RightSidebar";
 import styles from "@styles/projects/avg-dashboard/Dashboard.module.css";
-import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
+import { LeftSidebarProvider } from "@context/projects/avg-dashboard/LeftSidebarContext-v4";
+import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
 
 type DashboardProps = {
-	cachedClustersArray: IFeatureCollection[];
+	cachedClustersArray: IGeoclustersGeoJSON[];
 };
 
 export default function Dashboard({ cachedClustersArray }: DashboardProps): JSX.Element {
 	return (
 		<div className={styles["dashboard-container"]}>
 			<div>AVG Dashboard</div>
-			<RefreshDataControls></RefreshDataControls>
-			<div className={styles["left-sidebar-container"]}>
-				<LeftSidebarProvider serverSideClusters={cachedClustersArray}>
+			<DataRefreshControls></DataRefreshControls>
+			<LeftSidebarProvider serverSideClusters={cachedClustersArray}>
+				{/* REMOVE STYLES BELOW */}
+				<div style={{ display: "grid", gridTemplateColumns: "1fr 0.9fr" }}>
+				{/* <div style={{ display: "grid", gridTemplateColumns: "1fr 0.5fr" }}> */}
 					<LeftSidebar></LeftSidebar>
-				</LeftSidebarProvider>
-			</div>
+					<RightSidebar></RightSidebar>
+				</div>
+			</LeftSidebarProvider>
 		</div>
 	);
 }

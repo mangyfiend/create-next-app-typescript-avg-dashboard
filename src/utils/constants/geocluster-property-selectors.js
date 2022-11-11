@@ -1,0 +1,17 @@
+const PROPERTY_SELECTORS = Object.freeze({
+	GEOCLUSTER_TITLE: "agc_extended_name",
+	GEOCLUSTER_LOCAITON: "agc_location",
+	GEOCLUSTER_PROPERTIES: "properties",
+	GEOCLUSTER_ID: "agc_id",
+	GEOCLUSTER_FEATURE_PROPERTIES: "properties",
+	GEOCLUSTER_FEATURE_ID: "chunk_id",
+	GEOCLUSTER_FEATURE_SIZE: "chunk_size",
+	GEOCLUSTER_FEATURE_UNIT: "ha",
+	GEOCLUSTER_FEATURE_PHOTO_URL: "owner_photo_url",
+	GEOCLUSTER_FEATURE_INDEX: "chunk_index",
+	GEOCLUSTER_FEATURE_OWNER: "owner_name",
+	GEOCLUSTER_FEATURE_CENTER_LAT: "center_lat",
+	GEOCLUSTER_FEATURE_CENTER_LNG: "center_lng",
+});
+
+export default PROPERTY_SELECTORS;

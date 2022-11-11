@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import GeoclusterRecord from "./GeoclusterRecordItem";
+import ClusterRecordRow from "./ClusterRecordRow";
 import styles from "@styles/projects/avg-dashboard/LeftSidebar.module.css";
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
@@ -7,6 +7,7 @@ import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSi
 import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
 
 export default function LeftSidebarListPages() {
+	
 	const {
 		clusterNameFiltertext,
 		clusterPagesArray,
@@ -55,9 +56,9 @@ export default function LeftSidebarListPages() {
 					{(!recordsArray || recordsArray.length === 0) && <div>please refresh the page</div>}
 					{recordsArray &&
 						recordsArray.map((record) => (
-							<GeoclusterRecord
+							<ClusterRecordRow
 								key={record[OS.GEOCLUSTER_PROPERTIES][OS.GEOCLUSTER_ID]}
-								dataRecord={record}></GeoclusterRecord>
+								clusterData={record}></ClusterRecordRow>
 						))}
 				</div>
 				<div className={"flex-row-between"}>

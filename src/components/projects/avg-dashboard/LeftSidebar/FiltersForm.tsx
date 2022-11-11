@@ -21,7 +21,7 @@ export default function LeftSidebarFilters() {
 			<div>Left Sidebar Filters</div>
 			<SearchBar></SearchBar>
 			<form onSubmit={setClusterFilters}>
-				<label htmlFor="clusterSizeSelect">Cluster Sizes</label>
+				<label htmlFor="clusterSizeSelect">Cluster Size Bounds</label>
 				<select
 					name="clusterSizeSelect"
 					id="cluster_size_select"

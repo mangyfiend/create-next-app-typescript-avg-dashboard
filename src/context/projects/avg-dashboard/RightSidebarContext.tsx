@@ -4,29 +4,27 @@ import React, { createContext, useState, useEffect } from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
-import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
+import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRightSidebarContextProps";
 import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
 import IGeoclusterFilters from "@interfaces/projects/avg-dashboard/GeoclusterFilters";
 
 // def. the context provider props
 interface IProviderProps {
 	children?: React.ReactNode;
-	serverSideClusters: IFeatureCollection[];
+	// serverSideClusters: IFeatureCollection[];
 }
 
 // init. the context
-const LeftSidebarContext = createContext<ILeftSidebarContextProps | {}>({});
+const RightSidebarContext = createContext<IRightSidebarContextProps | {}>({});
 
 // def. provider
-export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderProps) => {
+export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// IMPORTANT > THIS BRINGS SERVER SIDE DATA INTO THE PROVIDER IMMEDIATELY VIA getServerSideProps in index.js
-	// console.log({serverSideClusters});
-	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
+	console.log("%c[RIGHT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: purple");
 
-	const { liveClustersArray }: IDashboardContextProps = useDashboardContext();
+	const { clickedClusterData }: IDashboardContextProps = useDashboardContext();
 
-	// USE LIVE DATA IF DATA FROM SERVER SIDE (...props) IS NOT AVAILABLE
-	const CLUSTERS_ARRAY = serverSideClusters ? serverSideClusters : liveClustersArray;
+	const CLUSTER_FEATS_ARRAY = clickedClusterData.features;
 
 	const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState("0");
@@ -106,9 +104,9 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 		let filteredClustersArray = [];
 
 		// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS
-		if (CLUSTERS_ARRAY && CLUSTERS_ARRAY.length > 0) {
+		if (CLUSTER_FEATS_ARRAY && CLUSTER_FEATS_ARRAY.length > 0) {
 			filteredClustersArray = filterClustersBySize(
-				CLUSTERS_ARRAY,
+				CLUSTER_FEATS_ARRAY,
 				clusterFilters.clusterSizeSelect
 			);
 
@@ -124,10 +122,10 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 			console.log({ filteredClustersArray });
 		}
 		return () => {};
-	}, [CLUSTERS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);
+	}, [CLUSTER_FEATS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);
 
 	return (
-		<LeftSidebarContext.Provider
+		<RightSidebarContext.Provider
 			value={{
 				clusterNameFiltertext,
 				onClusterNameFilterTextChange,
@@ -140,8 +138,8 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 				clusterPagesArray,
 			}}>
 			{children}
-		</LeftSidebarContext.Provider>
+		</RightSidebarContext.Provider>
 	);
 };
 
-export default LeftSidebarContext;
+export default RightSidebarContext;

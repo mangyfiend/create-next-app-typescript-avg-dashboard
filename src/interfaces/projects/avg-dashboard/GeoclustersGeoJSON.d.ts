@@ -1,5 +1,5 @@
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
-import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON"
+import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON"
 
 export default interface IGeoclustersGeoJSON extends IFeatureCollection {
 	properties?: {

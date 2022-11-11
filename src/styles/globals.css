@@ -16,7 +16,7 @@ html::-webkit-scrollbar {
 
 body {
 	height: 100vh;
-	overflow-y: hidden;
+	/* overflow-y: hidden; */
 	max-height: 100vh;
 	font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
 		"Droid Sans", "Helvetica Neue", sans-serif;

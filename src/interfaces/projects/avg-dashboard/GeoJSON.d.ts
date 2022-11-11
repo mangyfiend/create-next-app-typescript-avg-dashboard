@@ -63,6 +63,8 @@ interface IFeature {
 	id?: string | number;
 	geometry: Geometry | null;
 	properties: Record | null;
+	type: "FeatureCollection";
+	features: IFeature[];
 }
 
 export default interface IFeatureCollection {

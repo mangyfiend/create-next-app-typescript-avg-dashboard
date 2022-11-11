@@ -1,4 +1,4 @@
-import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
+import IFeatureCollection from "@interfaces/projects/avg-dashboard/IFeatureCollection";
 
 // https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
 export function getErrorMessage(error: unknown) {

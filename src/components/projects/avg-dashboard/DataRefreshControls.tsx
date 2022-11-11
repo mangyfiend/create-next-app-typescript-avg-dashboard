@@ -1,5 +1,6 @@
-import styles from "@styles/projects/avg-dashboard/DataSelectActions.module.css";
+import styles from "@styles/projects/avg-dashboard/DataRefreshControls.module.css";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
+import IDashboardContextProps from "interfaces/projects/avg-dashboard/IDashboardContextProps"
 
 export default function DataSelectActions() {
 	const {
@@ -9,7 +10,7 @@ export default function DataSelectActions() {
 		fetchErrChk,
 		onDataRefreshButtonClick,
 		autoFetchInterval,
-	} = useDashboardContext();
+	} : IDashboardContextProps = useDashboardContext();
 
 	let messageSpan;
 	let refreshBtnDisabled;
@@ -34,7 +35,7 @@ export default function DataSelectActions() {
 		refreshBtnDisabled = false;
 	}
 
-	if (autoFetchInterval == 0 && !dataLoadingChk) {
+	if (+autoFetchInterval == 0 && !dataLoadingChk) {
 		refreshBtnDisabled = false;
 	} 
 

@@ -32,6 +32,6 @@
 			"@styles/*": ["styles/*"]
 		}
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/projects/avg-dashboard/LeftSidebar/DataSelectActions.jsx"],
 	"exclude": ["node_modules"]
 }
