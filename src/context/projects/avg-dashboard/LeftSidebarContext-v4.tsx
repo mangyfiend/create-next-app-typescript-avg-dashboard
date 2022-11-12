@@ -23,7 +23,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 	// console.log({serverSideClusters});
 	console.log("%c[LEFT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: blue");
 
-	const { liveClustersArray }: IDashboardContextProps = useDashboardContext();
+	const { liveClustersArray }: IDashboardContextProps | undefined = useDashboardContext();
 
 	// USE LIVE DATA IF DATA FROM SERVER SIDE (...props) IS NOT AVAILABLE
 	const CLUSTERS_ARRAY = serverSideClusters ? serverSideClusters : liveClustersArray;

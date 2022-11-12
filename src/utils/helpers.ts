@@ -28,6 +28,10 @@ export function capitalize(s: string) {
 	return s && s[0].toUpperCase() + s.slice(1);
 }
 
+export function getProperCase(s: string) {
+	return s && s[0].toUpperCase() + s.slice(1);
+}
+
 // Add multiple classNames to nextjs elements
 export const addStyles = (stylesModule, classes: string) => {
 	const classList = classes.split(" ");

@@ -19,7 +19,7 @@ export default function SidebarListPages() {
 	// 	pageRowsLength: number;
 	// }) {
 
-	const { clickedClusterData }: IDashboardContextProps = useDashboardContext();
+	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
 
 	const clusterFeatsPagesArray = clickedClusterData?.features;
 		// TODOD > KEEP
@@ -66,7 +66,7 @@ export default function SidebarListPages() {
 			<div className={"flex-col"}>
 				<div className={styles["list-page-body"]}>
 					{(!clusterFeatsArray || clusterFeatsArray.length === 0) && (
-						<div>please refresh the page</div>
+						<div>no geocluster features</div>
 					)}
 					{clusterFeatsArray &&
 						clusterFeatsArray.map((clusterFeat) => (

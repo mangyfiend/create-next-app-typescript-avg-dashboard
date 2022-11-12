@@ -1,6 +1,6 @@
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
 import SearchBar from "./SearchBar-v4";
-import styles from "@styles/projects/avg-dashboard/LeftSidebarFilters.module.css"
+import styles from "@styles/projects/avg-dashboard/LeftSidebarFilters.module.css";
 import { TITLES } from "@utils/constants/titles";
 import { capitalize } from "@utils/helpers";
 import { GEO_POL_REGIONS } from "@utils/constants/geo-pol-regions";
@@ -17,7 +17,7 @@ export default function LeftSidebarFilters() {
 	const featureTitle: string = capitalize(TITLES.CLUSTER_FEATURE_TITLE);
 
 	return (
-		<>
+		<div className={styles["filters-form-wrapper"]}>
 			<div>Left Sidebar Filters</div>
 			<SearchBar></SearchBar>
 			<form onSubmit={setClusterFilters}>
@@ -141,6 +141,6 @@ export default function LeftSidebarFilters() {
 					</div>
 				</div>
 			</form>
-		</>
+		</div>
 	);
 }

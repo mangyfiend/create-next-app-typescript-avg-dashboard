@@ -7,6 +7,7 @@ import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selecto
 import API_URLS from "@utils/constants/api-urls";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
+import PROPERTY_SELECTORS from "@utils/constants/geocluster-property-selectors";
 
 // def. the context provider props
 interface IProviderProps {
@@ -118,8 +119,6 @@ export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 
 		return () => clearInterval(intervalId);
 	}, [autoFetchInterval, manualDataRefreshTrigger]);
-
-	// const dashboardCon
 
 	return (
 		<DashboardContext.Provider

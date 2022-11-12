@@ -5,7 +5,7 @@ import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardConte
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 
 export default function ClusterRecordRow({ clusterData }: { clusterData: IGeoclustersGeoJSON }) {
-	const { setClickedClusterData }: IDashboardContextProps = useDashboardContext();
+	const { setClickedClusterData }: IDashboardContextProps | undefined= useDashboardContext();
 
 	function clusterTitleClickHandler(evt: React.MouseEvent<HTMLAnchorElement>): void {
 		setClickedClusterData(clusterData);
@@ -27,7 +27,7 @@ export default function ClusterRecordRow({ clusterData }: { clusterData: IGeoclu
 			</div>
 		);
 	} else {
-		rowMarkup = <span>something went wrong</span>;
+		rowMarkup = <span>no data here yet</span>;
 	}
 	return rowMarkup;
 }

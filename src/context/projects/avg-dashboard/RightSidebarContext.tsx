@@ -22,7 +22,8 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// IMPORTANT > THIS BRINGS SERVER SIDE DATA INTO THE PROVIDER IMMEDIATELY VIA getServerSideProps in index.js
 	console.log("%c[RIGHT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: purple");
 
-	const { clickedClusterData }: IDashboardContextProps = useDashboardContext();
+	// the the data for the cluster from the left sidebar that was clicked
+	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
 
 	const CLUSTER_FEATS_ARRAY = clickedClusterData.features;
 
@@ -100,7 +101,6 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// TODO > MOVE TO CUSTOM HOOK
 	// filter the live data when text in the search input changes
 	useEffect(() => {
-
 		let filteredClustersArray = [];
 
 		// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS

@@ -17,9 +17,7 @@ export default function LeftSidebar(): JSX.Element {
 						<LeftSidebarListControls></LeftSidebarListControls>
 					</div>
 				</div>
-				{/* <div> */}
-					<LeftSidebarFilters></LeftSidebarFilters>
-				{/* </div> */}
+				<LeftSidebarFilters></LeftSidebarFilters>
 			</div>
 		</div>
 	);
