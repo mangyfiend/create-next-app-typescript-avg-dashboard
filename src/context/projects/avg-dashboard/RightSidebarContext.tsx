@@ -1,12 +1,12 @@
-import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import { splitGeoJSONArray } from "@utils/helpers";
 import React, { createContext, useState, useEffect } from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
-import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRightSidebarContextProps";
-import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
+import IGeoclusterFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterFeatureGeoJSON";
 import IGeoclusterFilters from "@interfaces/projects/avg-dashboard/GeoclusterFilters";
+import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 
 // def. the context provider props
 interface IProviderProps {
@@ -22,10 +22,10 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// IMPORTANT > THIS BRINGS SERVER SIDE DATA INTO THE PROVIDER IMMEDIATELY VIA getServerSideProps in index.js
 	console.log("%c[RIGHT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: purple");
 
-	// the the data for the cluster from the left sidebar that was clicked
+	// the the data for the geocluster from the left sidebar that was clicked
 	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
 
-	const CLUSTER_FEATS_ARRAY = clickedClusterData.features;
+	const CLUSTER_FEATS_ARRAY: IGeoclusterFeatureGeoJSON[] = clickedClusterData.features;
 
 	const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState("0");
@@ -66,21 +66,21 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// CLUSTER FILTER FUNCTIONS
 
 	// 1.
-	const filterClustersBySize = (clustersArray: IFeatureCollection[], sizeCategory: number) => {
-		return clustersArray.filter((cluster) => cluster.features.length >= sizeCategory);
+	const filterClusterFeatsBySize = (clusterFeats: IGeoclusterFeatureGeoJSON[], sizeCategory: number) => {
+		return clusterFeats.filter((geocluster) => geocluster.features.length >= sizeCategory);
 	};
 
 	// 2.
-	const filterClustersByName = (clustersArray: IGeoclustersGeoJSON[], titleString: string) => {
-		let filteredArray = clustersArray.filter((cluster) => {
-			const clusterTitle = cluster.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
+	const filterClustersByName = (clustersArray: IGeoclusterGeoJSON[], titleString: string) => {
+		let filteredArray = clustersArray.filter((geocluster) => {
+			const clusterTitle = getGeoclusterProperties(geocluster).clusterTitle.toLowerCase();
 			return clusterTitle.indexOf(titleString.toLowerCase()) !== -1;
 		});
 		return filteredArray;
 	};
 
 	// 3.
-	const getClusterArrayPages = (clustersArray: IFeatureCollection[], numPages: number) => {
+	const getClusterArrayPages = (clustersArray: IGeoclusterGeoJSON[], numPages: number) => {
 		// before user interaction,
 		// the default value of the rows limit select elment is == 0
 		return numPages === 0 ? [clustersArray] : splitGeoJSONArray(clustersArray, numPages);
@@ -105,12 +105,12 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 
 		// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS
 		if (CLUSTER_FEATS_ARRAY && CLUSTER_FEATS_ARRAY.length > 0) {
-			filteredClustersArray = filterClustersBySize(
+			filteredClustersArray = filterClusterFeatsBySize(
 				CLUSTER_FEATS_ARRAY,
 				clusterFilters.clusterSizeSelect
 			);
 
-			// filter clusters by cluster name
+			// filter clusters by geocluster name
 			filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFiltertext);
 
 			//

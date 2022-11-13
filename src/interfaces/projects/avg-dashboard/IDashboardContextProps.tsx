@@ -1,6 +1,6 @@
 import { SyntheticEvent, ChangeEvent } from "react";
 import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
-import IGeoclustersGeoJSON from "./GeoclustersGeoJSON";
+import IGeoclusterGeoJSON from "./GeoclusterGeoJSON";
 import IGeoclusterFeatureGeoJSON from "./IGeoclusterFeatureGeoJSON";
 
 // def. the context props
@@ -15,8 +15,8 @@ export default interface IDashboardContextProps {
 	autoFetchInterval?: string | undefined;
 
 	// SANDBOX
-	clickedClusterData?: IGeoclustersGeoJSON | null;
-	setClickedClusterData?: (arg: IGeoclustersGeoJSON) => void;
+	clickedClusterData?: IGeoclusterGeoJSON | null;
+	setClickedClusterData?: (arg: IGeoclusterGeoJSON) => void;
 	clickedClusterFeatureData?: IGeoclusterFeatureGeoJSON | null;
 	setClickedClusterFeatureData?: (arg: IGeoclusterFeatureGeoJSON) => void;
 

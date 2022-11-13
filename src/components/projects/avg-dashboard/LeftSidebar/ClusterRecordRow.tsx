@@ -1,10 +1,10 @@
 import React from "react";
-import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
-import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
+import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 
-export default function ClusterRecordRow({ clusterData }: { clusterData: IGeoclustersGeoJSON }) {
+export default function ClusterRecordRow({ clusterData }: { clusterData: IGeoclusterGeoJSON }) {
 	const { setClickedClusterData }: IDashboardContextProps | undefined= useDashboardContext();
 
 	function clusterTitleClickHandler(evt: React.MouseEvent<HTMLAnchorElement>): void {
@@ -17,12 +17,12 @@ export default function ClusterRecordRow({ clusterData }: { clusterData: IGeoclu
 		rowMarkup = (
 			<div className="flex-col">
 				<a href="#" onClick={clusterTitleClickHandler}>
-					{clusterData.properties[OS.GEOCLUSTER_TITLE]}
+					{getGeoclusterProperties(clusterData).clusterTitle}
 				</a>
 				{/* <Link href="#">
 				</Link> */}
-				<small>{clusterData.properties[OS.GEOCLUSTER_LOCAITON]}</small>
-				<small>{clusterData.properties[OS.GEOCLUSTER_ID]}</small>
+				<small>{getGeoclusterProperties(clusterData).clusterLocation}</small>
+				<small>{getGeoclusterProperties(clusterData).clusterId}</small>
 				<small>{clusterData.features.length} Farmers</small>
 			</div>
 		);

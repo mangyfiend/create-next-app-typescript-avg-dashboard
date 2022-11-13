@@ -1,13 +1,13 @@
 import IGeoclusterFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterFeatureGeoJSON";
 import { useState, useEffect } from "react";
 import ClusterFeatureRow from "@components/projects/avg-dashboard/RightSidebar/ClusterFeatureRow";
-import PROPERTY_SELECTORS from "@utils/constants/geocluster-property-selectors";
+import {PROPERTY_SELECTORS as _} from "@utils/constants/geocluster-property-selectors";
 import styles from "@styles/projects/avg-dashboard/RightSidebar.module.css";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 
-export default function SidebarListPages() {
-	// export default function SidebarListPages({
+export default function ClusterFeaturesListPages() {
+	// export default function ClusterFeaturesListPages({
 	// 	clusterFeatsPagesArray,
 	// 	recordTitleFilterText,
 	// 	recordsFilters,
@@ -73,8 +73,8 @@ export default function SidebarListPages() {
 							<ClusterFeatureRow
 								// key={clusterFeat[OS.GEOCLUSTER_PROPERTIES][OS.GEOCLUSTER_ID]}
 								key={
-									clusterFeat[PROPERTY_SELECTORS.GEOCLUSTER_FEATURE_PROPERTIES][
-										PROPERTY_SELECTORS.GEOCLUSTER_FEATURE_ID
+									clusterFeat[_.GEOCLUSTER_FEATURE_PROPERTIES][
+										_.GEOCLUSTER_FEATURE_ID
 									]
 								}
 								clusterFeatureData={clusterFeat}></ClusterFeatureRow>

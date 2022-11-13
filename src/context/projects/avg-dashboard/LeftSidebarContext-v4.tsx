@@ -1,12 +1,12 @@
-import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import { splitGeoJSONArray } from "@utils/helpers";
 import React, { createContext, useState, useEffect } from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
-import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
 import IGeoclusterFilters from "@interfaces/projects/avg-dashboard/GeoclusterFilters";
+import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 
 // def. the context provider props
 interface IProviderProps {
@@ -68,13 +68,13 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 
 	// 1.
 	const filterClustersBySize = (clustersArray: IFeatureCollection[], sizeCategory: number) => {
-		return clustersArray.filter((cluster) => cluster.features.length >= sizeCategory);
+		return clustersArray.filter((geocluster) => geocluster.features.length >= sizeCategory);
 	};
 
 	// 2.
-	const filterClustersByName = (clustersArray: IGeoclustersGeoJSON[], titleString: string) => {
-		let filteredArray = clustersArray.filter((cluster) => {
-			const clusterTitle = cluster.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
+	const filterClustersByName = (clustersArray: IGeoclusterGeoJSON[], titleString: string) => {
+		let filteredArray = clustersArray.filter((geocluster) => {
+			const clusterTitle = getGeoclusterProperties(geocluster).clusterTitle.toLowerCase();
 			return clusterTitle.indexOf(titleString.toLowerCase()) !== -1;
 		});
 		return filteredArray;
@@ -112,7 +112,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 				clusterFilters.clusterSizeSelect
 			);
 
-			// filter clusters by cluster name
+			// filter clusters by geocluster name
 			filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFiltertext);
 
 			//

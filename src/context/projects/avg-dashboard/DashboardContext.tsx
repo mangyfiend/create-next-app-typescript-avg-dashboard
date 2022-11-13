@@ -6,8 +6,7 @@ import { getErrorMessage } from "@utils/helpers";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import API_URLS from "@utils/constants/api-urls";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
-import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
-import PROPERTY_SELECTORS from "@utils/constants/geocluster-property-selectors";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
 
 // def. the context provider props
 interface IProviderProps {
@@ -29,14 +28,14 @@ export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 	const [dataLoadingChk, setDataLoadingChk] = useState(true);
 	const [fetchErrChk, setFetchErrChk] = useState(false);
 	const [clustersAPIResponse, setClustersAPIResponse] = useState({});
-	const [liveClustersArray, setLiveClustersArray] = useState<IGeoclustersGeoJSON[]>([]);
+	const [liveClustersArray, setLiveClustersArray] = useState<IGeoclusterGeoJSON[]>([]);
 	const [liveDataTimestamp, setLiveDataTimestamp] = useState(Date.now());
 	const [manualDataRefreshTrigger, setManualDataRefreshTrigger] = useState(0);
 	const [autoFetchInterval, setAutoFetchInterval] = useState<string | undefined>("0");
 	// SANDBOX
-	const [clickedClusterData, setClickedClusterData] = useState<IGeoclustersGeoJSON | null>(null);
+	const [clickedClusterData, setClickedClusterData] = useState<IGeoclusterGeoJSON | null>(null);
 	const [clickedClusterFeatureData, setClickedClusterFeatureData] =
-		useState<IGeoclustersGeoJSON | null>(null);
+		useState<IGeoclusterGeoJSON | null>(null);
 	const renderRef = useRef(false);
 
 	// SANDBOX
@@ -45,7 +44,7 @@ export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 	// after both components first render
 	useEffect(() => {
 		if (renderRef.current) {
-			console.log(clickedClusterData.features);
+			console.log(clickedClusterData?.features);
 		}
 		return () => {
 			renderRef.current = true;

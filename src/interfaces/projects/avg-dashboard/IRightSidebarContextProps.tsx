@@ -1,7 +1,7 @@
-import IGeoclustersGeoJSON from "./GeoclustersGeoJSON";
+import IGeoclusterGeoJSON from "./GeoclusterGeoJSON";
 
 // def. context props interface
 export default interface IRightSidebarContextProps {
-	clickedClusterData?: IGeoclustersGeoJSON | null;
-	setClickedClusterData?: (arg: IGeoclustersGeoJSON) => void;
+	clickedClusterData?: IGeoclusterGeoJSON | null;
+	setClickedClusterData?: (arg: IGeoclusterGeoJSON) => void;
 }

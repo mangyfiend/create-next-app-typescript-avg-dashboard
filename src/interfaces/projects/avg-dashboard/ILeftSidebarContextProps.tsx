@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import IGeoclustersGeoJSON from "./GeoclustersGeoJSON";
+import IGeoclusterGeoJSON from "./GeoclusterGeoJSON";
 import IGeoclusterFilters from "./GeoclusterFilters";
 
 // def. the context props
@@ -11,8 +11,8 @@ export default interface ILeftSidebarContextProps {
 	clusterFilters?: IGeoclusterFilters;
 	onPageRowsSelectChange?: (argument: ChangeEvent<HTMLSelectElement>) => void;
 	pageRowsLength?: string;
-	workingClustersArray?: IGeoclustersGeoJSON[];
+	workingClustersArray?: IGeoclusterGeoJSON[];
 	// FIXME > WHICH IS THE CORRECT WAY TO REPRESENT ARRAY OF ARRAY
-	clusterPagesArray?: IGeoclustersGeoJSON[][];
-	// clusterPagesArray?: [IGeoclustersGeoJSON][];
+	clusterPagesArray?: IGeoclusterGeoJSON[][];
+	// clusterPagesArray?: [IGeoclusterGeoJSON][];
 }

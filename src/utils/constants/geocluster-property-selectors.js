@@ -1,9 +1,8 @@
-const PROPERTY_SELECTORS = Object.freeze({
+export const PROPERTY_SELECTORS = Object.freeze({
+	GEOCLUSTER_ID: "agc_id",
 	GEOCLUSTER_TITLE: "agc_extended_name",
 	GEOCLUSTER_LOCAITON: "agc_location",
 	GEOCLUSTER_PROPERTIES: "properties",
-	GEOCLUSTER_ID: "agc_id",
-	GEOCLUSTER_TITLE: "agc_extended_name",
 	GEOCLUSTER_FEATURE_PROPERTIES: "properties",
 	GEOCLUSTER_FEATURES_DESCRIPTION: "farms",
 	GEOCLUSTER_FEATURE_ID: "chunk_id",
@@ -15,5 +14,3 @@ const PROPERTY_SELECTORS = Object.freeze({
 	GEOCLUSTER_FEATURE_CENTER_LAT: "center_lat",
 	GEOCLUSTER_FEATURE_CENTER_LNG: "center_lng",
 });
-
-export default PROPERTY_SELECTORS;

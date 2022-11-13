@@ -3,10 +3,10 @@ import LeftSidebar from "@components/projects/avg-dashboard/LeftSidebar/LeftSide
 import RightSidebar from "@components/projects/avg-dashboard/RightSidebar/RightSidebar";
 import styles from "@styles/projects/avg-dashboard/Dashboard.module.css";
 import { LeftSidebarProvider } from "@context/projects/avg-dashboard/LeftSidebarContext-v4";
-import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
 
 type DashboardProps = {
-	cachedClustersArray: IGeoclustersGeoJSON[];
+	cachedClustersArray: IGeoclusterGeoJSON[];
 };
 
 export default function Dashboard({ cachedClustersArray }: DashboardProps): JSX.Element {

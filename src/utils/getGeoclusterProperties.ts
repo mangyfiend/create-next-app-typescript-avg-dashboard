@@ -1,6 +1,6 @@
-import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
-import PROPERTY_SELECTORS from "./constants/geocluster-property-selectors";
-import { capitalize, getProperCase } from "./helpers";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
+import { PROPERTY_SELECTORS as _ } from "./constants/geocluster-property-selectors";
+import { getProperCase } from "./helpers";
 
 interface IClusterProperties {
 	clusterId: string;
@@ -11,24 +11,15 @@ interface IClusterProperties {
 }
 
 // single source of truth for cluster properties
-export default function getGeoclusterProperties(geocluster: IGeoclustersGeoJSON) {
+export default function getGeoclusterProperties(geocluster: IGeoclusterGeoJSON) {
 	const CLUSTER_PROPS: IClusterProperties = {
-    
-		clusterId:
-			geocluster[PROPERTY_SELECTORS.GEOCLUSTER_PROPERTIES[PROPERTY_SELECTORS.GEOCLUSTER_ID]],
-		clusterTitle:
-			geocluster[PROPERTY_SELECTORS.GEOCLUSTER_PROPERTIES[PROPERTY_SELECTORS.GEOCLUSTER_TITLE]],
+		clusterId: geocluster[_.GEOCLUSTER_PROPERTIES][_.GEOCLUSTER_ID],
+		clusterTitle: geocluster[_.GEOCLUSTER_PROPERTIES][_.GEOCLUSTER_TITLE],
 		clusterFeatsNum: geocluster.features.length,
-		clusterLocation:
-			geocluster[
-				PROPERTY_SELECTORS.GEOCLUSTER_PROPERTIES[PROPERTY_SELECTORS.GEOCLUSTER_LOCAITON]
-			],
+		clusterLocation: geocluster[_.GEOCLUSTER_PROPERTIES][_.GEOCLUSTER_LOCAITON],
 		featuresDescription: getProperCase(
-			geocluster[
-				PROPERTY_SELECTORS.GEOCLUSTER_PROPERTIES[
-					PROPERTY_SELECTORS.GEOCLUSTER_FEATURES_DESCRIPTION
-				]
-			]),
+			geocluster[_.GEOCLUSTER_PROPERTIES][_.GEOCLUSTER_FEATURES_DESCRIPTION]
+		),
 	};
 	return CLUSTER_PROPS;
 }

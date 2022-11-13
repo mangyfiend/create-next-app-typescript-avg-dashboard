@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import ClusterRecordRow from "./ClusterRecordRow";
 import styles from "@styles/projects/avg-dashboard/LeftSidebar.module.css";
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
-import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
-import IGeoclustersGeoJSON from "@interfaces/projects/avg-dashboard/GeoclustersGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
+import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 
 export default function LeftSidebarListPages() {
-	
 	const {
 		clusterNameFiltertext,
 		clusterPagesArray,
@@ -45,7 +44,7 @@ export default function LeftSidebarListPages() {
 
 	// console.log({ clusterPagesArray });
 
-	let recordsArray: IGeoclustersGeoJSON[] = clusterPagesArray[pageIdx];
+	let recordsArray: IGeoclusterGeoJSON[] = clusterPagesArray[pageIdx];
 
 	// console.log({ recordsArray });
 
@@ -55,10 +54,10 @@ export default function LeftSidebarListPages() {
 				<div className={styles["list-page-body"]}>
 					{(!recordsArray || recordsArray.length === 0) && <div>please refresh the page</div>}
 					{recordsArray &&
-						recordsArray.map((record) => (
+						recordsArray.map((clusterRecord) => (
 							<ClusterRecordRow
-								key={record[OS.GEOCLUSTER_PROPERTIES][OS.GEOCLUSTER_ID]}
-								clusterData={record}></ClusterRecordRow>
+								key={getGeoclusterProperties(clusterRecord).clusterId}
+								clusterData={clusterRecord}></ClusterRecordRow>
 						))}
 				</div>
 				<div className={"flex-row-between"}>
