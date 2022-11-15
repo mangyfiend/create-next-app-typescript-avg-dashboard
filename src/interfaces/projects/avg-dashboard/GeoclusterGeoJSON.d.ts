@@ -2,7 +2,7 @@ import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selecto
 import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON"
 
 export default interface IGeoclusterGeoJSON extends IFeatureCollection {
-	properties?: {
+	properties: {
 		agc_id?: string,
 		// OS.GEOCLUSTER_TITLE?: string,
 		agc_extended_name?: string,

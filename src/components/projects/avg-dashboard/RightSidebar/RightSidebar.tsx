@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import SearchBar from "./SearchBar";
 import styles from "@styles/projects/avg-dashboard/RightSidebar.module.css";
 import LeftSidebarListControls from "../LeftSidebar/LeftSidebarListControls-v4";
 import ClusterFeaturesListPages from "@components/projects/avg-dashboard/RightSidebar/ClusterFeaturesListPages";
@@ -33,9 +34,10 @@ export const RightSidebarContext = createContext<IRightSidebarContextProps | {}>
 // 	);
 // };
 
-export function RightSidebarMap() {
-	// export function RightSidebarMap({ children }: { children: React.ReactNode }): JSX.Element {
-	return <div className="right-sidebar-map-container">Cluster Features Map</div>;
+import styles2 from "@styles/projects/avg-dashboard/ClusterFeaturesMap.module.css"
+export function ClusterFeaturesMap() {
+	// export function ClusterFeaturesMap({ children }: { children: React.ReactNode }): JSX.Element {
+	return <div className={styles2["map-container"]}>Cluster Features Map</div>;
 }
 
 export function ClusterFeaturesList({ children }: { children: React.ReactNode }): JSX.Element {
@@ -81,9 +83,9 @@ export function RightSidebarHeader() {
 export default function RightSidebar() {
 	return (
 		<div className={styles["right-sidebar-container"]}>
-			<RightSidebarMap></RightSidebarMap>
+			<ClusterFeaturesMap></ClusterFeaturesMap>
 			<RightSidebarHeader></RightSidebarHeader>
-			<div>Search Bar</div>
+			<SearchBar></SearchBar>
 			<ClusterFeaturesList>
 				<ClusterFeaturesListPages></ClusterFeaturesListPages>
 			</ClusterFeaturesList>

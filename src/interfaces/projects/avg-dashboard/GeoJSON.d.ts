@@ -20,7 +20,7 @@ interface GeometryBase extends Record {
 	bbox?: number[];
 }
 
-interface Point extends GeometryBase {
+export interface Point extends GeometryBase {
 	type: "Point";
 	coordinates: Position;
 }
@@ -58,13 +58,11 @@ interface GeometryCollection {
 }
 
 // GeoJSON Types
-interface IFeature {
+export interface IFeature {
 	type: "Feature";
 	id?: string | number;
 	geometry: Geometry | null;
-	properties: Record | null;
-	type: "FeatureCollection";
-	features: IFeature[];
+	properties?: Record | null;
 }
 
 export default interface IFeatureCollection {

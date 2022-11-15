@@ -1,4 +1,5 @@
 import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
+import { Point } from "@interfaces/projects/avg-dashboard/GeoJSON";
 import { PROPERTY_SELECTORS as _ } from "./constants/geocluster-property-selectors";
 import { getProperCase } from "./helpers";
 
@@ -8,6 +9,11 @@ interface IClusterProperties {
 	clusterFeatsNum: number;
 	clusterLocation: string;
 	featuresDescription: string;
+	clusterCrops: string[];
+	clusterArea: number;
+	clusterUsedArea: number;
+	clusterUnusedArea: number;
+	clusterCenterFeat: Point
 }
 
 // single source of truth for cluster properties

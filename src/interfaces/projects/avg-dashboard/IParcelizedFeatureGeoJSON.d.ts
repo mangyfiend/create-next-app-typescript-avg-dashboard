@@ -1,12 +1,13 @@
+import { IFeature } from "./GeoJSON";
 
-// FIXME > CHANGE TO NORMALIZED/FLATTENED PROP. NAMES
-export default interface IGeoclusterFeatureGeoJSON extends Ifeature {
+export default interface IParcelizedFeatureGeoJSON extends IFeature {
 	properties: {
 		chunk_id: string,
+		chunk_index: number,
+		chunk_size: number,
 		owner_id: string,
 		owner_photo_url: string,
 		owner_name: string,
-		chunk_index: string,
 		center_lat: number,
 		center_lng: number,
 	};

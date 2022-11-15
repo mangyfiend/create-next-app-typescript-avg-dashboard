@@ -1,12 +1,15 @@
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
-import { PROPERTY_SELECTORS as _ } from "@utils/constants/geocluster-property-selectors";
 import IGeoclusterFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterFeatureGeoJSON";
+import getParcelizedClusterFeatProps from "@utils/getParcelizedClusterFeatProps";
+import IParcelizedFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IParcelizedFeatureGeoJSON";
 
 export default function ClusterFeatureRow({
 	clusterFeatureData,
 }: {
-	clusterFeatureData: IGeoclusterFeatureGeoJSON;
+	// FIXME > WHICH TYPE TO SELECT?
+	// clusterFeatureData: IGeoclusterFeatureGeoJSON | IParcelizedFeatureGeoJSON;
+	clusterFeatureData: IParcelizedFeatureGeoJSON;
 }) {
 	const { setClickedClusterFeatureData }: IDashboardContextProps = useDashboardContext();
 
@@ -20,15 +23,15 @@ export default function ClusterFeatureRow({
 		rowMarkup = (
 			<div className="flex-col">
 				<a href="#" onClick={featureTitleClickHandler}>
-					{clusterFeatureData[_.GEOCLUSTER_FEATURE_PROPERTIES][_.GEOCLUSTER_FEATURE_ID]}
+					{getParcelizedClusterFeatProps(clusterFeatureData).clusterFeatId}
 				</a>
 				{/* <Link href="#">
                 </Link> */}
 				<small>
-					{clusterFeatureData[_.GEOCLUSTER_FEATURE_PROPERTIES][_.GEOCLUSTER_FEATURE_OWNER]}
+					{getParcelizedClusterFeatProps(clusterFeatureData).clusterFeatTitle}
 				</small>
 				<small>
-					{clusterFeatureData[_.GEOCLUSTER_FEATURE_PROPERTIES][_.GEOCLUSTER_FEATURE_SIZE]} ha.
+					{getParcelizedClusterFeatProps(clusterFeatureData).clusterFeatSize}
 				</small>
 				{/* <small>{clusterFeatureData.properties[OS.GEOCLUSTER_ID]}</small>
                 <small>{clusterFeatureData.features.length} Farmers</small> */}

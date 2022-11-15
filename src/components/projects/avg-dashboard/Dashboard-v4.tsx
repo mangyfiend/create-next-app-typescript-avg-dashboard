@@ -3,6 +3,7 @@ import LeftSidebar from "@components/projects/avg-dashboard/LeftSidebar/LeftSide
 import RightSidebar from "@components/projects/avg-dashboard/RightSidebar/RightSidebar";
 import styles from "@styles/projects/avg-dashboard/Dashboard.module.css";
 import { LeftSidebarProvider } from "@context/projects/avg-dashboard/LeftSidebarContext-v4";
+import { RightSidebarStore } from "@context/projects/avg-dashboard/RightSidebarContext";
 import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
 
 type DashboardProps = {
@@ -14,14 +15,15 @@ export default function Dashboard({ cachedClustersArray }: DashboardProps): JSX.
 		<div className={styles["dashboard-container"]}>
 			<div>AVG Dashboard</div>
 			<DataRefreshControls></DataRefreshControls>
-			<LeftSidebarProvider serverSideClusters={cachedClustersArray}>
-				{/* REMOVE STYLES BELOW */}
-				<div style={{ display: "grid", gridTemplateColumns: "1fr 0.9fr" }}>
-				{/* <div style={{ display: "grid", gridTemplateColumns: "1fr 0.5fr" }}> */}
+			{/* REMOVE STYLES BELOW */}
+			<div style={{ display: "grid", gridTemplateColumns: "1fr 0.9fr" }}>
+				<LeftSidebarProvider serverSideClusters={cachedClustersArray}>
 					<LeftSidebar></LeftSidebar>
+				</LeftSidebarProvider>
+				<RightSidebarStore>
 					<RightSidebar></RightSidebar>
-				</div>
-			</LeftSidebarProvider>
+				</RightSidebarStore>
+			</div>
 		</div>
 	);
 }

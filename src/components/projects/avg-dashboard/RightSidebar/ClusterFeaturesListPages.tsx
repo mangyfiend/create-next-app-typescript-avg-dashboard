@@ -1,10 +1,12 @@
 import IGeoclusterFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterFeatureGeoJSON";
 import { useState, useEffect } from "react";
 import ClusterFeatureRow from "@components/projects/avg-dashboard/RightSidebar/ClusterFeatureRow";
-import {PROPERTY_SELECTORS as _} from "@utils/constants/geocluster-property-selectors";
+import { PROPERTY_SELECTORS as _ } from "@utils/constants/geocluster-property-selectors";
 import styles from "@styles/projects/avg-dashboard/RightSidebar.module.css";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
+import getParcelizedClusterFeatProps from "@utils/getParcelizedClusterFeatProps";
+import IParcelizedFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IParcelizedFeatureGeoJSON";
 
 export default function ClusterFeaturesListPages() {
 	// export default function ClusterFeaturesListPages({
@@ -22,7 +24,7 @@ export default function ClusterFeaturesListPages() {
 	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
 
 	const clusterFeatsPagesArray = clickedClusterData?.features;
-		// TODOD > KEEP
+	// TODOD > KEEP
 	// const {
 	// 	clusterFeatsPagesArray,
 	// 	recordTitleFilterText,
@@ -59,7 +61,7 @@ export default function ClusterFeaturesListPages() {
 	// }, [recordTitleFilterText, recordsFilters, pageRowsLength]);
 
 	// let clusterFeatsArray: IGeoclusterFeatureGeoJSON[] = clusterFeatsPagesArray[pageIdx];
-	let clusterFeatsArray: IGeoclusterFeatureGeoJSON[] = clusterFeatsPagesArray;
+	let clusterFeatsArray: IParcelizedFeatureGeoJSON[] = clusterFeatsPagesArray;
 
 	return (
 		<>
@@ -72,11 +74,7 @@ export default function ClusterFeaturesListPages() {
 						clusterFeatsArray.map((clusterFeat) => (
 							<ClusterFeatureRow
 								// key={clusterFeat[OS.GEOCLUSTER_PROPERTIES][OS.GEOCLUSTER_ID]}
-								key={
-									clusterFeat[_.GEOCLUSTER_FEATURE_PROPERTIES][
-										_.GEOCLUSTER_FEATURE_ID
-									]
-								}
+								key={getParcelizedClusterFeatProps(clusterFeat).clusterFeatId}
 								clusterFeatureData={clusterFeat}></ClusterFeatureRow>
 						))}
 				</div>

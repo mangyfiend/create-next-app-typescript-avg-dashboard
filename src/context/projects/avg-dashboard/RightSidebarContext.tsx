@@ -6,7 +6,9 @@ import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRight
 import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
 import IGeoclusterFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterFeatureGeoJSON";
 import IGeoclusterFilters from "@interfaces/projects/avg-dashboard/GeoclusterFilters";
-import getGeoclusterProperties from "@utils/getGeoclusterProperties";
+// import getGeoclusterProperties from "@utils/getGeoclusterProperties";
+import getParcelizedClusterFeatProps from "@utils/getParcelizedClusterFeatProps";
+import IParcelizedFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IParcelizedFeatureGeoJSON";
 
 // def. the context provider props
 interface IProviderProps {
@@ -19,15 +21,17 @@ const RightSidebarContext = createContext<IRightSidebarContextProps | {}>({});
 
 // def. provider
 export const RightSidebarStore = ({ children }: IProviderProps) => {
-	// IMPORTANT > THIS BRINGS SERVER SIDE DATA INTO THE PROVIDER IMMEDIATELY VIA getServerSideProps in index.js
-	console.log("%c[RIGHT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: purple");
+	console.log("%c[RIGHT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: orange");
 
 	// the the data for the geocluster from the left sidebar that was clicked
 	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
 
-	const CLUSTER_FEATS_ARRAY: IGeoclusterFeatureGeoJSON[] = clickedClusterData.features;
+	const CLUSTER_FEATS_ARRAY: IParcelizedFeatureGeoJSON[] = clickedClusterData
+		? clickedClusterData.features
+		: [];
 
-	const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
+	// const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
+	const [featTitleFilterText, setFeatTitleFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState("0");
 	const [workingClustersArray, setWorkingClustersArray] = useState([]);
 	const [clusterPagesArray, setClusterPagesArray] = useState([]);
@@ -66,20 +70,39 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// CLUSTER FILTER FUNCTIONS
 
 	// 1.
-	const filterClusterFeatsBySize = (clusterFeats: IGeoclusterFeatureGeoJSON[], sizeCategory: number) => {
-		return clusterFeats.filter((geocluster) => geocluster.features.length >= sizeCategory);
+	const filterClusterFeatsBySize = (
+		clusterFeats: IParcelizedFeatureGeoJSON[],
+		// FIXME
+		sizeCategory: number = -Infinity
+	) => {
+		return clusterFeats.filter(
+			(geoclusterFeat) => getParcelizedClusterFeatProps(geoclusterFeat).clusterFeatSize >= sizeCategory
+		);
 	};
 
 	// 2.
-	const filterClustersByName = (clustersArray: IGeoclusterGeoJSON[], titleString: string) => {
-		let filteredArray = clustersArray.filter((geocluster) => {
-			const clusterTitle = getGeoclusterProperties(geocluster).clusterTitle.toLowerCase();
-			return clusterTitle.indexOf(titleString.toLowerCase()) !== -1;
+	const filterClusterFeatsByTitle = (
+		clusterFeatsArray: IParcelizedFeatureGeoJSON[],
+		filterString: string
+	) => {
+		let filteredFeatsArray = clusterFeatsArray.filter((geoclusterFeat) => {
+			const clusterFeatTitle =
+				getParcelizedClusterFeatProps(geoclusterFeat).clusterFeatTitle.toLowerCase();
+			return clusterFeatTitle.indexOf(filterString.toLowerCase()) !== -1;
 		});
-		return filteredArray;
+		return filteredFeatsArray;
 	};
+	// REMOVE
+	// const filterClustersByName = (clustersArray: IGeoclusterGeoJSON[], titleString: string) => {
+	// 	let filteredArray = clustersArray.filter((geocluster) => {
+	// 		const clusterTitle = getGeoclusterProperties(geocluster).clusterTitle.toLowerCase();
+	// 		return clusterTitle.indexOf(titleString.toLowerCase()) !== -1;
+	// 	});
+	// 	return filteredArray;
+	// };
 
 	// 3.
+	// REMOVE
 	const getClusterArrayPages = (clustersArray: IGeoclusterGeoJSON[], numPages: number) => {
 		// before user interaction,
 		// the default value of the rows limit select elment is == 0
@@ -87,48 +110,76 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	};
 
 	// search filter text input change
-	// const onClusterNameFilterTextChange = (evt: { target: { value: SetStateAction<string>; }; }) => {
-	const onClusterNameFilterTextChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-		setClusterNameFilterText(evt.target.value);
+	const onClusterFeatTitleSearch = (evt: React.ChangeEvent<HTMLInputElement>) => {
+		setFeatTitleFilterText(evt.target.value);
 	};
 
+	// REMOVE
 	// select number of results per page
 	// const onPageRowsSelectChange = (evt: { target: { value: SetStateAction<number>; }; }) => {
 	const onPageRowsSelectChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
 		setPageRowsLength(evt.target.value);
 	};
 
-	// TODO > MOVE TO CUSTOM HOOK
-	// filter the live data when text in the search input changes
+	// SANDBOX
+	// filter the cluster features when the search input text changes
 	useEffect(() => {
-		let filteredClustersArray = [];
+		
+		let filteredFeatsArray = [];
 
-		// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS
 		if (CLUSTER_FEATS_ARRAY && CLUSTER_FEATS_ARRAY.length > 0) {
-			filteredClustersArray = filterClusterFeatsBySize(
-				CLUSTER_FEATS_ARRAY,
-				clusterFilters.clusterSizeSelect
-			);
+
+				filteredFeatsArray = filterClusterFeatsBySize(
+					CLUSTER_FEATS_ARRAY,
+					clusterFilters.clusterSizeSelect
+				);
 
 			// filter clusters by geocluster name
-			filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFiltertext);
+			filteredFeatsArray = filterClusterFeatsByTitle(filteredFeatsArray, featTitleFilterText);
 
 			//
-			setWorkingClustersArray(filteredClustersArray);
+			// setWorkingClustersArray(filteredClustersArray);
 
-			//
-			setClusterPagesArray(getClusterArrayPages(filteredClustersArray, +pageRowsLength));
+			// //
+			// setClusterPagesArray(getClusterArrayPages(filteredClustersArray, +pageRowsLength));
 
-			console.log({ filteredClustersArray });
+			console.log({ filteredFeatsArray });
 		}
-		return () => {};
-	}, [CLUSTER_FEATS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);
+	}, [CLUSTER_FEATS_ARRAY, featTitleFilterText]);
+
+	// REMOVE
+	// TODO > MOVE TO CUSTOM HOOK
+	// filter the live data when text in the search input changes
+	// useEffect(() => {
+	// 	let filteredClustersArray = [];
+
+	// 	// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS
+	// 	if (CLUSTER_FEATS_ARRAY && CLUSTER_FEATS_ARRAY.length > 0) {
+	// 		filteredClustersArray = filterClusterFeatsBySize(
+	// 			CLUSTER_FEATS_ARRAY,
+	// 			clusterFilters.clusterSizeSelect
+	// 		);
+
+	// 		// filter clusters by geocluster name
+	// 		filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFiltertext);
+
+	// 		//
+	// 		setWorkingClustersArray(filteredClustersArray);
+
+	// 		//
+	// 		setClusterPagesArray(getClusterArrayPages(filteredClustersArray, +pageRowsLength));
+
+	// 		console.log({ filteredClustersArray });
+	// 	}
+	// 	return () => {};
+	// }, [CLUSTER_FEATS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);
 
 	return (
 		<RightSidebarContext.Provider
 			value={{
-				clusterNameFiltertext,
-				onClusterNameFilterTextChange,
+				// clusterNameFiltertext,
+				featTitleFilterText,
+				onClusterFeatTitleSearch,
 				handleClusterFiltersChange,
 				setClusterFilters,
 				clusterFilters,

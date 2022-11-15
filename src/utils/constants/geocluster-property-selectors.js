@@ -1,9 +1,10 @@
+// REMOVE > DEPRECATED > USE INTERFACES (eg. IParcelizedFeatureGeoJSON) INSTEAD
 export const PROPERTY_SELECTORS = Object.freeze({
 	GEOCLUSTER_ID: "agc_id",
 	GEOCLUSTER_TITLE: "agc_extended_name",
 	GEOCLUSTER_LOCAITON: "agc_location",
 	GEOCLUSTER_PROPERTIES: "properties",
-	GEOCLUSTER_FEATURE_PROPERTIES: "properties",
+	// GEOCLUSTER_FEATURE_PROPERTIES: "properties",
 	GEOCLUSTER_FEATURES_DESCRIPTION: "farms",
 	GEOCLUSTER_FEATURE_ID: "chunk_id",
 	GEOCLUSTER_FEATURE_SIZE: "chunk_size",
