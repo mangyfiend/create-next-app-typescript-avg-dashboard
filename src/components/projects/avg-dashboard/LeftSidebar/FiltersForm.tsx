@@ -1,8 +1,8 @@
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
 import SearchBar from "./SearchBar-v4";
 import styles from "@styles/projects/avg-dashboard/LeftSidebarFilters.module.css";
-import { TITLES } from "@utils/constants/titles";
-import { capitalize } from "@utils/helpers";
+import { DESCRIPTORS } from "@utils/constants/descriptors";
+import { getProperCase } from "@utils/helpers-v2";
 import { GEO_POL_REGIONS } from "@utils/constants/geo-pol-regions";
 import { COUNTRY_ADMIN_LEVELS } from "@utils/constants/country-admin-levels";
 import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
@@ -14,7 +14,7 @@ export default function LeftSidebarFilters() {
 		clusterFilters,
 	}: ILeftSidebarContextProps = useLeftSidebarContext();
 
-	const featureTitle: string = capitalize(TITLES.CLUSTER_FEATURE_TITLE);
+	const featureTitle: string = getProperCase(DESCRIPTORS.GEOCLUSTER_FEATURES_DESCRIPTION);
 
 	return (
 		<div className={styles["filters-form-wrapper"]}>

@@ -68,7 +68,7 @@ export default function ClusterFeaturesListPages() {
 			<div className={"flex-col"}>
 				<div className={styles["list-page-body"]}>
 					{(!clusterFeatsArray || clusterFeatsArray.length === 0) && (
-						<div>no geocluster features</div>
+						<div>please click a cluster on the left panel</div>
 					)}
 					{clusterFeatsArray &&
 						clusterFeatsArray.map((clusterFeat) => (

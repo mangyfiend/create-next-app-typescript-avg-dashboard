@@ -1,4 +1,4 @@
-import { splitGeoJSONArray } from "@utils/helpers";
+import { splitGeoJSONArray } from "@utils/helpers-v2";
 import React, { createContext, useState, useEffect } from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
@@ -102,7 +102,6 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 	// TODO > MOVE TO CUSTOM HOOK
 	// filter the live data when text in the search input changes
 	useEffect(() => {
-
 		let filteredClustersArray = [];
 
 		// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS

@@ -1,4 +1,4 @@
-import { splitGeoJSONArray } from "@utils/helpers";
+import { splitGeoJSONArray } from "@utils/helpers-v2";
 import React, { createContext, useState, useEffect } from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";

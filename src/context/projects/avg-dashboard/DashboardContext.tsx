@@ -2,7 +2,7 @@ import React from "react";
 import { useRef } from "react";
 import { createContext, useState, useEffect } from "react";
 import IGeoclusterAPIResponse from "@interfaces/projects/avg-dashboard/GeoclustersAPIResponse";
-import { getErrorMessage } from "@utils/helpers";
+import { getErrorMessage } from "@utils/helpers-v2";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import API_URLS from "@utils/constants/api-urls";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
