@@ -9,11 +9,11 @@ interface IClusterProperties {
 	clusterFeatsNum: number;
 	clusterLocation: string;
 	featuresDescription: string;
-	clusterCrops: string[];
-	clusterArea: number;
-	clusterUsedArea: number;
-	clusterUnusedArea: number;
-	clusterCenterFeat: Point;
+	// clusterCrops: string[];
+	// clusterArea: number;
+	// clusterUsedArea: number;
+	// clusterUnusedArea: number;
+	// clusterCenterPointFeat: Point;
 }
 
 // single source of truth for cluster properties
@@ -27,6 +27,12 @@ export default function getGeoclusterProperties(geocluster: IGeoclusterGeoJSON) 
 		featuresDescription: getProperCase(
 			geocluster[PROPS.GEOCLUSTER_PROPERTIES][PROPS.GEOCLUSTER_FEATURES_DESCRIPTION]
 		),
+		// TODO > 
+		// clusterCrops: geocluster[PROPS.GEOCLUSTER_PROPERTIES][PROPS.GEOCLUSTER_CROPS],
+		// clusteArea: geocluster[PROPS.GEOCLUSTER_PROPERTIES][PROPS.GEOCLUSTER_AREA],
+		// clusterUsedArea: geocluster[PROPS.GEOCLUSTER_PROPERTIES][PROPS.GEOCLUSTER_USED_AREA],
+		// clusterUnusedArea: geocluster[PROPS.GEOCLUSTER_PROPERTIES][PROPS.GEOCLUSTER_UNUSED_AREA],
+		// clusterCenterPointFeat: geocluster[PROPS.GEOCLUSTER_PROPERTIES][PROPS.GEOCLUSTER_CENTER_POINT_FEATURE]
 	};
 	return CLUSTER_PROPS;
 }
