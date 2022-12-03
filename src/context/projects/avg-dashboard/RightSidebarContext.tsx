@@ -3,10 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRightSidebarContextProps";
-import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
-import IGeoclusterFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterFeatureGeoJSON";
 import IGeoclusterFilters from "@interfaces/projects/avg-dashboard/GeoclusterFilters";
-// import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 import getParcelizedClusterFeatProps from "@utils/getParcelizedClusterFeatProps";
 import IParcelizedFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IParcelizedFeatureGeoJSON";
 
@@ -32,7 +29,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 
 	// const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
 	const [featTitleFilterText, setFeatTitleFilterText] = useState("");
-	const [pageRowsLength, setPageRowsLength] = useState("0");
+	const [pageListLength, setPageListLength] = useState("0");
 	const [clusterFeatsPages, setClusterFeatsPages] = useState([]);
 	// TODO > WIP > ADD MORE FILTERS
 	const [clusterFilters, setClusterFilters] = useState<IGeoclusterFilters>({
@@ -109,7 +106,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// select number of results per page
 	// const onPageRowsSelectChange = (evt: { target: { value: SetStateAction<number>; }; }) => {
 	const onPageRowsSelectChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-		setPageRowsLength(evt.target.value);
+		setPageListLength(evt.target.value);
 	};
 
 	// SANDBOX
@@ -130,11 +127,11 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 			filteredFeatsArray = filterClusterFeatsByTitle(filteredFeatsArray, featTitleFilterText);
 
 			// get pagenated cluster feats.
-			setClusterFeatsPages(getClusterFeatsPages(filteredFeatsArray, +pageRowsLength));
+			setClusterFeatsPages(getClusterFeatsPages(filteredFeatsArray, +pageListLength));
 
 			console.log({ filteredFeatsArray });
 		}
-	}, [CLUSTER_FEATS_ARRAY, clusterFilters.clusterSizeSelect, featTitleFilterText, pageRowsLength]);
+	}, [CLUSTER_FEATS_ARRAY, clusterFilters.clusterSizeSelect, featTitleFilterText, pageListLength]);
 
 	return (
 		<RightSidebarContext.Provider
@@ -146,7 +143,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 				setClusterFilters,
 				clusterFilters,
 				onPageRowsSelectChange,
-				pageRowsLength,
+				pageListLength,
 				clusterFeatsPages,
 			}}>
 			{children}

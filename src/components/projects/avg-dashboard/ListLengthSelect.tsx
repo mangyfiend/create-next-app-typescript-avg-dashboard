@@ -1,10 +1,4 @@
-import { ChangeEvent } from "react";
-
-export default function ListLengthSelect({
-	handleListLengthChange,
-}: {
-	handleListLengthChange: (argument: ChangeEvent<HTMLInputElement>) => void;
-}) {
+export default function ListLengthSelect({ handleListLengthChange }): JSX.Element {
 	return (
 		<div className="flex-row">
 			<select name="" id="" onChange={handleListLengthChange}>

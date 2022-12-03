@@ -10,11 +10,10 @@ export default function ClusterFeaturesPages() {
 	const {
 		clusterFeatsPages,
 		featTitleFilterText,
-		pageRowsLength,
+		pageListLength,
+		onListLengthChange,
 		clusterFeatsFilters,
 	}: IRightSidebarContextProps = useRightSidebarContext();
-
-	const { onPageRowsSelectChange } : ILeftSidebarContextProps = useLeftSidebarContext();
 
 	const [pageIdx, setPageIdx] = useState<number>(0);
 
@@ -40,7 +39,7 @@ export default function ClusterFeaturesPages() {
 		return () => {
 			// TODO
 		};
-	}, [featTitleFilterText, clusterFeatsFilters, pageRowsLength]);
+	}, [featTitleFilterText, clusterFeatsFilters, pageListLength]);
 
 	let clusterFeatsArray: IParcelizedFeatureGeoJSON[] = clusterFeatsPages[pageIdx];
 
@@ -76,7 +75,7 @@ export default function ClusterFeaturesPages() {
 					</div>
 				</div>
 			</div>
-			<ListLengthSelect handleListLengthChange={onPageRowsSelectChange}></ListLengthSelect>
+			<ListLengthSelect handleListLengthChange={onListLengthChange}></ListLengthSelect>
 			{/* <button onClick={handleShowMoreClick}>{showMoreChk ? "Hide" : "Show"} details</button>
 			{showMoreChk && <p>{currentPicture.description}</p>}
 			<Image src={currentPicture.url} alt={currentPicture.alt} width={200} height={200} /> */}
