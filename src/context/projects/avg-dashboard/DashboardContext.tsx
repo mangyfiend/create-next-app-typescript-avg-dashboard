@@ -71,7 +71,7 @@ export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 			setFetchErrChk(false);
 
 			try {
-				let apiResponse = await fetch(API_URLS.PARCELIZED_GEOCLUSTERS);
+				let apiResponse = await fetch(API_URLS.LOCAL.PARCELIZED_GEOCLUSTERS);
 
 				const apiData: IGeoclusterAPIResponse = await apiResponse.json();
 

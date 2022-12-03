@@ -2,7 +2,7 @@ import React, { createContext } from "react";
 import SearchBar from "./SearchBar";
 import styles from "@styles/projects/avg-dashboard/RightSidebar.module.css";
 import LeftSidebarListControls from "../LeftSidebar/LeftSidebarListControls-v4";
-import ClusterFeaturesListPages from "@components/projects/avg-dashboard/RightSidebar/ClusterFeaturesListPages";
+import ClusterFeaturesPages from "@components/projects/avg-dashboard/RightSidebar/ClusterFeaturesPages";
 import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRightSidebarContextProps";
 
 // def. context
@@ -34,7 +34,7 @@ export const RightSidebarContext = createContext<IRightSidebarContextProps | {}>
 // 	);
 // };
 
-import styles2 from "@styles/projects/avg-dashboard/ClusterFeaturesMap.module.css"
+import styles2 from "@styles/projects/avg-dashboard/ClusterFeaturesMap.module.css";
 export function ClusterFeaturesMap() {
 	// export function ClusterFeaturesMap({ children }: { children: React.ReactNode }): JSX.Element {
 	return <div className={styles2["map-container"]}>Cluster Features Map</div>;
@@ -59,11 +59,9 @@ import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboar
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 export function RightSidebarHeader() {
-
 	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
 
 	if (clickedClusterData) {
-
 		const clusterProperties = getGeoclusterProperties(clickedClusterData);
 
 		return (
@@ -86,11 +84,7 @@ export default function RightSidebar() {
 			<ClusterFeaturesMap></ClusterFeaturesMap>
 			<RightSidebarHeader></RightSidebarHeader>
 			<SearchBar></SearchBar>
-			<ClusterFeaturesList>
-				<ClusterFeaturesListPages></ClusterFeaturesListPages>
-			</ClusterFeaturesList>
-			{/* FIXME */}
-			<LeftSidebarListControls></LeftSidebarListControls>
+			<ClusterFeaturesPages></ClusterFeaturesPages>
 		</div>
 	);
 }

@@ -33,8 +33,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
 	const [featTitleFilterText, setFeatTitleFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState("0");
-	const [workingClustersArray, setWorkingClustersArray] = useState([]);
-	const [clusterPagesArray, setClusterPagesArray] = useState([]);
+	const [clusterFeatsPages, setClusterFeatsPages] = useState([]);
 	// TODO > WIP > ADD MORE FILTERS
 	const [clusterFilters, setClusterFilters] = useState<IGeoclusterFilters>({
 		clusterSizeSelect: -Infinity,
@@ -92,21 +91,13 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 		});
 		return filteredFeatsArray;
 	};
-	// REMOVE
-	// const filterClustersByName = (clustersArray: IGeoclusterGeoJSON[], titleString: string) => {
-	// 	let filteredArray = clustersArray.filter((geocluster) => {
-	// 		const clusterTitle = getGeoclusterProperties(geocluster).clusterTitle.toLowerCase();
-	// 		return clusterTitle.indexOf(titleString.toLowerCase()) !== -1;
-	// 	});
-	// 	return filteredArray;
-	// };
 
 	// 3.
 	// REMOVE
-	const getClusterArrayPages = (clustersArray: IGeoclusterGeoJSON[], numPages: number) => {
+	const getClusterFeatsPages = (clusterFeatures: IParcelizedFeatureGeoJSON[], numPages: number) => {
 		// before user interaction,
 		// the default value of the rows limit select elment is == 0
-		return numPages === 0 ? [clustersArray] : splitGeoJSONArray(clustersArray, numPages);
+		return numPages === 0 ? [clusterFeatures] : splitGeoJSONArray(clusterFeatures, numPages);
 	};
 
 	// search filter text input change
@@ -129,6 +120,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 
 		if (CLUSTER_FEATS_ARRAY && CLUSTER_FEATS_ARRAY.length > 0) {
 
+			// filter by size of feat.
 				filteredFeatsArray = filterClusterFeatsBySize(
 					CLUSTER_FEATS_ARRAY,
 					clusterFilters.clusterSizeSelect
@@ -137,42 +129,12 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 			// filter clusters by geocluster name
 			filteredFeatsArray = filterClusterFeatsByTitle(filteredFeatsArray, featTitleFilterText);
 
-			//
-			// setWorkingClustersArray(filteredClustersArray);
-
-			// //
-			// setClusterPagesArray(getClusterArrayPages(filteredClustersArray, +pageRowsLength));
+			// get pagenated cluster feats.
+			setClusterFeatsPages(getClusterFeatsPages(filteredFeatsArray, +pageRowsLength));
 
 			console.log({ filteredFeatsArray });
 		}
-	}, [CLUSTER_FEATS_ARRAY, featTitleFilterText]);
-
-	// REMOVE
-	// TODO > MOVE TO CUSTOM HOOK
-	// filter the live data when text in the search input changes
-	// useEffect(() => {
-	// 	let filteredClustersArray = [];
-
-	// 	// TODO > COMPARE CACHED AND LIVE CLUSTERS ARRAY LENGTHS
-	// 	if (CLUSTER_FEATS_ARRAY && CLUSTER_FEATS_ARRAY.length > 0) {
-	// 		filteredClustersArray = filterClusterFeatsBySize(
-	// 			CLUSTER_FEATS_ARRAY,
-	// 			clusterFilters.clusterSizeSelect
-	// 		);
-
-	// 		// filter clusters by geocluster name
-	// 		filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFiltertext);
-
-	// 		//
-	// 		setWorkingClustersArray(filteredClustersArray);
-
-	// 		//
-	// 		setClusterPagesArray(getClusterArrayPages(filteredClustersArray, +pageRowsLength));
-
-	// 		console.log({ filteredClustersArray });
-	// 	}
-	// 	return () => {};
-	// }, [CLUSTER_FEATS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);
+	}, [CLUSTER_FEATS_ARRAY, clusterFilters.clusterSizeSelect, featTitleFilterText, pageRowsLength]);
 
 	return (
 		<RightSidebarContext.Provider
@@ -185,8 +147,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 				clusterFilters,
 				onPageRowsSelectChange,
 				pageRowsLength,
-				workingClustersArray,
-				clusterPagesArray,
+				clusterFeatsPages,
 			}}>
 			{children}
 		</RightSidebarContext.Provider>

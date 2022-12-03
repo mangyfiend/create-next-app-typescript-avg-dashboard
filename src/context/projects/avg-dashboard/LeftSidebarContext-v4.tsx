@@ -124,8 +124,8 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 			console.log({ filteredClustersArray });
 		}
 		return () => {};
-	// }, [CLUSTERS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);
-	},[])
+	}, [CLUSTERS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);
+	// },[])
 
 	return (
 		<LeftSidebarContext.Provider

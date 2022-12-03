@@ -1,5 +1,6 @@
 import Dashboard from "@components/projects/avg-dashboard/Dashboard-v4";
 import { DashboardProvider } from "@context/projects/avg-dashboard/DashboardContext";
+import API_URLS from "@constants/api-urls"
 
 export default function AvgDashboard(props) {
 	return (
@@ -13,7 +14,7 @@ export default function AvgDashboard(props) {
 
 export async function getServerSideProps() {
 	try {
-		let apiResponse = await fetch(`https://geoclusters.herokuapp.com/api/v1/parcelized-agcs/`);
+		let apiResponse = await fetch(API_URLS.LOCAL.PARCELIZED_GEOCLUSTERS);
 		apiResponse = await apiResponse.json();
 		return {
 			props: {

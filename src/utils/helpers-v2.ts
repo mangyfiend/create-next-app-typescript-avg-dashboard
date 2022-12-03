@@ -1,14 +1,15 @@
 import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
+import IParcelizedFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IParcelizedFeatureGeoJSON";
 
 // Add multiple classNames to nextjs elements
-export const addStyles = (styles: { [x: string]: any; }, classes: string) => {
+export const addStyles = (styles: { [x: string]: any }, classes: string) => {
 	const classList = classes.split(" ");
 	classes = "";
 	for (const className of classList) {
-		classes += `${styles[className]} `
+		classes += `${styles[className]} `;
 	}
 	return classes;
-}
+};
 
 // https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
 export function getErrorMessage(error: unknown) {
@@ -17,7 +18,10 @@ export function getErrorMessage(error: unknown) {
 }
 
 // split the cachedData into arrays
-export function splitGeoJSONArray(arr: IFeatureCollection[], pageWidth: number): any[] {
+export function splitGeoJSONArray(
+	arr: IFeatureCollection[] | IParcelizedFeatureGeoJSON[],
+	pageWidth: number
+): any[] {
 	let finalArr = [];
 	let tempArr = [];
 	for (let idx = 0; idx < arr.length; idx++) {
