@@ -4,7 +4,7 @@ import RightSidebar from "@components/projects/avg-dashboard/RightSidebar/RightS
 import styles from "@styles/projects/avg-dashboard/Dashboard.module.css";
 import { LeftSidebarProvider } from "@context/projects/avg-dashboard/LeftSidebarContext-v4";
 import { RightSidebarStore } from "@context/projects/avg-dashboard/RightSidebarContext";
-import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterGeoJSON";
 
 type DashboardProps = {
 	cachedClustersArray: IGeoclusterGeoJSON[];

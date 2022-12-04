@@ -1,6 +1,6 @@
 import { SyntheticEvent, ChangeEvent } from "react";
 import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
-import IGeoclusterGeoJSON from "./GeoclusterGeoJSON";
+import IGeoclusterGeoJSON from "./IGeoclusterGeoJSON";
 import IGeoclusterFeatureGeoJSON from "./IGeoclusterFeatureGeoJSON";
 import IParcelizedFeatureGeoJSON from "./IParcelizedFeatureGeoJSON";
 

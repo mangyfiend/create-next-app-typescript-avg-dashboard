@@ -6,7 +6,7 @@ import { getErrorMessage } from "@utils/helpers-v2";
 import { OBJECT_SELECTORS as OS } from "@utils/constants/object-property-selectors";
 import API_URLS from "@utils/constants/api-urls";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
-import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterGeoJSON";
 
 // def. the context provider props
 interface IProviderProps {

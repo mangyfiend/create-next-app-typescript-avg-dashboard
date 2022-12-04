@@ -10,7 +10,6 @@ import IParcelizedFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IParce
 // def. the context provider props
 interface IProviderProps {
 	children?: React.ReactNode;
-	// serverSideClusters: IFeatureCollection[];
 }
 
 // init. the context

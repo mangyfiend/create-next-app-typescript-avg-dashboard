@@ -1,4 +1,4 @@
-import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterGeoJSON";
 import { Point } from "@interfaces/projects/avg-dashboard/GeoJSON";
 import { PROPERTY_SELECTORS as PROPS } from "./constants/geocluster-property-selectors";
 import { getProperCase } from "./helpers-v2";

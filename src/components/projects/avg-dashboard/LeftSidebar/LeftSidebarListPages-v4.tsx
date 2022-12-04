@@ -3,7 +3,7 @@ import ClusterRecordRow from "./ClusterRecordRow";
 import styles from "@styles/projects/avg-dashboard/LeftSidebar.module.css";
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
 import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
-import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterGeoJSON";
 import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 
 export default function LeftSidebarListPages() {
@@ -86,9 +86,6 @@ export default function LeftSidebarListPages() {
 					</div>
 				</div>
 			</div>
-			{/* <button onClick={handleShowMoreClick}>{showMoreChk ? "Hide" : "Show"} details</button>
-			{showMoreChk && <p>{currentPicture.description}</p>}
-			<Image src={currentPicture.url} alt={currentPicture.alt} width={200} height={200} /> */}
 		</>
 	);
 }

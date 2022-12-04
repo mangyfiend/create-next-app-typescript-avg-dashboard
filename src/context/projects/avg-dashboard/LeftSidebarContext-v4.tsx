@@ -4,7 +4,7 @@ import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardConte
 import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
-import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/GeoclusterGeoJSON";
+import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterGeoJSON";
 import IGeoclusterFilters from "@interfaces/projects/avg-dashboard/GeoclusterFilters";
 import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 

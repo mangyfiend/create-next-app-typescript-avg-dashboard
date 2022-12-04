@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import IGeoclusterGeoJSON from "./GeoclusterGeoJSON";
+import IGeoclusterGeoJSON from "./IGeoclusterGeoJSON";
 import IGeoclusterFilters from "./GeoclusterFilters";
 
 // def. the context props

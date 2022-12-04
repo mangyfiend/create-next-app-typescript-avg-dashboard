@@ -1,23 +1,22 @@
-import useRightSidebarContext from "@hooks/projects/avg-dashboard/useRightSidebarContext";
-import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRightSidebarContextProps";
-import { useState, ChangeEvent, SetStateAction } from "react";
+import { ChangeEvent } from "react";
 
-export default function SearchBar() {
-	const { featTitleFilterText, onClusterFeatTitleSearch }: IRightSidebarContextProps = useRightSidebarContext();
-	// const [searchText, setSearchText] = useState("");
-	// // const onSearchTextChange = (evt: { target: { value: SetStateAction<string> } }) =>
-	// // setSearchText(evt.target.value);
-	// const onSearchTextChange = (evt: ChangeEvent<HTMLInputElement>) =>
-	// 	setSearchText(evt.target.value);
+type SearchBarTypes = {
+	searchText: string;
+	onSearchTextChange: (argument: ChangeEvent<HTMLInputElement>) => void;
+};
 
+export default function SearchBar({
+	searchText,
+	onSearchTextChange,
+}: SearchBarTypes): JSX.Element {
 	return (
 		<form>
 			<input
 				type="text"
 				name="searchFilterText"
-				value={featTitleFilterText}
+				value={searchText}
 				placeholder="generic search"
-				onChange={onClusterFeatTitleSearch}
+				onChange={onSearchTextChange}
 			/>
 		</form>
 	);

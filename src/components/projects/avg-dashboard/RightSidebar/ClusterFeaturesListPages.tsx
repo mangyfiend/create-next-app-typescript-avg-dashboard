@@ -4,16 +4,14 @@ import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRight
 import useRightSidebarContext from "@hooks/projects/avg-dashboard/useRightSidebarContext";
 import ClusterFeaturesList from "@components/projects/avg-dashboard/RightSidebar/ClusterFeaturesList";
 import ListLengthSelect from "../ListLengthSelect";
-import SearchBar from "./SearchBar";
 import useResetListPageIndex from "@hooks/projects/avg-dashboard/useResetListPageIndex";
 
 export default function ClusterFeaturesPages() {
-	const {
-		clusterFeatsPages,
-		handleListLengthChange,
-	}: IRightSidebarContextProps = useRightSidebarContext();
 
-	const {pageIndex, setPageIndex} = useResetListPageIndex(0)
+	const { clusterFeatsPages, handleListLengthChange }: IRightSidebarContextProps =
+		useRightSidebarContext();
+
+	const { pageIndex, setPageIndex } = useResetListPageIndex(0);
 
 	const handleNextClick = () => {
 		setPageIndex(pageIndex + 1);
@@ -33,12 +31,9 @@ export default function ClusterFeaturesPages() {
 
 	let clusterFeatsArray: IParcelizedFeatureGeoJSON[] = clusterFeatsPages[pageIndex];
 
-	return !clusterFeatsArray || clusterFeatsArray.length < 1 ? (
-		<div>please click on a cluster on the left panel</div>
-	) : (
+	return (
 		<>
 			<div className={"flex-col"}>
-				<SearchBar></SearchBar>
 				<ClusterFeaturesList clusterFeatures={clusterFeatsArray}></ClusterFeaturesList>
 				<div className={"flex-row-between"}>
 					<span>
