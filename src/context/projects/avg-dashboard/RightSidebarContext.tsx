@@ -23,9 +23,9 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// the the data for the geocluster from the left sidebar that was clicked
 	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
 
-	const CLUSTER_FEATS_ARRAY: IParcelizedFeatureGeoJSON[] = clickedClusterData
-		? clickedClusterData.features
-		: [];
+	// const CLUSTER_FEATS_ARRAY: IParcelizedFeatureGeoJSON[] = clickedClusterData
+	// 	? clickedClusterData.features
+	// 	: [];
 
 	// const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
 	const [featTitleFilterText, setFeatTitleFilterText] = useState("");
@@ -72,7 +72,8 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 		sizeCategory: number = -Infinity
 	) => {
 		return clusterFeats.filter(
-			(geoclusterFeat) => getParcelizedClusterFeatProps(geoclusterFeat).clusterFeatSize >= sizeCategory
+			(geoclusterFeat) =>
+				getParcelizedClusterFeatProps(geoclusterFeat).clusterFeatSize >= sizeCategory
 		);
 	};
 
@@ -90,8 +91,10 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	};
 
 	// 3.
-	// REMOVE
-	const getClusterFeatsPages = (clusterFeatures: IParcelizedFeatureGeoJSON[], numPages: number) => {
+	const getClusterFeatsPages = (
+		clusterFeatures: IParcelizedFeatureGeoJSON[],
+		numPages: number
+	) => {
 		// before user interaction,
 		// the default value of the rows limit select elment is == 0
 		return numPages === 0 ? [clusterFeatures] : splitGeoJSONArray(clusterFeatures, numPages);
@@ -102,26 +105,27 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 		setFeatTitleFilterText(evt.target.value);
 	};
 
-	// REMOVE
-	// select number of results per page
-	// const onPageRowsSelectChange = (evt: { target: { value: SetStateAction<number>; }; }) => {
-	const onPageRowsSelectChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+	// Select num. cluster feats. per per page
+	const handleListLengthChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
 		setPageListLength(evt.target.value);
 	};
 
 	// SANDBOX
 	// filter the cluster features when the search input text changes
 	useEffect(() => {
-		
+
+		const CLUSTER_FEATS_ARRAY: IParcelizedFeatureGeoJSON[] = clickedClusterData
+			? clickedClusterData.features
+			: [];
+
 		let filteredFeatsArray = [];
 
 		if (CLUSTER_FEATS_ARRAY && CLUSTER_FEATS_ARRAY.length > 0) {
-
 			// filter by size of feat.
-				filteredFeatsArray = filterClusterFeatsBySize(
-					CLUSTER_FEATS_ARRAY,
-					clusterFilters.clusterSizeSelect
-				);
+			filteredFeatsArray = filterClusterFeatsBySize(
+				CLUSTER_FEATS_ARRAY,
+				clusterFilters.clusterSizeSelect
+			);
 
 			// filter clusters by geocluster name
 			filteredFeatsArray = filterClusterFeatsByTitle(filteredFeatsArray, featTitleFilterText);
@@ -131,7 +135,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 
 			console.log({ filteredFeatsArray });
 		}
-	}, [CLUSTER_FEATS_ARRAY, clusterFilters.clusterSizeSelect, featTitleFilterText, pageListLength]);
+	}, [clickedClusterData, clusterFilters.clusterSizeSelect, featTitleFilterText, pageListLength]);
 
 	return (
 		<RightSidebarContext.Provider
@@ -142,7 +146,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 				handleClusterFiltersChange,
 				setClusterFilters,
 				clusterFilters,
-				onPageRowsSelectChange,
+				handleListLengthChange,
 				pageListLength,
 				clusterFeatsPages,
 			}}>

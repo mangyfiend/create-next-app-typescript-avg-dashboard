@@ -1,7 +1,5 @@
 import React, { createContext } from "react";
-import SearchBar from "./SearchBar";
 import styles from "@styles/projects/avg-dashboard/RightSidebar.module.css";
-import LeftSidebarListControls from "../LeftSidebar/LeftSidebarListControls-v4";
 import ClusterFeaturesPages from "@components/projects/avg-dashboard/RightSidebar/ClusterFeaturesPages";
 import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRightSidebarContextProps";
 
@@ -83,7 +81,6 @@ export default function RightSidebar() {
 		<div className={styles["right-sidebar-container"]}>
 			<ClusterFeaturesMap></ClusterFeaturesMap>
 			<RightSidebarHeader></RightSidebarHeader>
-			<SearchBar></SearchBar>
 			<ClusterFeaturesPages></ClusterFeaturesPages>
 		</div>
 	);

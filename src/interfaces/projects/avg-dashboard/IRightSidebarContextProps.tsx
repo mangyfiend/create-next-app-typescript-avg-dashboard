@@ -8,5 +8,5 @@ export default interface IRightSidebarContextProps {
 	featTitleFilterText?: string;
 	onClusterFeatTitleSearch?: (argument: ChangeEvent<HTMLInputElement>) => void;
 	pageListLength?: string;
-	onListLengthChange?: (argument: ChangeEventHandler<HTMLSelectElement>) => void;
+	handleListLengthChange?: (argument: ChangeEventHandler<HTMLSelectElement>) => void;
 }

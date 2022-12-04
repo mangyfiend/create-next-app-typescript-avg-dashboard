@@ -27,14 +27,14 @@ export default function ClusterFeatureRow({
 				</a>
 				{/* <Link href="#">
                 </Link> */}
-				<small>
-					{getParcelizedClusterFeatProps(clusterFeatureData).clusterFeatTitle}
-				</small>
-				<small>
-					{getParcelizedClusterFeatProps(clusterFeatureData).clusterFeatSize}
-				</small>
+				<small>{getParcelizedClusterFeatProps(clusterFeatureData).clusterFeatTitle}</small>
+				<small>{getParcelizedClusterFeatProps(clusterFeatureData).clusterFeatSize}</small>
 				{/* <small>{clusterFeatureData.properties[OS.GEOCLUSTER_ID]}</small>
-                <small>{clusterFeatureData.features.length} Farmers</small> */}
+				<small>{clusterFeatureData.features.length} Farmers</small> */}
+				{/* TODO */}
+				{/* <button onClick={handleShowMoreClick}>{showMoreChk ? "Hide" : "Show"} details</button>
+				{showMoreChk && <p>{currentPicture.description}</p>}
+				<Image src={currentPicture.url} alt={currentPicture.alt} width={200} height={200} /> */}
 			</div>
 		);
 	} else {

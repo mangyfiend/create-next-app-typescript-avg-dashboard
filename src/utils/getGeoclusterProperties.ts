@@ -18,7 +18,6 @@ interface IClusterProperties {
 
 // single source of truth for cluster properties
 export default function getGeoclusterProperties(geocluster: IGeoclusterGeoJSON) {
-	console.log({ geocluster });
 	const CLUSTER_PROPS: IClusterProperties = {
 		clusterId: geocluster[PROPS.GEOCLUSTER_PROPERTIES][PROPS.GEOCLUSTER_ID],
 		clusterTitle: geocluster[PROPS.GEOCLUSTER_PROPERTIES][PROPS.GEOCLUSTER_TITLE],
