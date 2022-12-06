@@ -117,11 +117,12 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 
 			//
 			setWorkingClustersArray(filteredClustersArray);
+			// console.log({workingClustersArray})
+			// console.log({ filteredClustersArray });
 
 			//
 			setClusterPagesArray(getClusterArrayPages(filteredClustersArray, +pageRowsLength));
 
-			console.log({ filteredClustersArray });
 		}
 		return () => {};
 	}, [CLUSTERS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);

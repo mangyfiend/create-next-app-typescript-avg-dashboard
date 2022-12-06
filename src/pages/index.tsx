@@ -36,7 +36,7 @@ export default function AVGDashboard(props: { cachedGeoclustersArray: IGeocluste
 
 export async function getServerSideProps() {
 	try {
-		let apiResponse = await fetch(API_URLS.PARCELIZED_GEOCLUSTERS);
+		let apiResponse = await fetch(API_URLS.LOCAL.PARCELIZED_GEOCLUSTERS);
 		const apiData: IGeoclusterAPIResponse = await apiResponse.json();
 		return {
 			props: {

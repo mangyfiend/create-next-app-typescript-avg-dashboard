@@ -17,6 +17,16 @@ export function getErrorMessage(error: unknown) {
 	return String(error);
 }
 
+export function getMapboxApiToken(): string {
+	try {
+		const mapboxApiToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
+		if (!mapboxApiToken) throw Error(`MISSING MAPBOX API TOKEN`);
+		return mapboxApiToken;
+	} catch (getTokenErr) {
+		getErrorMessage(getTokenErr);
+	}
+}
+
 // split the cachedData into arrays
 export function splitGeoJSONArray(
 	arr: IFeatureCollection[] | IParcelizedFeatureGeoJSON[],

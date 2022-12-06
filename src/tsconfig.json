@@ -21,11 +21,12 @@
 
     "baseUrl": ".",
     "paths": {
-      "@styles/*": ["styles/*"],
       "@components/*": ["components/*"],
-      "@interfaces/*": ["interfaces/*"],
+      "@config/*": ["config/*"],
       "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
     }
 

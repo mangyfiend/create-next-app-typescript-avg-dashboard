@@ -1,8 +1,8 @@
 import styles from "@styles/projects/avg-dashboard/RightSidebar.module.css";
 import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRightSidebarContextProps";
 import useRightSidebarContext from "@hooks/projects/avg-dashboard/useRightSidebarContext";
-import ClusterFeaturesListPages from "@components/projects/avg-dashboard/RightSidebar/ClusterFeaturesListPages";
-import ClusterFeaturesMap from "./ClusterFeaturesMap";
+import ClusterFeaturesListPages from "@components/projects/avg-dashboard/RightSidebar/ClusterFeaturesListPages"
+import ClusterFeaturesMap from "./ClusterFeaturesMap/ClusterFeaturesMap";
 import RightSidebarHeader from "./RightSidebarHeader";
 import SearchBar from "./SearchBar";
 
@@ -15,6 +15,7 @@ export default function RightSidebar() {
 
 	return !clusterFeatsPages || clusterFeatsPages.length < 1 ? (
 		<div className={styles["right-sidebar-container"]}>
+			<div>no features to show</div>
 			<div>please click on a cluster on the left panel</div>
 			<ClusterFeaturesMap></ClusterFeaturesMap>
 		</div>
