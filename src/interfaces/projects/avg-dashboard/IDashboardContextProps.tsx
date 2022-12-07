@@ -1,5 +1,5 @@
 import { SyntheticEvent, ChangeEvent } from "react";
-import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
+// import IFeatureCollection from "@interfaces/projects/avg-dashboard/GeoJSON";
 import IGeoclusterGeoJSON from "./IGeoclusterGeoJSON";
 import IGeoclusterFeatureGeoJSON from "./IGeoclusterFeatureGeoJSON";
 import IParcelizedFeatureGeoJSON from "./IParcelizedFeatureGeoJSON";
@@ -7,7 +7,7 @@ import IParcelizedFeatureGeoJSON from "./IParcelizedFeatureGeoJSON";
 // def. the context props
 export default interface IDashboardContextProps {
 	clustersAPIResponse?: Object;
-	liveClustersArray?: IFeatureCollection[];
+	liveClustersArray?: IGeoclusterGeoJSON[];
 	liveDataTimestamp?: number;
 	onDataRefreshButtonClick?: (argument: SyntheticEvent) => void;
 	onRetreiveIntervalSelectChange?: (argument: ChangeEvent<HTMLSelectElement>) => void;

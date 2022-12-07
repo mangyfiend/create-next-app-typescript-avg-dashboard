@@ -2,25 +2,27 @@ import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardConte
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
+import { ReactFragment } from "react";
 
 export default function LeftSidebarHeader() {
 	const { dataLoadingChk, liveDataTimestamp }: IDashboardContextProps = useDashboardContext();
-	const { workingClustersArray }: ILeftSidebarContextProps = useLeftSidebarContext();
+	const { currentGeoclusters }: ILeftSidebarContextProps =
+		useLeftSidebarContext();
 
-	let listCountSpan;
+	let listCountSpan: ReactFragment | JSX.Element;
 
 	let timestampSpan = <span>Updated {new Date(liveDataTimestamp).toUTCString()}</span>;
 
 	if (dataLoadingChk) timestampSpan = <div className="plain-text">loading data</div>;
 
-	if (workingClustersArray.length === 0) listCountSpan = <span> ... </span>;
+	if (currentGeoclusters.length === 0) listCountSpan = <span> ... </span>;
 
-	if (workingClustersArray.length > 0) {
+	if (currentGeoclusters.length > 0) {
 		listCountSpan = (
 			<span>{`${
-				workingClustersArray.length > 1
-					? `${workingClustersArray.length} AGCs`
-					: `${workingClustersArray.length} AGC`
+				currentGeoclusters.length > 1
+					? `${currentGeoclusters.length} AGCs`
+					: `${currentGeoclusters.length} AGC`
 			}`}</span>
 		);
 	} else {

@@ -26,7 +26,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// 	? clickedClusterData.features
 	// 	: [];
 
-	// const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
+	// const [clusterNameFilterText, setClusterNameFilterText] = useState("");
 	const [featTitleFilterText, setFeatTitleFilterText] = useState("");
 	const [pageListLength, setPageListLength] = useState("0");
 	const [clusterFeatsPages, setClusterFeatsPages] = useState([]);
@@ -139,7 +139,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	return (
 		<RightSidebarContext.Provider
 			value={{
-				// clusterNameFiltertext,
+				// clusterNameFilterText,
 				featTitleFilterText,
 				onClusterFeatTitleSearch,
 				handleClusterFiltersChange,

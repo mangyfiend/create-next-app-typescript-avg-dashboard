@@ -8,8 +8,8 @@ import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 
 export default function LeftSidebarListPages() {
 	const {
-		clusterNameFiltertext,
-		clusterPagesArray,
+		clusterNameFilterText,
+		pagenatedGeoclusters,
 		clusterFilters,
 		pageRowsLength,
 	}: ILeftSidebarContextProps = useLeftSidebarContext();
@@ -30,7 +30,7 @@ export default function LeftSidebarListPages() {
 	};
 
 	const handleJumpLastClick = () => {
-		setPageIdx(clusterPagesArray.length - 1);
+		setPageIdx(pagenatedGeoclusters.length - 1);
 	};
 
 	// reset pageIdx to first page (0) when search text changes
@@ -40,11 +40,11 @@ export default function LeftSidebarListPages() {
 		return () => {
 			//  second
 		};
-	}, [clusterNameFiltertext, clusterFilters, pageRowsLength]);
+	}, [clusterNameFilterText, clusterFilters, pageRowsLength]);
 
-	// console.log({ clusterPagesArray });
+	// console.log({ pagenatedGeoclusters });
 
-	let recordsArray: IGeoclusterGeoJSON[] = clusterPagesArray[pageIdx];
+	let recordsArray: IGeoclusterGeoJSON[] = pagenatedGeoclusters[pageIdx];
 
 	// console.log({ recordsArray });
 
@@ -62,9 +62,9 @@ export default function LeftSidebarListPages() {
 				</div>
 				<div className={"flex-row-between"}>
 					<span>
-						{clusterPagesArray.length > 0 &&
-							`Page ${pageIdx + 1} of ${clusterPagesArray.length}`}
-						{clusterPagesArray.length < 1 && `Page 0 / 0`}
+						{pagenatedGeoclusters.length > 0 &&
+							`Page ${pageIdx + 1} of ${pagenatedGeoclusters.length}`}
+						{pagenatedGeoclusters.length < 1 && `Page 0 / 0`}
 					</span>
 					<div className="flex-row">
 						<button disabled={pageIdx === 0 ? true : false} onClick={handleJumpFirstClick}>
@@ -74,12 +74,12 @@ export default function LeftSidebarListPages() {
 							Previous Page
 						</button>
 						<button
-							disabled={pageIdx === clusterPagesArray.length - 1 ? true : false}
+							disabled={pageIdx === pagenatedGeoclusters.length - 1 ? true : false}
 							onClick={handleNextClick}>
 							Next Page
 						</button>
 						<button
-							disabled={pageIdx === clusterPagesArray.length - 1 ? true : false}
+							disabled={pageIdx === pagenatedGeoclusters.length - 1 ? true : false}
 							onClick={handleJumpLastClick}>
 							Last Page
 						</button>

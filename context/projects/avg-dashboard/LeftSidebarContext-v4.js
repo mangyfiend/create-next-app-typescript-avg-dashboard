@@ -18,7 +18,7 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 	// USE LIVE DATA IF DATA FROM SERVER SIDE (...props) IS NOT AVAILABLE
 	const CLUSTERS_ARRAY = props.serverSideClusters ? props.serverSideClusters : liveClustersArray;
 
-	const [clusterNameFiltertext, setClusterNameFilterText] = useState("");
+	const [clusterNameFilterText, setClusterNameFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState(0);
 	const [workingClustersArray, setWorkingClustersArray] = useState([]);
 	const [clusterPagesArray, setClusterPagesArray] = useState([]);
@@ -88,12 +88,12 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 			);
 
 			//
-			filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFiltertext);
+			filteredClustersArray = filterClustersByName(filteredClustersArray, clusterNameFilterText);
 
 			// if (filteredClustersArray.length > 0) {
 			filteredClustersArray = filteredClustersArray.filter((cluster) => {
 				const clusterTitle = cluster.properties[OS.GEOCLUSTER_TITLE].toLowerCase();
-				return clusterTitle.indexOf(clusterNameFiltertext.toLowerCase()) !== -1;
+				return clusterTitle.indexOf(clusterNameFilterText.toLowerCase()) !== -1;
 			});
 
 			//
@@ -105,12 +105,12 @@ export const LeftSidebarProvider = ({ children, ...props }) => {
 			console.log({ filteredClustersArray });
 		}
 		return () => {};
-	}, [CLUSTERS_ARRAY, clusterNameFiltertext, pageRowsLength, clusterFilters]);
+	}, [CLUSTERS_ARRAY, clusterNameFilterText, pageRowsLength, clusterFilters]);
 
 	return (
 		<LeftSidebarContext.Provider
 			value={{
-				clusterNameFiltertext,
+				clusterNameFilterText,
 				onClusterNameFilterTextChange,
 				handleClusterFiltersChange,
 				setClusterFilters,

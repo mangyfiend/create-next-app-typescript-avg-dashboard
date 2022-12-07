@@ -3,11 +3,11 @@ import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSi
 import LeftSidebarListPages from "./LeftSidebarListPages-v4";
 
 export default function LeftSidebarList() {
-	const { clusterPagesArray }: ILeftSidebarContextProps = useLeftSidebarContext();
+	const { pagenatedGeoclusters }: ILeftSidebarContextProps = useLeftSidebarContext();
 	return (
 		<>
 			<>
-				{clusterPagesArray.length > 0 ? (
+				{pagenatedGeoclusters.length > 0 ? (
 					<LeftSidebarListPages></LeftSidebarListPages>
 				) : (
 					<div>nothing here</div>
