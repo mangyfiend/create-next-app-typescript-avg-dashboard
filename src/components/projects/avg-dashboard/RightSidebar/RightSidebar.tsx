@@ -4,7 +4,7 @@ import useRightSidebarContext from "@hooks/projects/avg-dashboard/useRightSideba
 import ClusterFeaturesListPages from "./ClusterFeaturesListPages";
 import ClusterFeaturesMap from "./ClusterFeaturesMap/ClusterFeaturesMap";
 import RightSidebarHeader from "./RightSidebarHeader";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar";
 
 export default function RightSidebar() {
 	const {

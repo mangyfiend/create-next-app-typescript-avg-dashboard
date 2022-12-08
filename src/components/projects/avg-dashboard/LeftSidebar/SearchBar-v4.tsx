@@ -10,7 +10,7 @@ export default function SearchBar() {
 				type="text"
 				name="clusterNameFilterText"
 				value={clusterNameFilterText}
-				placeholder="search [cached]"
+				placeholder="search geoclusters"
 				onChange={onClusterNameFilterTextChange}></input>
 		</form>
 	);

@@ -1,5 +1,6 @@
 import LeftSidebarHeader from "./LeftSidebarHeader-v4";
-import SearchBar from "./SearchBar-v4";
+// import SearchBar from "./SearchBar-v4";
+import SearchBar from "../SearchBar";
 import LeftSidebarList from "./LeftSidebarList-v4";
 import LeftSidebarListPages from "./LeftSidebarListPages-v4";
 import LeftSidebarListControls from "./LeftSidebarListControls-v4";
@@ -9,7 +10,11 @@ import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSi
 import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarContext-v4";
 
 export default function LeftSidebar(): JSX.Element {
-	const { pagenatedGeoclusters }: ILeftSidebarContextProps = useLeftSidebarContext();
+	const {
+		pagenatedGeoclusters,
+		onClusterNameFilterTextChange,
+		clusterNameFilterText,
+	}: ILeftSidebarContextProps = useLeftSidebarContext();
 
 	return !pagenatedGeoclusters || pagenatedGeoclusters[0].length === 0 ? (
 		<div className={styles["left-sidebar-container"]}>
@@ -21,7 +26,9 @@ export default function LeftSidebar(): JSX.Element {
 				<div className="flex-col" style={{ padding: "5px", border: "3px solid limegreen" }}>
 					<LeftSidebarHeader></LeftSidebarHeader>
 					<div>
-						{/* <SearchBar></SearchBar> */}
+						<SearchBar
+							searchText={clusterNameFilterText}
+							onSearchTextChange={onClusterNameFilterTextChange}></SearchBar>
 						{/* <LeftSidebarList></LeftSidebarList> */}
 						<LeftSidebarListPages></LeftSidebarListPages>
 						{/* <LeftSidebarListControls></LeftSidebarListControls> */}

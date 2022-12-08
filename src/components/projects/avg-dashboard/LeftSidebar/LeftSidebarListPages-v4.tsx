@@ -7,7 +7,6 @@ import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterGe
 import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 import GeoclustersList from "./GeoclustersList";
 import ListLengthSelect from "../ListLengthSelect";
-import SearchBar from "./SearchBar-v4";
 
 export default function LeftSidebarListPages() {
 	const {
@@ -53,7 +52,6 @@ export default function LeftSidebarListPages() {
 	return (
 		<>
 			<div className={"flex-col"}>
-				<SearchBar></SearchBar>
 				{/* REMOVE */}
 				{/* <div className={styles["list-page-body"]}>
 					{(!recordsArray || recordsArray.length === 0) && <div>please refresh the page</div>}
