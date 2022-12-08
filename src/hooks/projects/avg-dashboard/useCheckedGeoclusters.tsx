@@ -15,7 +15,7 @@ const filterClustersById = (
 
 export default function useCheckedGeoclusters(
 	clustersArray: IGeoclusterGeoJSON[],
-	checkedClusterIds: string[]
+	checkedGeoclusterIds: string[]
 ) {
 	const [checkedClusters, setCheckedClusters] = useState<IGeoclusterGeoJSON[]>([]);
 
@@ -23,13 +23,13 @@ export default function useCheckedGeoclusters(
 
 		const CHECKED_CLUSTERS = [];
 
-		checkedClusterIds.forEach((id) =>
+		checkedGeoclusterIds.forEach((id) =>
 			CHECKED_CLUSTERS.push(...filterClustersById(clustersArray, id))
 		);
 
 		setCheckedClusters(CHECKED_CLUSTERS);
 
-	}, [checkedClusterIds, clustersArray]);
+	}, [checkedGeoclusterIds, clustersArray]);
 
 	return checkedClusters;
 }

@@ -5,6 +5,9 @@ import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarC
 import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
 import IGeoclusterGeoJSON from "@interfaces/projects/avg-dashboard/IGeoclusterGeoJSON";
 import getGeoclusterProperties from "@utils/getGeoclusterProperties";
+import GeoclustersList from "./GeoclustersList";
+import ListLengthSelect from "../ListLengthSelect";
+import SearchBar from "./SearchBar-v4";
 
 export default function LeftSidebarListPages() {
 	const {
@@ -12,6 +15,7 @@ export default function LeftSidebarListPages() {
 		pagenatedGeoclusters,
 		clusterFilters,
 		pageRowsLength,
+		handleListLengthChange,
 	}: ILeftSidebarContextProps = useLeftSidebarContext();
 
 	const [pageIdx, setPageIdx] = useState<number>(0);
@@ -42,8 +46,6 @@ export default function LeftSidebarListPages() {
 		};
 	}, [clusterNameFilterText, clusterFilters, pageRowsLength]);
 
-	// console.log({ pagenatedGeoclusters });
-
 	let recordsArray: IGeoclusterGeoJSON[] = pagenatedGeoclusters[pageIdx];
 
 	// console.log({ recordsArray });
@@ -51,7 +53,9 @@ export default function LeftSidebarListPages() {
 	return (
 		<>
 			<div className={"flex-col"}>
-				<div className={styles["list-page-body"]}>
+				<SearchBar></SearchBar>
+				{/* REMOVE */}
+				{/* <div className={styles["list-page-body"]}>
 					{(!recordsArray || recordsArray.length === 0) && <div>please refresh the page</div>}
 					{recordsArray &&
 						recordsArray.map((clusterRecord) => (
@@ -59,7 +63,8 @@ export default function LeftSidebarListPages() {
 								key={getGeoclusterProperties(clusterRecord).clusterId}
 								clusterData={clusterRecord}></ClusterRecordRow>
 						))}
-				</div>
+				</div> */}
+				<GeoclustersList geoclustersArray={recordsArray}></GeoclustersList>
 				<div className={"flex-row-between"}>
 					<span>
 						{pagenatedGeoclusters.length > 0 &&
@@ -85,6 +90,7 @@ export default function LeftSidebarListPages() {
 						</button>
 					</div>
 				</div>
+				<ListLengthSelect onListLengthChange={handleListLengthChange}></ListLengthSelect>
 			</div>
 		</>
 	);

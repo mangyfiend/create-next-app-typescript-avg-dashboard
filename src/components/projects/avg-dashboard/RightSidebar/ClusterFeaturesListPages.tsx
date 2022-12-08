@@ -6,7 +6,7 @@ import ClusterFeaturesList from "@components/projects/avg-dashboard/RightSidebar
 import ListLengthSelect from "../ListLengthSelect";
 import useResetListPageIndex from "@hooks/projects/avg-dashboard/useResetListPageIndex";
 
-export default function ClusterFeaturesPages() {
+export default function ClusterFeaturesListPages() {
 
 	const { clusterFeatsPages, handleListLengthChange }: IRightSidebarContextProps =
 		useRightSidebarContext();

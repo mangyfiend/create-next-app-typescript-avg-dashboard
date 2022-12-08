@@ -8,11 +8,13 @@ import useLeftSidebarContext from "@hooks/projects/avg-dashboard/useLeftSidebarC
 import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
 
 export default function ClusterRecordRow({ clusterData }: { clusterData: IGeoclusterGeoJSON }) {
-
 	const { setClickedClusterData }: IDashboardContextProps = useDashboardContext();
 
-   // state setter to track all the clicked checkboxes
-	const { checkedClusterIds, setCheckedClusterIds }: ILeftSidebarContextProps = useLeftSidebarContext();
+	// state setter to track all the clicked checkboxes
+	const {
+		checkedGeoclusterIds,
+		setCheckedGeoclusterIds,
+	}: ILeftSidebarContextProps = useLeftSidebarContext();
 
 	function clusterTitleClickHandler(evt: React.MouseEvent<HTMLAnchorElement>): void {
 		setClickedClusterData(clusterData);
@@ -36,9 +38,8 @@ export default function ClusterRecordRow({ clusterData }: { clusterData: IGeoclu
 				<ListItemCheckbox
 					checkboxLabel=""
 					listItemId={getGeoclusterProperties(clusterData).clusterId}
-               checkedIdsStateSetter={setCheckedClusterIds}
-               prevCheckedIds={checkedClusterIds}
-               ></ListItemCheckbox>
+					checkedIdsStateSetter={setCheckedGeoclusterIds}
+					prevCheckedIds={checkedGeoclusterIds}></ListItemCheckbox>
 			</div>
 		);
 	} else {

@@ -24,12 +24,13 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 
 	const { liveClustersArray }: IDashboardContextProps | undefined = useDashboardContext();
 
-	// USE LIVE DATA IF DATA FROM SERVER SIDE (...props) IS NOT AVAILABLE
+	// USE LIVE DATA IF DATA FROM NEXTJS SERVER SIDE (...props) IS NOT AVAILABLE
 	const GEOCLUSTERS_ARRAY = serverSideClusters ? serverSideClusters : liveClustersArray;
 
 	const [clusterNameFilterText, setClusterNameFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState("0");
-	const [checkedClusterIds, setCheckedClusterIds] = useState<string[] | []>([]);
+	const [geoclusterCheckboxIds, setGeoclusterCheckboxIds] = useState<string[] | []>([]);
+	const [checkedGeoclusterIds, setCheckedGeoclusterIds] = useState<string[] | []>([]);
 	// TODO > WIP > ADD MORE FILTERS
 	const [clusterFilters, setClusterFilters] = useState<IGeoclusterFilters>({
 		clusterSizeSelect: -Infinity,
@@ -54,7 +55,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 
 	const selectedGeoclusters: IGeoclusterGeoJSON[] | [] = useCheckedGeoclusters(
 		currentGeoclusters,
-		checkedClusterIds
+		checkedGeoclusterIds
 	);
 
 	const pagenatedGeoclusters: IGeoclusterGeoJSON[][] = usePagenateGeoclusters(
@@ -102,13 +103,20 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 		setPageRowsLength(evt.target.value);
 	};
 
+	// Select num. cluster feats. per per page
+	const handleListLengthChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+		setPageRowsLength(evt.target.value);
+	};
+
 	return (
 		<LeftSidebarContext.Provider
 			value={{
 				clusterNameFilterText,
-				checkedClusterIds,
-				setCheckedClusterIds,
+				setGeoclusterCheckboxIds,
+				checkedGeoclusterIds,
+				setCheckedGeoclusterIds,
 				onClusterNameFilterTextChange,
+				handleListLengthChange,
 				handleClusterFiltersChange,
 				setClusterFilters,
 				clusterFilters,

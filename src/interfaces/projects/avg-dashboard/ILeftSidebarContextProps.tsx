@@ -5,10 +5,12 @@ import IGeoclusterFilters from "./GeoclusterFilters";
 // def. the context props
 export default interface ILeftSidebarContextProps {
 	clusterNameFilterText?: string;
-	checkedClusterIds?: string[];
-	setCheckedClusterIds?: (argument) => [] | string[];
+	setGeoclusterCheckboxIds?: (argument) => [] | string[];
+	checkedGeoclusterIds?: string[];
+	setCheckedGeoclusterIds?: (argument) => [] | string[];
 	onClusterNameFilterTextChange?: (argument: ChangeEvent<HTMLInputElement>) => void;
 	handleClusterFiltersChange?: () => void;
+	handleListLengthChange?: () => void;
 	setClusterFilters?: () => void;
 	clusterFilters?: IGeoclusterFilters;
 	onPageRowsSelectChange?: (argument: ChangeEvent<HTMLSelectElement>) => void;

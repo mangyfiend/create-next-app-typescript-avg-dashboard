@@ -4,15 +4,20 @@ export default function ListItemCheckbox({
 	checkboxLabel,
 	listItemId,
 	prevCheckedIds,
+	checkboxIdsStateSetter, // keeps track of all the checkboxes
 	checkedIdsStateSetter, // keeps track of only the checked checkboxes
 }: {
 	checkboxLabel: string;
 	listItemId: string;
 	// from context: use this to keep track of all the checked boxes
+	checkboxIdsStateSetter: React.Dispatch<React.SetStateAction<string[]>>;
 	checkedIdsStateSetter: React.Dispatch<React.SetStateAction<string[]>>;
 	// from context: get all prev. checked boxes
 	prevCheckedIds: string[];
 }): JSX.Element {
+
+	// FIXME
+	// checkboxIdsStateSetter((prevIds: [] | string[]) => [...prevIds, listItemId])
 
 	// check if THIS checkbox was previously checked before the last re-render
 	const isPrevChecked = prevCheckedIds.indexOf(listItemId) !== -1;
@@ -34,7 +39,7 @@ export default function ListItemCheckbox({
 		} else {
 			// filter out this list item's id from the array of checked ids
 			checkedIdsStateSetter((prevIds) => prevIds.filter((prevId) => prevId !== listItemId));
-
+			
 		}
 	};
 
