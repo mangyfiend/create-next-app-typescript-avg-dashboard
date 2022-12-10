@@ -16,8 +16,8 @@ export default interface IDashboardContextProps {
 	autoFetchInterval?: string | undefined;
 
 	// SANDBOX
-	clickedClusterData?: IGeoclusterGeoJSON | null;
-	setClickedClusterData?: (arg: IGeoclusterGeoJSON) => void;
+	clickedClusterGeoJSON?: IGeoclusterGeoJSON | null;
+	setClickedClusterGeoJSON?: (arg: IGeoclusterGeoJSON) => void;
 	clickedClusterFeatureData?: IParcelizedFeatureGeoJSON | IGeoclusterFeatureGeoJSON | null;
 	setClickedClusterFeatureData?: (
 		arg: IParcelizedFeatureGeoJSON | IGeoclusterFeatureGeoJSON

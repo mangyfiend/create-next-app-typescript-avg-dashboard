@@ -1,11 +1,10 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactNode } from "react";
 import IGeoclusterGeoJSON from "./IGeoclusterGeoJSON";
 import IGeoclusterFilters from "./GeoclusterFilters";
 
 // def. the context props
 export default interface ILeftSidebarContextProps {
 	clusterNameFilterText?: string;
-	setGeoclusterCheckboxIds?: (argument) => [] | string[];
 	checkedGeoclusterIds?: string[];
 	setCheckedGeoclusterIds?: (argument) => [] | string[];
 	onClusterNameFilterTextChange?: (argument: ChangeEvent<HTMLInputElement>) => void;
@@ -21,4 +20,5 @@ export default interface ILeftSidebarContextProps {
 	clusterPagesArray?: IGeoclusterGeoJSON[][];
 	// clusterPagesArray?: [IGeoclusterGeoJSON][];
 	pagenatedGeoclusters?: IGeoclusterGeoJSON[][];
+	geoclustersToMap?: IGeoclusterGeoJSON[];
 }

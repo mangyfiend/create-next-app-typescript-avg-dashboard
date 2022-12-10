@@ -12,7 +12,7 @@ export default function useResetListPageIndex(initialValue: number) {
 		clusterFeatsFilters,
 	}: IRightSidebarContextProps = useRightSidebarContext();
 
-	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
+	const { clickedClusterGeoJSON }: IDashboardContextProps | undefined = useDashboardContext();
 
 	const [pageIndex, setPageIndex] = useState<number>(initialValue);
 
@@ -26,7 +26,7 @@ export default function useResetListPageIndex(initialValue: number) {
 		return () => {
 			// TODO
 		};
-	}, [featTitleFilterText, clusterFeatsFilters, pageListLength, clickedClusterData]);
+	}, [featTitleFilterText, clusterFeatsFilters, pageListLength, clickedClusterGeoJSON]);
 
 	return { pageIndex, setPageIndex };
 }

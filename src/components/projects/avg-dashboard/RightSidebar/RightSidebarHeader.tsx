@@ -3,10 +3,10 @@ import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardConte
 import getGeoclusterProperties from "@utils/getGeoclusterProperties";
 
 export default function RightSidebarHeader() {
-	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
+	const { clickedClusterGeoJSON }: IDashboardContextProps | undefined = useDashboardContext();
 
-	if (clickedClusterData) {
-		const clusterProperties = getGeoclusterProperties(clickedClusterData);
+	if (clickedClusterGeoJSON) {
+		const clusterProperties = getGeoclusterProperties(clickedClusterGeoJSON);
 
 		return (
 			<>

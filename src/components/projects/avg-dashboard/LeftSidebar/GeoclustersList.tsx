@@ -29,7 +29,7 @@ export default function GeoclustersList({
 			{geoclustersArray.map((geocluster) => (
 				<ClusterRecordRow
 					key={getGeoclusterProperties(geocluster).clusterId}
-					clusterData={geocluster}></ClusterRecordRow>
+					clusterGeoJSON={geocluster}></ClusterRecordRow>
 			))}
 		</div>
 	);

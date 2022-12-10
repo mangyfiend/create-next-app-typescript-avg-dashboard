@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useRef } from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
 import ILeftSidebarContextProps from "@interfaces/projects/avg-dashboard/ILeftSidebarContextProps";
@@ -29,7 +29,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 
 	const [clusterNameFilterText, setClusterNameFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState("0");
-	const [geoclusterCheckboxIds, setGeoclusterCheckboxIds] = useState<string[] | []>([]);
+	const listCheckboxesRefs = useRef();
 	const [checkedGeoclusterIds, setCheckedGeoclusterIds] = useState<string[] | []>([]);
 	// TODO > WIP > ADD MORE FILTERS
 	const [clusterFilters, setClusterFilters] = useState<IGeoclusterFilters>({
@@ -66,9 +66,9 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 	const geoclustersToMap =
 		selectedGeoclusters.length > 0 ? selectedGeoclusters : currentGeoclusters;
 
-	console.log({ currentGeoclusters });
-	console.log({ selectedGeoclusters });
-	console.log({ geoclustersToMap });
+	// console.log({ currentGeoclusters });
+	// console.log({ selectedGeoclusters });
+	// console.log({ geoclustersToMap });
 	// console.log({ pagenatedGeoclusters });
 
 	// DEF. CHANGE HANDLER FUNCTIONS
@@ -112,7 +112,6 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 		<LeftSidebarContext.Provider
 			value={{
 				clusterNameFilterText,
-				setGeoclusterCheckboxIds,
 				checkedGeoclusterIds,
 				setCheckedGeoclusterIds,
 				onClusterNameFilterTextChange,
@@ -124,6 +123,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 				pageRowsLength,
 				currentGeoclusters,
 				pagenatedGeoclusters,
+				geoclustersToMap,
 			}}>
 			{children}
 		</LeftSidebarContext.Provider>

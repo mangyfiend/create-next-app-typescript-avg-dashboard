@@ -33,23 +33,23 @@ export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 	const [manualDataRefreshTrigger, setManualDataRefreshTrigger] = useState(0);
 	const [autoFetchInterval, setAutoFetchInterval] = useState<string | undefined>("0");
 	// SANDBOX
-	const [clickedClusterData, setClickedClusterData] = useState<IGeoclusterGeoJSON | null>(null);
+	const [clickedClusterGeoJSON, setClickedClusterGeoJSON] = useState<IGeoclusterGeoJSON | null>(null);
 	const [clickedClusterFeatureData, setClickedClusterFeatureData] =
 		useState<IGeoclusterGeoJSON | null>(null);
 	const renderRef = useRef(false);
 
 	// SANDBOX
 	// when the clusterRow & clusterFeatureRow first render
-	// clickedClusterData & clickedClusterFeatureData both return "undefined" on first click
+	// clickedClusterGeoJSON & clickedClusterFeatureData both return "undefined" on first click
 	// after both components first render
 	useEffect(() => {
 		if (renderRef.current) {
-			console.log(clickedClusterData?.features);
+			console.log(clickedClusterGeoJSON?.features);
 		}
 		return () => {
 			renderRef.current = true;
 		};
-	}, [clickedClusterData]);
+	}, [clickedClusterGeoJSON]);
 
 	// manual refresh button clicked
 	const onDataRefreshButtonClick = (evt: React.SyntheticEvent) => {
@@ -132,8 +132,8 @@ export const DashboardProvider: React.FC<IProviderProps> = ({ children }) => {
 				autoFetchInterval,
 
 				// SANDBOX
-				clickedClusterData,
-				setClickedClusterData,
+				clickedClusterGeoJSON,
+				setClickedClusterGeoJSON,
 				clickedClusterFeatureData,
 				setClickedClusterFeatureData,
 			}}>

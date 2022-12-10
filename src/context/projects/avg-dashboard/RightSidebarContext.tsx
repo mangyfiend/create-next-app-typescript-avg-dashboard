@@ -1,11 +1,22 @@
-import { splitGeoJSONArray } from "@utils/helpers-v2";
 import React, { createContext, useState, useEffect } from "react";
+import { ChangeEvent, ChangeEventHandler } from "react";
 import useDashboardContext from "@hooks/projects/avg-dashboard/useDashboardContext";
 import IDashboardContextProps from "@interfaces/projects/avg-dashboard/IDashboardContextProps";
-import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRightSidebarContextProps";
+// import IRightSidebarContextProps from "@interfaces/projects/avg-dashboard/IRightSidebarContextProps";
 import IGeoclusterFilters from "@interfaces/projects/avg-dashboard/GeoclusterFilters";
 import getParcelizedClusterFeatProps from "@utils/getParcelizedClusterFeatProps";
 import IParcelizedFeatureGeoJSON from "@interfaces/projects/avg-dashboard/IParcelizedFeatureGeoJSON";
+import { splitGeoJSONArray } from "@utils/helpers-v2";
+
+// def. the context props
+
+export interface IRightSidebarContextProps {
+	clusterFeatsPages?: IParcelizedFeatureGeoJSON[][];
+	featTitleFilterText?: string;
+	onClusterFeatTitleSearch?: (argument: ChangeEvent<HTMLInputElement>) => void;
+	pageListLength?: string;
+	handleListLengthChange?: (argument: ChangeEventHandler<HTMLSelectElement>) => void;
+}
 
 // def. the context provider props
 interface IProviderProps {
@@ -20,17 +31,18 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	console.log("%c[RIGHT SIDEBAR] CONTEXT PROVIDER RE-RENDERED", "color: orange");
 
 	// the the data for the geocluster from the left sidebar that was clicked
-	const { clickedClusterData }: IDashboardContextProps | undefined = useDashboardContext();
+	const { clickedClusterGeoJSON }: IDashboardContextProps | undefined = useDashboardContext();
 
-	// const CLUSTER_FEATS_ARRAY: IParcelizedFeatureGeoJSON[] = clickedClusterData
-	// 	? clickedClusterData.features
+	// const CLUSTER_FEATS_ARRAY: IParcelizedFeatureGeoJSON[] = clickedClusterGeoJSON
+	// 	? clickedClusterGeoJSON.features
 	// 	: [];
 
 	// const [clusterNameFilterText, setClusterNameFilterText] = useState("");
 	const [featTitleFilterText, setFeatTitleFilterText] = useState("");
 	const [pageListLength, setPageListLength] = useState("0");
 	const [clusterFeatsPages, setClusterFeatsPages] = useState([]);
-	// TODO > WIP > ADD MORE FILTERS
+
+	// FIXME > CHANGE TO CLUSTER FEATS. FILTERS
 	const [clusterFilters, setClusterFilters] = useState<IGeoclusterFilters>({
 		clusterSizeSelect: -Infinity,
 		adminLevelSelect: 1,
@@ -43,7 +55,6 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 		rangeTimeframeSelect: "hours",
 		neverVisitedChk: true,
 	});
-	// TODO > neverVisitedChk == true ? visitedInLastRange = 0 & disabled
 
 	const handleClusterFiltersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		// AUTO-GENERATED TYPES >
@@ -112,9 +123,8 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 	// SANDBOX
 	// filter the cluster features when the search input text changes
 	useEffect(() => {
-
-		const CLUSTER_FEATS_ARRAY: IParcelizedFeatureGeoJSON[] = clickedClusterData
-			? clickedClusterData.features
+		const CLUSTER_FEATS_ARRAY: IParcelizedFeatureGeoJSON[] = clickedClusterGeoJSON
+			? clickedClusterGeoJSON.features
 			: [];
 
 		let filteredFeatsArray = [];
@@ -134,7 +144,7 @@ export const RightSidebarStore = ({ children }: IProviderProps) => {
 
 			console.log({ filteredFeatsArray });
 		}
-	}, [clickedClusterData, clusterFilters.clusterSizeSelect, featTitleFilterText, pageListLength]);
+	}, [clickedClusterGeoJSON, clusterFilters.clusterSizeSelect, featTitleFilterText, pageListLength]);
 
 	return (
 		<RightSidebarContext.Provider

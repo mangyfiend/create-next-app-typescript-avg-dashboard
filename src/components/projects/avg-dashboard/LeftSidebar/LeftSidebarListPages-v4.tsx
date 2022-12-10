@@ -59,7 +59,7 @@ export default function LeftSidebarListPages() {
 						recordsArray.map((clusterRecord) => (
 							<ClusterRecordRow
 								key={getGeoclusterProperties(clusterRecord).clusterId}
-								clusterData={clusterRecord}></ClusterRecordRow>
+								clusterGeoJSON={clusterRecord}></ClusterRecordRow>
 						))}
 				</div> */}
 				<GeoclustersList geoclustersArray={recordsArray}></GeoclustersList>
