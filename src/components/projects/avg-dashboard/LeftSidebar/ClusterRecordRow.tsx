@@ -16,7 +16,7 @@ export default function ClusterRecordRow({
 		useDashboardContext();
 
 	// state setter to track all the clicked checkboxes
-	const { checkedGeoclusterIds, setCheckedGeoclusterIds, listCheckboxesRefs }: ILeftSidebarContextProps =
+	const { checkedGeoclusterIds, setCheckedGeoclusterIds }: ILeftSidebarContextProps =
 		useLeftSidebarContext();
 
 	function clusterTitleClickHandler(evt: React.MouseEvent<HTMLAnchorElement>): void {
@@ -41,7 +41,6 @@ export default function ClusterRecordRow({
 				<ListItemCheckbox
 					checkboxLabel=""
 					listItemId={getGeoclusterProperties(clusterGeoJSON).clusterId}
-					listCheckboxesRefs={listCheckboxesRefs}
 					checkedIdsStateSetter={setCheckedGeoclusterIds}
 					prevCheckedIds={checkedGeoclusterIds}></ListItemCheckbox>
 			</div>
