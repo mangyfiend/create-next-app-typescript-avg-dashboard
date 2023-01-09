@@ -30,6 +30,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 	const [clusterNameFilterText, setClusterNameFilterText] = useState("");
 	const [pageRowsLength, setPageRowsLength] = useState("0");
 	const listCheckboxesRefs = useRef();
+	const [masterCheckboxIsChecked, setMasterCheckboxIsChecked] = useState<boolean>(false)
 	const [checkedGeoclusterIds, setCheckedGeoclusterIds] = useState<string[] | []>([]);
 	// TODO > WIP > ADD MORE FILTERS
 	const [clusterFilters, setClusterFilters] = useState<IGeoclusterFilters>({
@@ -67,7 +68,7 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 		selectedGeoclusters.length > 0 ? selectedGeoclusters : currentGeoclusters;
 
 	// console.log({ currentGeoclusters });
-	// console.log({ selectedGeoclusters });
+	console.log({ selectedGeoclusters });
 	// console.log({ geoclustersToMap });
 	// console.log({ pagenatedGeoclusters });
 
@@ -114,6 +115,8 @@ export const LeftSidebarProvider = ({ serverSideClusters, children }: IProviderP
 				clusterNameFilterText,
 				checkedGeoclusterIds,
 				setCheckedGeoclusterIds,
+				masterCheckboxIsChecked,
+				setMasterCheckboxIsChecked,
 				onClusterNameFilterTextChange,
 				handleListLengthChange,
 				handleClusterFiltersChange,

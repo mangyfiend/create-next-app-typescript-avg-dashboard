@@ -7,6 +7,8 @@ export default interface ILeftSidebarContextProps {
 	clusterNameFilterText?: string;
 	checkedGeoclusterIds?: string[];
 	setCheckedGeoclusterIds?: (argument) => [] | string[];
+	masterCheckboxIsChecked?: boolean;
+	setMasterCheckboxIsChecked?: React.Dispatch<React.SetStateAction<boolean>>
 	onClusterNameFilterTextChange?: (argument: ChangeEvent<HTMLInputElement>) => void;
 	handleClusterFiltersChange?: () => void;
 	handleListLengthChange?: () => void;
